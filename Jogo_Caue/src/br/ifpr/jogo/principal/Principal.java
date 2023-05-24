@@ -5,10 +5,11 @@ import javax.swing.JFrame;
 public class Principal extends JFrame {
     
     public Principal(){
-        setVisible(true);
-        setSize(1000,1000);
-        setTitle("Meu jogo");
-        setLocationRelativeTo(null);
+        super.setVisible(true);
+        super.setSize(500,500);
+        super.setTitle("Meu jogo");
+        super.setLocationRelativeTo(null);
+        super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 }
 
     public static void main(String[] args){
