@@ -23,7 +23,7 @@ public class Fase extends JPanel{
     public void paint(Graphics g){
         Graphics2D graficos = (Graphics2D) g;
         graficos.drawImage(this.fundo, 0,0,null);
-        graficos.drawImage(this.personagem.getImagem(), 0, 0, null);
+        graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoX(), this.personagem.getPosicaoY(), null);
         g.dispose();
 
     }
