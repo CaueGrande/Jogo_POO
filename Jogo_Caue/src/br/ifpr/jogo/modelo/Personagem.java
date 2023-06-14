@@ -14,8 +14,8 @@ public class Personagem {
     private int alturaImagem;
 
     public Personagem(){
-        this.posicaoX = 100;
-        this.posicaoY = 100;
+        this.posicaoX = 575;
+        this.posicaoY = 850;
     }
 
     public void Carregar(){

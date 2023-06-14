@@ -11,8 +11,8 @@ public class Principal extends JFrame {
         super.add(fase);
 
         super.setVisible(true);
-        super.setSize(640,640);
-        super.setTitle("Meu jogo");
+        super.setSize(1280, 1080);
+        super.setTitle("Savanna Survivor");
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 }
