@@ -32,13 +32,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         
         this.fundo = carregando.getImage();
 
-        this.personagem = new Personagem(VELOCIDADE_DESLOCAMENTO);
-        this.personagem.Carregar();
+        this.addKeyListener(this);
+
+        personagem = new Personagem(VELOCIDADE_DESLOCAMENTO);
+        personagem.carregar();
 
         this.lobo = new Lobo();
         this.lobo.Carregar();
-        
-        this.addKeyListener(this);
 
         this.timer = new Timer(DELAY, this);
         this.timer.start();

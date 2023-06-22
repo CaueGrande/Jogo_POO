@@ -25,47 +25,61 @@ public class Personagem {
         this.velocidadeDeDeslocamento = velocidadeDeDeslocamento;
     }
 
-    public void Carregar(){
-        ImageIcon carregador = new ImageIcon("recursos\\personagem.png");
+    public void carregar(){
+        ImageIcon carregador = new ImageIcon("recursos\\personagem_w.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
     }
+        
+    
 
     public void atualizar(){
         this.posicaoX = this.posicaoX + this.deslocamentoX;
         this.posicaoY = this.posicaoY + this.deslocamentoY;
     }
 
-    public void mover(KeyEvent tecla){
+    public void mover (KeyEvent tecla){
         int codigo = tecla.getKeyCode();
         
         switch(codigo){
 
             case KeyEvent.VK_UP:
+                ImageIcon carregador_up = new ImageIcon("recursos\\personagem_w.png");
+                this.imagem = carregador_up.getImage();
                 this.deslocamentoY = - this.velocidadeDeDeslocamento;
                 break;
             case KeyEvent.VK_W:
+                ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
+                this.imagem = carregador_w.getImage();
                 this.deslocamentoY = - this.velocidadeDeDeslocamento;
                 break;
+
             case KeyEvent.VK_DOWN:
+                ImageIcon carregador_down = new ImageIcon("recursos\\personagem_s.png");
+                this.imagem = carregador_down.getImage();
                 this.deslocamentoY = this.velocidadeDeDeslocamento;
                 break;
             case KeyEvent.VK_S:
+                ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
+                this.imagem = carregador_s.getImage();
                 this.deslocamentoY = this.velocidadeDeDeslocamento;
                 break;
+
             case KeyEvent.VK_RIGHT:
                 this.deslocamentoX = this.velocidadeDeDeslocamento;
                 break;
             case KeyEvent.VK_D:
                 this.deslocamentoX = this.velocidadeDeDeslocamento;
                 break;
+
             case KeyEvent.VK_LEFT:
                 this.deslocamentoX = - this.velocidadeDeDeslocamento;
                 break;
             case KeyEvent.VK_A:
                 this.deslocamentoX = - this.velocidadeDeDeslocamento;
                 break;
+                
             default:
                 break;
         }
