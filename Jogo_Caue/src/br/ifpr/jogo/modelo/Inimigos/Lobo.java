@@ -20,12 +20,14 @@ public class Lobo {
     }
 
 
-    public void Carregar(){
+    public void carregar(){
         ImageIcon carregador = new ImageIcon("recursos\\lobo.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
     }
+
+    
 
     public int getPosicaoX() {
         return posicaoX;
