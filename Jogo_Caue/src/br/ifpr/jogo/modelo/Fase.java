@@ -53,14 +53,16 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         Graphics2D graficos = (Graphics2D) g;
 
         graficos.drawImage(this.fundo, 0,0,null);
-        graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoX(), this.personagem.getPosicaoY(), null);
-        graficos.drawImage(this.lobo.getImagem(), this.lobo.getPosicaoX(), this.lobo.getPosicaoY(), null);
-
+        
         ArrayList<Tiro> tiros = personagem.getTiros();
 
         for (Tiro tiro : tiros) {
             tiro.carregar();
             graficos.drawImage(tiro.getImagem(), tiro.getPosicaoEmX(), tiro.getPosicaoEmY(), this);
+        
+        graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoX(), this.personagem.getPosicaoY(), null);
+        graficos.drawImage(this.lobo.getImagem(), this.lobo.getPosicaoX(), this.lobo.getPosicaoY(), null);
+
     }
 
         g.dispose();
