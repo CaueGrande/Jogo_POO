@@ -47,8 +47,9 @@ public class Personagem {
         this.posicaoY = this.posicaoY + this.deslocamentoY;
     }
 
+
     public void atirar(){
-            int Posicao_inicial_tiroX = this.posicaoX + this.larguraImagem;
+            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2);
             int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2);
 
             Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY);
@@ -93,20 +94,28 @@ public class Personagem {
 
             //MOVIMENTO PRA DIREITA
             case KeyEvent.VK_RIGHT:
+                ImageIcon carregador_right = new ImageIcon("recursos\\personagem_d.png");
+                this.imagem = carregador_right.getImage();
 
                 this.deslocamentoX = this.velocidadeDeDeslocamento;
                 break;
             case KeyEvent.VK_D:
+                ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
+                this.imagem = carregador_d.getImage();
 
                 this.deslocamentoX = this.velocidadeDeDeslocamento;
                 break;
 
             //MOVIMENTO PRA ESQUERDA
             case KeyEvent.VK_LEFT:
+                ImageIcon carregador_left = new ImageIcon("recursos\\personagem_a.png");
+                this.imagem = carregador_left.getImage();
 
                 this.deslocamentoX = - this.velocidadeDeDeslocamento;
                 break;
             case KeyEvent.VK_A:
+                ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
+                this.imagem = carregador_a.getImage();
 
                 this.deslocamentoX = - this.velocidadeDeDeslocamento;
                 break;

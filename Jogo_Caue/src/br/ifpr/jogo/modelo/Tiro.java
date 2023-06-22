@@ -16,8 +16,8 @@ public class Tiro {
 
 
     public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
-    this.posicaoEmX = posicaoPersonagemEmX - 100;
-    this.posicaoEmY = posicaoPersonagemEmY - 50;
+    this.posicaoEmX = posicaoPersonagemEmX;
+    this.posicaoEmY = posicaoPersonagemEmY;
     }
 
     public void carregar(){
