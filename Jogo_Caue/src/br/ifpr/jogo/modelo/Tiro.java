@@ -21,14 +21,14 @@ public class Tiro {
 
     public void carregar(){
 
-        ImageIcon carregador = new ImageIcon("recursos\\tiro.png");
+        ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
     }
 
     public void atualizar() {
-        this.posicaoEmX = this.posicaoEmX + Velocidade_Negativa;
+        //this.posicaoEmX = this.posicaoEmX + Velocidade_Negativa;
         this.posicaoEmY = this.posicaoEmY + Velocidade_Negativa;
 }
 

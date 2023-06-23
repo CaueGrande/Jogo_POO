@@ -15,13 +15,13 @@ public class Lobo {
     private int alturaImagem;
 
     public Lobo(){
-        this.posicaoX = deslocamentoX;
-        this.posicaoY = deslocamentoY;
+        this.posicaoX = 530;
+        this.posicaoY = 100;
     }
 
 
     public void carregar(){
-        ImageIcon carregador = new ImageIcon("recursos\\lobo.png");
+        ImageIcon carregador = new ImageIcon("recursos\\lobo_s.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
