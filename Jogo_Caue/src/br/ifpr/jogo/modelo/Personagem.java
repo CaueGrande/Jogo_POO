@@ -47,82 +47,41 @@ public class Personagem {
         this.posicaoY = this.posicaoY + this.deslocamentoY;
     }
 
-
     public void atirar(){
-            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2);
-            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2);
+        int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2);
+        int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2);
 
-            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY);
-            this.tiros.add(tiro);
-        }    
+        Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY);
+        this.tiros.add(tiro);
+    }
 
     public void mover (KeyEvent tecla){
         int codigo = tecla.getKeyCode();
-        
-        switch(codigo){
-            //MOVIMENTO PRA CIMA
-            case KeyEvent.VK_UP:
-                //ATUALIZA A IMAGEM 
-                ImageIcon carregador_up = new ImageIcon("recursos\\personagem_w.png");
-                this.imagem = carregador_up.getImage();
 
-                //DESLOCAMENTO DO PERSONAGEM
-                this.deslocamentoY = - this.velocidadeDeDeslocamento;
+        if (codigo == KeyEvent.VK_UP || codigo == KeyEvent.VK_W){
+            ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
+            this.imagem = carregador_w.getImage();
 
-                break;
-            case KeyEvent.VK_W:
-            
-                ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
-                this.imagem = carregador_w.getImage();
-                this.deslocamentoY = - this.velocidadeDeDeslocamento;
-                break;
-            
-            //MOVIMENTO PRA BAIXO
-            case KeyEvent.VK_DOWN:
+            this.deslocamentoY = - this.velocidadeDeDeslocamento;
 
-                ImageIcon carregador_down = new ImageIcon("recursos\\personagem_s.png");
-                this.imagem = carregador_down.getImage();
+        } else if(codigo == KeyEvent.VK_DOWN || codigo == KeyEvent.VK_S){
+            ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
+            this.imagem = carregador_s.getImage();
 
-                this.deslocamentoY = this.velocidadeDeDeslocamento;
-                break;
-            case KeyEvent.VK_S:
-                ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
-                this.imagem = carregador_s.getImage();
+            this.deslocamentoY = this.velocidadeDeDeslocamento;
 
-                this.deslocamentoY = this.velocidadeDeDeslocamento;
-                break;
+        } else if (codigo == KeyEvent.VK_RIGHT || codigo == KeyEvent.VK_D){
+            ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
+            this.imagem = carregador_d.getImage();
 
-            //MOVIMENTO PRA DIREITA
-            case KeyEvent.VK_RIGHT:
-                ImageIcon carregador_right = new ImageIcon("recursos\\personagem_d.png");
-                this.imagem = carregador_right.getImage();
+            this.deslocamentoX = this.velocidadeDeDeslocamento;
 
-                this.deslocamentoX = this.velocidadeDeDeslocamento;
-                break;
-            case KeyEvent.VK_D:
-                ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
-                this.imagem = carregador_d.getImage();
+        } else if (codigo == KeyEvent.VK_LEFT || codigo == KeyEvent.VK_A){
+            ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
+            this.imagem = carregador_a.getImage();
 
-                this.deslocamentoX = this.velocidadeDeDeslocamento;
-                break;
-
-            //MOVIMENTO PRA ESQUERDA
-            case KeyEvent.VK_LEFT:
-                ImageIcon carregador_left = new ImageIcon("recursos\\personagem_a.png");
-                this.imagem = carregador_left.getImage();
-
-                this.deslocamentoX = - this.velocidadeDeDeslocamento;
-                break;
-            case KeyEvent.VK_A:
-                ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
-                this.imagem = carregador_a.getImage();
-
-                this.deslocamentoX = - this.velocidadeDeDeslocamento;
-                break;
-                
-            default:
-                break;
-        }
+            this.deslocamentoX = - this.velocidadeDeDeslocamento;
+        }        
 
     }
 

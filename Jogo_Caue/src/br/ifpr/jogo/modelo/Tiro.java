@@ -1,7 +1,6 @@
 package br.ifpr.jogo.modelo;
 
 import java.awt.Image;
-import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -11,8 +10,8 @@ public class Tiro {
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
-    private static int Velocidade_Positiva = 2;
-    private static int Velocidade_Negativa = -2;
+    private static int Velocidade_Positiva = 5;
+    private static int Velocidade_Negativa = -5;
 
 
     public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
@@ -29,8 +28,8 @@ public class Tiro {
     }
 
     public void atualizar() {
-        this.posicaoEmX = this.posicaoEmX + Velocidade_Positiva;
-        this.posicaoEmY = this.posicaoEmY + Velocidade_Positiva;
+        this.posicaoEmX = this.posicaoEmX + Velocidade_Negativa;
+        this.posicaoEmY = this.posicaoEmY + Velocidade_Negativa;
 }
 
 

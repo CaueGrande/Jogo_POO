@@ -43,7 +43,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         this.lobo = new Lobo();
         this.lobo.carregar();
 
-
         this.timer = new Timer(DELAY, this);
         this.timer.start();
 
@@ -91,11 +90,14 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
         ArrayList<Tiro> tiros = personagem.getTiros();
 
-        for (int contador = 0; contador < tiros.size(); contador++) {
-            if (tiros.get(contador).getPosicaoEmX() > LARGURA_DA_JANELA)
+        for (int contador = 0; contador < tiros.size(); contador++){
+            if (tiros.get(contador).getPosicaoEmX() > LARGURA_DA_JANELA){
                 tiros.remove(contador);
-            else
+            } else if (tiros.get(contador).getPosicaoEmY() > ALTURA_DA_JANELA){
+                tiros.remove(contador);
+            } else {
                 tiros.get(contador).atualizar();
+            }
         }
 
         repaint();
