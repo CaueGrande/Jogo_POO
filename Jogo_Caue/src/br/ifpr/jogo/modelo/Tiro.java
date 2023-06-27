@@ -14,15 +14,17 @@ public class Tiro {
 
     private boolean visivel;
 
-    private String direcao;
+    private int direcao;
 
-    public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY, String direcao) {
+    // CONSTRUTOR
+    public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY, int direcao) {
         this.posicaoEmX = posicaoPersonagemEmX;
         this.posicaoEmY = posicaoPersonagemEmY;
         this.direcao = direcao;
         this.visivel = true;
     }
 
+    // CARREGA A IMAGEM INICIAL DOS TIROS
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
         this.imagem = carregador.getImage();
@@ -30,14 +32,18 @@ public class Tiro {
         this.larguraImagem = this.imagem.getHeight(null);
     }
 
+    //// MOVE A IMAGEM DO TIRO
     public void atualizar() {
-        if (direcao.equals("d")) {
+
+        // MUDA A DIRECAO DO TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O
+        // PERSONAGEM
+        if (direcao == Personagem.D_RIGTH) {
             posicaoEmX += velocidade;
-        } else if (direcao.equals("w")) {
+        } else if (direcao == Personagem.W_TOP) {
             posicaoEmY -= velocidade;
-        } else if (direcao.equals("a")) {
+        } else if (direcao == Personagem.A_LEFT) {
             posicaoEmX -= velocidade;
-        } else if (direcao.equals("s")) {
+        } else if (direcao == Personagem.S_BOTTOM) {
             posicaoEmY += velocidade;
         }
     }
@@ -91,11 +97,11 @@ public class Tiro {
         this.velocidade = velocidade;
     }
 
-    public String getdirecao() {
+    public int getDirecao() {
         return direcao;
     }
 
-    public void setdirecao(String direcao) {
+    public void setDirecao(int direcao) {
         this.direcao = direcao;
     }
 
