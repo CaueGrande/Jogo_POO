@@ -3,10 +3,9 @@ package br.ifpr.jogo.principal;
 import javax.swing.JFrame;
 import br.ifpr.jogo.modelo.Fase;
 
-
 public class Principal extends JFrame {
-    
-    public Principal(){
+
+    public Principal() {
         Fase fase = new Fase();
         super.add(fase);
 
@@ -15,10 +14,9 @@ public class Principal extends JFrame {
         super.setTitle("Savanna Survivor");
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        super.setResizable(false);
-}
+    }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Principal principal = new Principal();
     }
 }

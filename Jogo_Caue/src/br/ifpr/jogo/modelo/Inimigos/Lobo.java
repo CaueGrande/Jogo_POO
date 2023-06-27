@@ -13,10 +13,15 @@ public class Lobo {
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
+    private int velocidadeDeDeslocamento = 3;
+
+    private Personagem personagem;
 
     public Lobo(){
         this.posicaoX = 530;
         this.posicaoY = 100;
+
+        this.personagem = new Personagem();
     }
 
 
@@ -25,6 +30,25 @@ public class Lobo {
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
+    }
+
+    public void atualizar(){
+        this.posicaoX = this.posicaoX + this.deslocamentoX;
+        this.posicaoY = this.posicaoY + this.deslocamentoY;
+    }
+    
+    public void mover (){
+
+        while(this.posicaoX > personagem.getPosicaoX()){
+            this.deslocamentoX =- this.velocidadeDeDeslocamento;
+
+
+        }
+        while(this.posicaoX < personagem.getPosicaoX()){
+            this.deslocamentoX =+ this.velocidadeDeDeslocamento;
+        
+        }
+
     }
 
     

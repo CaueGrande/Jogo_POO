@@ -15,119 +15,120 @@ public class Personagem {
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
-    private int velocidadeDeDeslocamento;
+    private int velocidadeDeDeslocamento = 3;
 
     private static final int POSICAO_INICIAL_X = 575;
     private static final int POSICAO_INICIAL_Y = 850;
 
     private ArrayList<Tiro> tiros;
 
-    //LOCAL INICIAL DO PERSONAGEM
-    public Personagem(int velocidadeDeDeslocamento){
+    // LOCAL INICIAL DO PERSONAGEM
+    public Personagem() {
         this.posicaoX = POSICAO_INICIAL_X;
         this.posicaoY = POSICAO_INICIAL_Y;
 
-        this.velocidadeDeDeslocamento = velocidadeDeDeslocamento;
-
-        this.tiros = new ArrayList<Tiro> ();
+        this.tiros = new ArrayList<Tiro>();
     }
 
-    //IMAGEM INICIAL DO PERSONAGEM
-    public void carregar(){
+    // IMAGEM INICIAL DO PERSONAGEM
+    public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\personagem_w.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
     }
-        
-    
-    //MOVE O PERSONAGEM
-    public void atualizar(){
-        this.posicaoX = this.posicaoX + this.deslocamentoX;
-        this.posicaoY = this.posicaoY + this.deslocamentoY;
+
+    // MOVE O PERSONAGEM
+    public void atualizar() {
+        this.posicaoX += this.deslocamentoX;
+        this.posicaoY += this.deslocamentoY;
     }
 
-    public void atirar(){
-        int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2);
-        int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2);
-
-        Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY);
-        this.tiros.add(tiro);
-    }
-
-    public void mover (KeyEvent tecla){
+    public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
 
-        if (codigo == KeyEvent.VK_UP || codigo == KeyEvent.VK_W){
+        if (codigo == KeyEvent.VK_W) {
+            this.deslocamentoY = -this.velocidadeDeDeslocamento;
             ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
             this.imagem = carregador_w.getImage();
 
-            this.deslocamentoY = - this.velocidadeDeDeslocamento;
-
         }
-        if(codigo == KeyEvent.VK_DOWN || codigo == KeyEvent.VK_S){
+        if (codigo == KeyEvent.VK_S) {
+            this.deslocamentoY = this.velocidadeDeDeslocamento;
             ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
             this.imagem = carregador_s.getImage();
 
-            this.deslocamentoY = this.velocidadeDeDeslocamento;
-
         }
-        if (codigo == KeyEvent.VK_RIGHT || codigo == KeyEvent.VK_D){
+        if (codigo == KeyEvent.VK_D) {
+            this.deslocamentoX = this.velocidadeDeDeslocamento;
+            
             ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
             this.imagem = carregador_d.getImage();
 
-            this.deslocamentoX = this.velocidadeDeDeslocamento;
-
         }
-        if (codigo == KeyEvent.VK_LEFT || codigo == KeyEvent.VK_A){
+        if (codigo == KeyEvent.VK_A) {
+            this.deslocamentoX = -this.velocidadeDeDeslocamento;
             ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
             this.imagem = carregador_a.getImage();
-
-            this.deslocamentoX = - this.velocidadeDeDeslocamento;
-        }        
+            
+        }
 
     }
 
-    public void parar(KeyEvent tecla){
+    public void parar(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
 
-        //PARAR OS MOVIMENTOS
-        switch(codigo){
+        // PARAR OS MOVIMENTOS
+        if (codigo == KeyEvent.VK_W) {
+            this.deslocamentoY = 0;
 
-            case KeyEvent.VK_UP:
-                this.deslocamentoY = 0;
-                break;
-            case KeyEvent.VK_W:
-                this.deslocamentoY = 0;
-                break;
+        } else if (codigo == KeyEvent.VK_S) {
+            this.deslocamentoY = 0;
 
-            case KeyEvent.VK_DOWN:
-                this.deslocamentoY = 0;
-                break;
-            case KeyEvent.VK_S:
-                this.deslocamentoY = 0;
-                break;
+        } else if (codigo == KeyEvent.VK_D) {
+            this.deslocamentoX = 0;
 
-            case KeyEvent.VK_RIGHT:
-                this.deslocamentoX = 0;
-                break;
-             case KeyEvent.VK_D:
-                this.deslocamentoX = 0;
-                break;
+        } else if (codigo == KeyEvent.VK_A) {
+            this.deslocamentoX = 0;
 
-            case KeyEvent.VK_LEFT:
-                this.deslocamentoX = 0;
-                break;
-            case KeyEvent.VK_A:
-                this.deslocamentoX = 0;
-                break;
-
-            default:
-                break;
         }
+
     }
 
-    //GETTERS E SETTERS
+    public void atirar(KeyEvent tecla) {
+        int codigo = tecla.getKeyCode();
+
+        if (codigo == KeyEvent.VK_UP) {
+            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) - 2;
+            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) + 2;
+            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, "w");
+            this.tiros.add(tiro);
+
+        }
+        if (codigo == KeyEvent.VK_DOWN) {
+            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
+            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) - 2;
+            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, "s");
+            this.tiros.add(tiro);
+
+        }
+        if (codigo == KeyEvent.VK_RIGHT) {
+            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
+            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, "d");
+            this.tiros.add(tiro);
+
+        }
+        if (codigo == KeyEvent.VK_LEFT) {
+            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) + 8;
+            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, "a");
+            this.tiros.add(tiro);
+        }
+
+    }
+
+    // GETTERS E SETTERS
     public int getPosicaoX() {
         return posicaoX;
     }
@@ -208,5 +209,4 @@ public class Personagem {
         this.tiros = tiros;
     }
 
-    
 }

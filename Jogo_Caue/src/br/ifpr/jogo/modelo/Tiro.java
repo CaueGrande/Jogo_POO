@@ -10,15 +10,20 @@ public class Tiro {
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
-    private static int velocidade = 5;
+    private int velocidade = 5;
 
+    private boolean visivel;
 
-    public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
-    this.posicaoEmX = posicaoPersonagemEmX;
-    this.posicaoEmY = posicaoPersonagemEmY;
+    private String direcao;
+
+    public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY, String direcao) {
+        this.posicaoEmX = posicaoPersonagemEmX;
+        this.posicaoEmY = posicaoPersonagemEmY;
+        this.direcao = direcao;
+        this.visivel = true;
     }
 
-    public void carregar(){
+    public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
@@ -26,12 +31,18 @@ public class Tiro {
     }
 
     public void atualizar() {
-        //this.posicaoEmX = this.posicaoEmX + Velocidade_Negativa;
-        this.posicaoEmY = this.posicaoEmY + Velocidade;
-}
+        if (direcao.equals("d")) {
+            posicaoEmX += velocidade;
+        } else if (direcao.equals("w")) {
+            posicaoEmY -= velocidade;
+        } else if (direcao.equals("a")) {
+            posicaoEmX -= velocidade;
+        } else if (direcao.equals("s")) {
+            posicaoEmY += velocidade;
+        }
+    }
 
-
-    //GETTERS E SETTERS
+    // GETTERS E SETTERS
     public int getPosicaoEmX() {
         return posicaoEmX;
     }
@@ -72,20 +83,33 @@ public class Tiro {
         this.alturaImagem = alturaImagem;
     }
 
-    public static int getVelocidade_Positiva() {
-        return Velocidade_Positiva;
+    public int getVelocidade() {
+        return velocidade;
     }
 
-    public static void setVelocidade_Positiva(int velocidade_Positiva) {
-        Velocidade_Positiva = velocidade_Positiva;
+    public void setVelocidade(int velocidade) {
+        this.velocidade = velocidade;
     }
 
-    public static int getVelocidade_Negativa() {
-        return Velocidade_Negativa;
+    public String getdirecao() {
+        return direcao;
     }
 
-    public static void setVelocidade_Negativa(int velocidade_Negativa) {
-        Velocidade_Negativa = velocidade_Negativa;
+    public void setdirecao(String direcao) {
+        this.direcao = direcao;
+    }
+
+    public boolean isVisivel() {
+        if (this.posicaoEmX > 1285 || this.posicaoEmX < 0 || this.posicaoEmY > 1085 || this.posicaoEmY < 0) {
+            this.visivel = false;
+        } else {
+            this.visivel = true;
+        }
+        return visivel;
+    }
+
+    public void setVisivel(boolean visivel) {
+        this.visivel = visivel;
     }
 
 }
