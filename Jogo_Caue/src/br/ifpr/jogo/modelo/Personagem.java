@@ -64,19 +64,22 @@ public class Personagem {
 
             this.deslocamentoY = - this.velocidadeDeDeslocamento;
 
-        } else if(codigo == KeyEvent.VK_DOWN || codigo == KeyEvent.VK_S){
+        }
+        if(codigo == KeyEvent.VK_DOWN || codigo == KeyEvent.VK_S){
             ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
             this.imagem = carregador_s.getImage();
 
             this.deslocamentoY = this.velocidadeDeDeslocamento;
 
-        } else if (codigo == KeyEvent.VK_RIGHT || codigo == KeyEvent.VK_D){
+        }
+        if (codigo == KeyEvent.VK_RIGHT || codigo == KeyEvent.VK_D){
             ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
             this.imagem = carregador_d.getImage();
 
             this.deslocamentoX = this.velocidadeDeDeslocamento;
 
-        } else if (codigo == KeyEvent.VK_LEFT || codigo == KeyEvent.VK_A){
+        }
+        if (codigo == KeyEvent.VK_LEFT || codigo == KeyEvent.VK_A){
             ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
             this.imagem = carregador_a.getImage();
 

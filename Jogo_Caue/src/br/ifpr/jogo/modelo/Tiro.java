@@ -10,8 +10,7 @@ public class Tiro {
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
-    private static int Velocidade_Positiva = 5;
-    private static int Velocidade_Negativa = -5;
+    private static int velocidade = 5;
 
 
     public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
@@ -20,7 +19,6 @@ public class Tiro {
     }
 
     public void carregar(){
-
         ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
@@ -29,7 +27,7 @@ public class Tiro {
 
     public void atualizar() {
         //this.posicaoEmX = this.posicaoEmX + Velocidade_Negativa;
-        this.posicaoEmY = this.posicaoEmY + Velocidade_Negativa;
+        this.posicaoEmY = this.posicaoEmY + Velocidade;
 }
 
 

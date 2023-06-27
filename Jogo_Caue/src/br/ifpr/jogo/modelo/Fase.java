@@ -15,7 +15,7 @@ import javax.swing.Timer;
 
 import br.ifpr.jogo.modelo.Inimigos.Lobo;
 
-public class Fase extends JPanel implements KeyListener, ActionListener{
+public class Fase extends JPanel implements KeyListener, ActionListener {
     private Image fundo;
     private Personagem personagem;
     private Lobo lobo;
@@ -26,9 +26,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
     private static final int LARGURA_DA_JANELA = 1285;
     private static final int ALTURA_DA_JANELA = 1085;
-    
-    
-    public Fase(){
+
+    public Fase() {
         this.setFocusable(true);
         this.setDoubleBuffered(true);
 
@@ -48,19 +47,20 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         Graphics2D graficos = (Graphics2D) g;
 
         ArrayList<Tiro> tiros = personagem.getTiros();
-        
-        graficos.drawImage(this.fundo, 0,0,null);
-        graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoX(), this.personagem.getPosicaoY(), null);
+
+        graficos.drawImage(this.fundo, 0, 0, null);
         graficos.drawImage(this.lobo.getImagem(), this.lobo.getPosicaoX(), this.lobo.getPosicaoY(), null);
 
         for (Tiro tiro : tiros) {
             tiro.carregar();
             graficos.drawImage(tiro.getImagem(), tiro.getPosicaoEmX(), tiro.getPosicaoEmY(), this);
-    }
+        }
+        graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoX(), this.personagem.getPosicaoY(),
+                null);
 
         g.dispose();
 
@@ -68,7 +68,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
     }
 
     @Override
@@ -90,10 +90,10 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
         ArrayList<Tiro> tiros = personagem.getTiros();
 
-        for (int contador = 0; contador < tiros.size(); contador++){
-            if (tiros.get(contador).getPosicaoEmX() > LARGURA_DA_JANELA){
+        for (int contador = 0; contador < tiros.size(); contador++) {
+            if (tiros.get(contador).getPosicaoEmX() > LARGURA_DA_JANELA) {
                 tiros.remove(contador);
-            } else if (tiros.get(contador).getPosicaoEmY() > ALTURA_DA_JANELA){
+            } else if (tiros.get(contador).getPosicaoEmY() > ALTURA_DA_JANELA) {
                 tiros.remove(contador);
             } else {
                 tiros.get(contador).atualizar();

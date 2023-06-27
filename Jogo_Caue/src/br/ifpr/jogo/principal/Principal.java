@@ -15,6 +15,7 @@ public class Principal extends JFrame {
         super.setTitle("Savanna Survivor");
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        super.setResizable(false);
 }
 
     public static void main(String[] args){
