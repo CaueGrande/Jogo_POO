@@ -25,44 +25,50 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
     private static final int DELAY = 5;
 
-    private static final int LARGURA_DA_JANELA = 1285;
-    private static final int ALTURA_DA_JANELA = 1085;
+    // private static final int LARGURA_JANELA = 1285;
+    // private static final int ALTURA_JANELA = 1085;
 
     public Fase() {
         this.setFocusable(true);
         this.setDoubleBuffered(true);
 
+        // IMAGEM DA FASE
         ImageIcon carregando = new ImageIcon("recursos\\fundo.png");
         this.fundo = carregando.getImage();
 
-        this.addKeyListener(this);
-
+        // CRIA O PERSONAGEM NA FASE
         this.personagem = new Personagem();
         this.personagem.carregar();
 
         this.lobo = new Lobo();
         this.lobo.carregar();
 
+        this.addKeyListener(this);
+
+        // ADICIONA O DELAY NA FASE
         this.timer = new Timer(DELAY, this);
         this.timer.start();
 
     }
 
+    // DESENHA AS IMAGENS NA TELA
     public void paint(Graphics g) {
         Graphics2D graficos = (Graphics2D) g;
 
+        // VARIAVEL LISTA DE TIROS
+
         ArrayList<Tiro> tiros = personagem.getTiros();
-
         graficos.drawImage(this.fundo, 0, 0, null);
-        
-        graficos.drawImage(this.lobo.getImagem(), this.lobo.getPosicaoX(), this.lobo.getPosicaoY(), null);
 
-        for (Tiro tiro : tiros) {
+        for (int i = 0; i < tiros.size(); i++) {
+            Tiro tiro = tiros.get(i);
             tiro.carregar();
             graficos.drawImage(tiro.getImagem(), tiro.getPosicaoEmX(), tiro.getPosicaoEmY(), null);
         }
 
-        graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoX(), this.personagem.getPosicaoY(), null);
+        graficos.drawImage(personagem.getImagem(), personagem.getPosicaoX(), personagem.getPosicaoY(), this);
+
+        graficos.drawImage(lobo.getImagem(), lobo.getPosicaoX(), lobo.getPosicaoY(), null);
 
         g.dispose();
 
@@ -73,16 +79,15 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
     }
 
+    // ACAO AO APERTAR TECLA
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            personagem.atirar(e);
-        }
-        else{
-            personagem.mover(e);
-        }               
+        this.personagem.atirar();
+        this.personagem.mover(e);
+
     }
 
+    // ACAO AO SOLTAR TECLA
     @Override
     public void keyReleased(KeyEvent e) {
         this.personagem.parar(e);
@@ -91,16 +96,15 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.personagem.atualizar();
-        this.lobo.atualizar();
 
         ArrayList<Tiro> tiros = personagem.getTiros();
-        // Remover tiros que saem da tela, se eles não forem mais visíveis.
         Iterator<Tiro> iteratorTiro = tiros.iterator();
-        // Enquanto houver outro item na lista.
+
+        // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA
         while (iteratorTiro.hasNext()) {
             Tiro tiro = iteratorTiro.next();
 
-            //Se o tiro estiver visivel ele vai ir atualizando o movimento, se não ele é removido
+            // MOVE E REMOVE OS TIROS
             if (tiro.isVisivel()) {
                 tiro.atualizar();
             } else {

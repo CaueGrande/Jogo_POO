@@ -26,26 +26,54 @@ public class Tiro {
 
     // CARREGA A IMAGEM INICIAL DOS TIROS
     public void carregar() {
+        if(direcao == Personagem.TECLA_W) {
         ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
         this.larguraImagem = this.imagem.getHeight(null);
+
+        } else if(direcao == Personagem.TECLA_S) {
+        ImageIcon carregador = new ImageIcon("recursos\\tiro_s.png");
+        this.imagem = carregador.getImage();
+        
+        this.alturaImagem = this.imagem.getWidth(null);
+        this.larguraImagem = this.imagem.getHeight(null);
+            
+        } else if(direcao == Personagem.TECLA_D) {
+        ImageIcon carregador = new ImageIcon("recursos\\tiro_d.png");
+        this.imagem = carregador.getImage();
+
+        this.alturaImagem = this.imagem.getWidth(null);
+        this.larguraImagem = this.imagem.getHeight(null);
+
+        } else if(direcao == Personagem.TECLA_A) {
+        ImageIcon carregador = new ImageIcon("recursos\\tiro_a.png");
+        this.imagem = carregador.getImage();
+
+        this.alturaImagem = this.imagem.getWidth(null);
+        this.larguraImagem = this.imagem.getHeight(null);
+
+        } 
+        
     }
 
     //// MOVE A IMAGEM DO TIRO
     public void atualizar() {
 
-        // MUDA A DIRECAO DO TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O
-        // PERSONAGEM
-        if (direcao == Personagem.D_RIGTH) {
-            posicaoEmX += velocidade;
-        } else if (direcao == Personagem.W_TOP) {
+        // MUDA A DIRECAO DO TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O PERSONAGEM
+        if(direcao == Personagem.TECLA_W) {
             posicaoEmY -= velocidade;
-        } else if (direcao == Personagem.A_LEFT) {
-            posicaoEmX -= velocidade;
-        } else if (direcao == Personagem.S_BOTTOM) {
+
+        } else if(direcao == Personagem.TECLA_S) {
             posicaoEmY += velocidade;
-        }
+            
+        } else if(direcao == Personagem.TECLA_D) {
+            posicaoEmX += velocidade;
+
+        } else if(direcao == Personagem.TECLA_A) {
+            posicaoEmX -= velocidade;
+            
+        } 
     }
 
     // GETTERS E SETTERS

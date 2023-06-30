@@ -21,10 +21,10 @@ public class Personagem {
     private static final int POSICAO_INICIAL_X = 575;
     private static final int POSICAO_INICIAL_Y = 850;
 
-    public static int W_TOP = 0;
-    public static int S_BOTTOM = 1;
-    public static int A_LEFT = 2;
-    public static int D_RIGTH = 3;
+    public static int TECLA_W = 0;
+    public static int TECLA_S = 1;
+    public static int TECLA_A = 2;
+    public static int TECLA_D = 3;
 
     private ArrayList<Tiro> tiros;
 
@@ -33,8 +33,8 @@ public class Personagem {
         // PADRONIZA O LOCAL INICIAL DO PERSONAGEM
         this.posicaoX = POSICAO_INICIAL_X;
         this.posicaoY = POSICAO_INICIAL_Y;
-        this.direcao = W_TOP;
-
+        // PADRONIZA A DIRECAO INICIAL DO TIRO
+        this.direcao = TECLA_W;
         this.tiros = new ArrayList<Tiro>();
     }
 
@@ -46,7 +46,7 @@ public class Personagem {
         this.larguraImagem = this.imagem.getHeight(null);
     }
 
-    // MOVE A IMAGEM DO PERSONAGEM
+    // MUDA A POSICAO DO PERSONAGEM
     public void atualizar() {
         this.posicaoX += this.deslocamentoX;
         this.posicaoY += this.deslocamentoY;
@@ -60,14 +60,14 @@ public class Personagem {
             this.deslocamentoY = -this.velocidadeDeDeslocamento;
             ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
             this.imagem = carregador_w.getImage();
-            this.direcao = W_TOP;
+            this.direcao = TECLA_W;
 
         }
         if (codigo == KeyEvent.VK_S) {
             this.deslocamentoY = this.velocidadeDeDeslocamento;
             ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
             this.imagem = carregador_s.getImage();
-            this.direcao = S_BOTTOM;
+            this.direcao = TECLA_S;
 
         }
         if (codigo == KeyEvent.VK_D) {
@@ -75,13 +75,13 @@ public class Personagem {
 
             ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
             this.imagem = carregador_d.getImage();
-            this.direcao = D_RIGTH;
+            this.direcao = TECLA_D;
         }
         if (codigo == KeyEvent.VK_A) {
             this.deslocamentoX = -this.velocidadeDeDeslocamento;
             ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
             this.imagem = carregador_a.getImage();
-            this.direcao = A_LEFT;
+            this.direcao = TECLA_A;
         }
 
     }
@@ -107,33 +107,37 @@ public class Personagem {
     }
 
     // DETECTA A TECLA APERTADA E ATIRA PARA A DIRECAO CORRESPONDENTE
-    public void atirar(KeyEvent tecla) {
-        int codigo = tecla.getKeyCode();
+    public void atirar() {
 
-        if (this.direcao == Personagem.D_RIGTH) {
+        if(this.direcao == Personagem.TECLA_W) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 2;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) + 2;
 
-            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) + 8;
-            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
-            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, this.direcao);
+            Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.tiros.add(tiro);
-        } else if (this.direcao == Personagem.W_TOP) {
 
-            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) - 2;
-            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) + 2;
-            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, this.direcao);
-            this.tiros.add(tiro);
-        } else if (this.direcao == Personagem.A_LEFT) {
-            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
-            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
-            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, this.direcao);
-            this.tiros.add(tiro);
-        } else if (this.direcao == Personagem.S_BOTTOM) {
-            int Posicao_inicial_tiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
-            int Posicao_inicial_tiroY = this.posicaoY + (this.alturaImagem / 2) - 2;
-            Tiro tiro = new Tiro(Posicao_inicial_tiroX, Posicao_inicial_tiroY, this.direcao);
-            this.tiros.add(tiro);
-        }
+        } else if(this.direcao == Personagem.TECLA_S) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 2;
 
+            Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.tiros.add(tiro);
+
+        }else if(this.direcao == Personagem.TECLA_D) {
+
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) + 8;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+            Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.tiros.add(tiro);
+
+        } else if(this.direcao == Personagem.TECLA_A) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+
+            Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.tiros.add(tiro);
+
+        } 
     }
 
     // GETTERS E SETTERS
