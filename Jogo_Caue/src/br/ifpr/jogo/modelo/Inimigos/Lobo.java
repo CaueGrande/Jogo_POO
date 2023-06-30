@@ -19,17 +19,20 @@ public class Lobo {
     private static final int VELOCIDADE = 3;
     private static final int QTDE_INIMIGOS = 10;
 
+    private boolean visibilidade;
+
     private Personagem personagem;
 
     // CONSTRUTOR
-    public Lobo(){
-        this.posicaoX = 500;
-        this.posicaoY = 355;
+    public Lobo(int posicaoX, int posicaoY) {
+        this.posicaoX = posicaoX;
+        this.posicaoY = posicaoY;
+        this.visibilidade = true;
         this.personagem = new Personagem();
     }
 
     // CARREGA A IMAGEM INICIAL DO PERSONAGEM
-    public void carregar(){
+    public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\lobo_s.png");
         this.imagem = carregador.getImage();
         this.alturaImagem = this.imagem.getWidth(null);
@@ -37,21 +40,11 @@ public class Lobo {
     }
 
     // MUDA A POSICAO DOS LOBOS
-    public void atualizar(){
-        this.posicaoX = this.posicaoX - VELOCIDADE;
+    public void atualizar() {
+        this.posicaoY += VELOCIDADE;
         // this.posicaoY = this.posicaoY - VELOCIDADE;
- 
-    }
-    
-    // GERA OS LOBOS EM POSICOES ALEATORIAS
-    public static void inicializaLobos(){
-        lobos = new ArrayList<Lobo>();
-
-        for (int contador = 0; contador < QTDE_INIMIGOS; contador++) {
-            int posicaoX = (int) (Math.random() * 8000 + 1024);
-            int posicaoY = (int) (Math.random() * 650 + 30);
-            Lobo lobo = new Lobo();
-            lobos.add(lobo);
+        if (this.posicaoY > 1080) {
+            visibilidade = false;
         }
     }
 
@@ -118,6 +111,14 @@ public class Lobo {
 
     public void setPersonagem(Personagem personagem) {
         this.personagem = personagem;
+    }
+
+    public boolean isVisibilidade() {
+        return visibilidade;
+    }
+
+    public void setVisibilidade(boolean visibilidade) {
+        this.visibilidade = visibilidade;
     }
 
 }

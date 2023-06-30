@@ -20,12 +20,12 @@ import br.ifpr.jogo.modelo.Inimigos.Lobo;
 public class Fase extends JPanel implements KeyListener, ActionListener {
     private Image fundo;
     private Personagem personagem;
-    private Lobo lobo;
+    private List<Lobo> lobo;
     private Timer timer;
 
     private static final int DELAY = 5;
 
-    // private static final int LARGURA_JANELA = 1285;
+    private static final int LARGURA_JANELA = 1285;
     // private static final int ALTURA_JANELA = 1085;
 
     public Fase() {
@@ -40,16 +40,32 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
         this.personagem = new Personagem();
         this.personagem.carregar();
 
-        this.lobo = new Lobo();
-        this.lobo.carregar();
-
         this.addKeyListener(this);
 
         // ADICIONA O DELAY NA FASE
         this.timer = new Timer(DELAY, this);
         this.timer.start();
 
+        inicializaLobo();
     }
+
+    // INICIANDO POSIÇÃO DAS NAVES INIMIGAS ALEATORIAMENTE
+    public void inicializaLobo() {
+        lobo = new ArrayList<Lobo>();
+        int alturaInimigo = 50;
+        // TIMER PARA SPAWNAR O METEORITO
+        Timer lobotimer = new Timer(1500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Entrou");
+                int posicaoEmY = -alturaInimigo;
+                int posicaoEmX = (int) (Math.random() * (1280 - alturaInimigo));
+                lobo.add(new Lobo(posicaoEmX, posicaoEmY));
+            }
+        });
+        lobotimer.setRepeats(true);
+        lobotimer.start();
+    }// FIM MÉTODO METEORITO
 
     // DESENHA AS IMAGENS NA TELA
     public void paint(Graphics g) {
@@ -68,7 +84,12 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
         graficos.drawImage(personagem.getImagem(), personagem.getPosicaoX(), personagem.getPosicaoY(), this);
 
-        graficos.drawImage(lobo.getImagem(), lobo.getPosicaoX(), lobo.getPosicaoY(), null);
+        // FOR PARA O LOBO
+        for (int i = 0; i < lobo.size(); i++) {
+            Lobo lobinho = lobo.get(i);
+            lobinho.carregar();
+            graficos.drawImage(lobinho.getImagem(), lobinho.getPosicaoX(), lobinho.getPosicaoY(), null);
+        }
 
         g.dispose();
 
@@ -99,7 +120,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
         ArrayList<Tiro> tiros = personagem.getTiros();
         Iterator<Tiro> iteratorTiro = tiros.iterator();
-
         // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA
         while (iteratorTiro.hasNext()) {
             Tiro tiro = iteratorTiro.next();
@@ -108,9 +128,21 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             if (tiro.isVisivel()) {
                 tiro.atualizar();
             } else {
+
                 iteratorTiro.remove();
             }
         }
+
+        Iterator<Lobo> iteratorLobo = lobo.iterator();
+        while (iteratorLobo.hasNext()) {
+            Lobo loboinho = iteratorLobo.next();
+            if (loboinho.isVisibilidade()) {
+                loboinho.atualizar();
+            } else {
+                System.out.println("Removeu");
+                iteratorLobo.remove();
+            }
+        } // FIM NAVES
 
         repaint();
     }
