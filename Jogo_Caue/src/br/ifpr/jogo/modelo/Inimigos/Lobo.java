@@ -42,7 +42,7 @@ public class Lobo {
     // MUDA A POSICAO DOS LOBOS
     public void atualizar() {
         this.posicaoY += VELOCIDADE;
-        // this.posicaoY = this.posicaoY - VELOCIDADE;
+        // this.posicaoX += VELOCIDADE;
         if (this.posicaoY > 1080) {
             visibilidade = false;
         }

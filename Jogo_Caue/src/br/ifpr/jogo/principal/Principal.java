@@ -5,6 +5,7 @@ import br.ifpr.jogo.modelo.Fase;
 
 public class Principal extends JFrame {
 
+    // CONSTRUTOR
     public Principal() {
         Fase fase = new Fase();
         super.add(fase);
