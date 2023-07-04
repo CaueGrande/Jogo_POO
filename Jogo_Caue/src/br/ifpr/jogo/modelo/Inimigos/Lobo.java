@@ -16,7 +16,7 @@ public class Lobo {
 
     private static ArrayList<Lobo> lobos;
 
-    private static final int VELOCIDADE = 3;
+    private static final int VELOCIDADE = 1;
     private static final int QTDE_INIMIGOS = 10;
 
     private boolean visibilidade;
@@ -24,11 +24,11 @@ public class Lobo {
     private Personagem personagem;
 
     // CONSTRUTOR
-    public Lobo(int posicaoX, int posicaoY) {
+    public Lobo(int posicaoX, int posicaoY, Personagem personagem) {
         this.posicaoX = posicaoX;
         this.posicaoY = posicaoY;
         this.visibilidade = true;
-        this.personagem = new Personagem();
+        this.personagem = personagem;
     }
 
     // CARREGA A IMAGEM INICIAL DO PERSONAGEM
@@ -41,11 +41,33 @@ public class Lobo {
 
     // MUDA A POSICAO DOS LOBOS
     public void atualizar() {
-        this.posicaoY += VELOCIDADE;
-        // this.posicaoX += VELOCIDADE;
-        if (this.posicaoY > 1080) {
-            visibilidade = false;
+        if(personagem.getPosicaoY() > this.getPosicaoY()){
+            this.posicaoY += VELOCIDADE;
+            
         }
+        if(personagem.getPosicaoY() < this.getPosicaoY()){
+            this.posicaoY -= VELOCIDADE;
+            
+        }
+        if(personagem.getPosicaoX() > this.getPosicaoX()){
+            this.posicaoX += VELOCIDADE;
+
+        }
+        if(personagem.getPosicaoX() < this.getPosicaoX()){
+            this.posicaoX -= VELOCIDADE;
+            
+        }
+    
+        // DEIXA A VARIAVEL VISIBILIDADE FALSA QUANDO O LOBO CHEGA NO PERSONAGEM
+        if (personagem.getPosicaoX() == this.posicaoX) {
+            visibilidade = false;
+
+        }
+        if (personagem.getPosicaoY() == this.posicaoY) {
+            visibilidade = false;
+
+        }
+        
     }
 
     // GETTERS E SETTERS

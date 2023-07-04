@@ -61,7 +61,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             public void actionPerformed(ActionEvent e) {
                 int posicaoEmY = -alturaInimigo;
                 int posicaoEmX = (int) (Math.random() * (1280 - alturaInimigo));
-                lobo.add(new Lobo(posicaoEmX, posicaoEmY));
+                lobo.add(new Lobo(posicaoEmX, posicaoEmY, personagem));
             }
         });
         lobotimer.setRepeats(true);
@@ -146,6 +146,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
                 lobo_inimigo.atualizar();
             } else {
                 iteratorLobo.remove();
+                System.out.println("Removeu");
             }
         } 
 
