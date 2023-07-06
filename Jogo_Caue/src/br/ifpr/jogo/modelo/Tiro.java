@@ -5,92 +5,98 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Tiro {
-    private int posicaoEmX;
-    private int posicaoEmY;
+    private int posicaoX;
+    private int posicaoY;
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
-    private int velocidade = 5;
+    private int VELOCIDADE = 5;
 
     private boolean visivel;
 
     private int direcao;
 
     // CONSTRUTOR
-    public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY, int direcao) {
-        this.posicaoEmX = posicaoPersonagemEmX;
-        this.posicaoEmY = posicaoPersonagemEmY;
+    public Tiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
+        this.posicaoX = posicaoPersonagemX;
+        this.posicaoY = posicaoPersonagemY;
         this.direcao = direcao;
         this.visivel = true;
+        carregar();
     }
 
     // CARREGA A IMAGEM INICIAL DOS TIROS
     public void carregar() {
         if(direcao == Personagem.TECLA_W) {
-        ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
-        this.imagem = carregador.getImage();
-        this.alturaImagem = this.imagem.getWidth(null);
-        this.larguraImagem = this.imagem.getHeight(null);
-
-        } else if(direcao == Personagem.TECLA_S) {
-        ImageIcon carregador = new ImageIcon("recursos\\tiro_s.png");
-        this.imagem = carregador.getImage();
-        
-        this.alturaImagem = this.imagem.getWidth(null);
-        this.larguraImagem = this.imagem.getHeight(null);
+            ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
+            this.imagem = carregador.getImage();
             
-        } else if(direcao == Personagem.TECLA_D) {
-        ImageIcon carregador = new ImageIcon("recursos\\tiro_d.png");
-        this.imagem = carregador.getImage();
+            this.alturaImagem = this.imagem.getWidth(null);
+            this.larguraImagem = this.imagem.getHeight(null);
 
-        this.alturaImagem = this.imagem.getWidth(null);
-        this.larguraImagem = this.imagem.getHeight(null);
+        }
+        if(direcao == Personagem.TECLA_S) {
+            ImageIcon carregador = new ImageIcon("recursos\\tiro_s.png");
+            this.imagem = carregador.getImage();
+        
+            this.alturaImagem = this.imagem.getWidth(null);
+            this.larguraImagem = this.imagem.getHeight(null);
+            
+        }
+        if(direcao == Personagem.TECLA_D) {
+            ImageIcon carregador = new ImageIcon("recursos\\tiro_d.png");
+            this.imagem = carregador.getImage();
 
-        } else if(direcao == Personagem.TECLA_A) {
-        ImageIcon carregador = new ImageIcon("recursos\\tiro_a.png");
-        this.imagem = carregador.getImage();
+            this.alturaImagem = this.imagem.getWidth(null);
+            this.larguraImagem = this.imagem.getHeight(null);
 
-        this.alturaImagem = this.imagem.getWidth(null);
-        this.larguraImagem = this.imagem.getHeight(null);
+        }
+        if(direcao == Personagem.TECLA_A) {
+            ImageIcon carregador = new ImageIcon("recursos\\tiro_a.png");
+            this.imagem = carregador.getImage();
 
-        } 
+            this.alturaImagem = this.imagem.getWidth(null);
+            this.larguraImagem = this.imagem.getHeight(null);
+
+        }
+        
         
     }
 
-    //// MOVE A IMAGEM DO TIRO
+    // MUDA A POSICAO DO TIRO
     public void atualizar() {
 
         // MUDA A DIRECAO DO TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O PERSONAGEM
         if(direcao == Personagem.TECLA_W) {
-            posicaoEmY -= velocidade;
+            posicaoY -= VELOCIDADE;
 
         } else if(direcao == Personagem.TECLA_S) {
-            posicaoEmY += velocidade;
+            posicaoY += VELOCIDADE;
             
         } else if(direcao == Personagem.TECLA_D) {
-            posicaoEmX += velocidade;
+            posicaoX += VELOCIDADE;
 
         } else if(direcao == Personagem.TECLA_A) {
-            posicaoEmX -= velocidade;
+            posicaoX -= VELOCIDADE;
             
         } 
     }
 
     // GETTERS E SETTERS
-    public int getPosicaoEmX() {
-        return posicaoEmX;
+    public int getPosicaoX() {
+        return posicaoX;
     }
 
-    public void setPosicaoEmX(int posicaoEmX) {
-        this.posicaoEmX = posicaoEmX;
+    public void setPosicaoX(int posicaoX) {
+        this.posicaoX = posicaoX;
     }
 
-    public int getPosicaoEmY() {
-        return posicaoEmY;
+    public int getPosicaoY() {
+        return posicaoY;
     }
 
-    public void setPosicaoEmY(int posicaoEmY) {
-        this.posicaoEmY = posicaoEmY;
+    public void setPosicaoY(int posicaoY) {
+        this.posicaoY = posicaoY;
     }
 
     public Image getImagem() {
@@ -118,11 +124,11 @@ public class Tiro {
     }
 
     public int getVelocidade() {
-        return velocidade;
+        return VELOCIDADE;
     }
 
     public void setVelocidade(int velocidade) {
-        this.velocidade = velocidade;
+        this.VELOCIDADE = velocidade;
     }
 
     public int getDirecao() {
@@ -134,7 +140,7 @@ public class Tiro {
     }
 
     public boolean isVisivel() {
-        if (this.posicaoEmX > 1285 || this.posicaoEmX < 0 || this.posicaoEmY > 1085 || this.posicaoEmY < 0) {
+        if (this.posicaoX > 1285 || this.posicaoX < 0 || this.posicaoY > 1085 || this.posicaoY < 0) {
             this.visivel = false;
         } else {
             this.visivel = true;

@@ -1,6 +1,7 @@
 package br.ifpr.jogo.modelo.Inimigos;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -17,7 +18,6 @@ public class Lobo {
     private static ArrayList<Lobo> lobos;
 
     private static final int VELOCIDADE = 1;
-    private static final int QTDE_INIMIGOS = 10;
 
     private boolean visibilidade;
 
@@ -31,7 +31,7 @@ public class Lobo {
         this.personagem = personagem;
     }
 
-    // CARREGA A IMAGEM INICIAL DO PERSONAGEM
+    // CARREGA A IMAGEM INICIAL DO LOBO
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\lobo_s.png");
         this.imagem = carregador.getImage();
@@ -41,33 +41,42 @@ public class Lobo {
 
     // MUDA A POSICAO DOS LOBOS
     public void atualizar() {
-        if(personagem.getPosicaoY() > this.getPosicaoY()){
+        int personagemX = personagem.getPosicaoX() - (personagem.getLarguraImagem() / 2);
+        int personagemY = personagem.getPosicaoY() - (personagem.getAlturaImagem() / 2);
+        
+        int deltaX = personagemX - this.getPosicaoX();
+        int deltaY = personagemY - this.getPosicaoY();
+
+        if(deltaY > 0){
             this.posicaoY += VELOCIDADE;
-            
-        }
-        if(personagem.getPosicaoY() < this.getPosicaoY()){
+        } else if(deltaY < 0){
             this.posicaoY -= VELOCIDADE;
-            
         }
-        if(personagem.getPosicaoX() > this.getPosicaoX()){
+        if(deltaX > 0){
             this.posicaoX += VELOCIDADE;
-
-        }
-        if(personagem.getPosicaoX() < this.getPosicaoX()){
+        }else if(deltaX < 0){
             this.posicaoX -= VELOCIDADE;
-            
-        }
-    
-        // DEIXA A VARIAVEL VISIBILIDADE FALSA QUANDO O LOBO CHEGA NO PERSONAGEM
-        if (personagem.getPosicaoX() == this.posicaoX) {
-            visibilidade = false;
-
-        }
-        if (personagem.getPosicaoY() == this.posicaoY) {
-            visibilidade = false;
-
         }
         
+        //ESSE IF SO SERA USADO NO FUTURO, QUANDO O MAPA FOR MAIOR E O INIMIGO PODERA SER DEIXADO PARA TRAS
+        /*if (this.posicaoX < 0) {
+            this.visibilidade = false;
+        }
+        if (this.posicaoX > 1300) {
+            this.visibilidade = false;
+        }
+        if (this.posicaoY < 0) {
+            this.visibilidade = false;
+        }
+        if (this.posicaoY > 1100) {
+            this.visibilidade = false;
+        }*/
+    }
+
+    // PEGA AS DIMENSOES E POSICOES DA IMAGEM, PARA QUE POSSA HAVER A COLISAO
+    public Rectangle getRectangle(){
+        return new Rectangle(this.posicaoX, this.posicaoY, (this.larguraImagem/2), (this.alturaImagem/2));
+
     }
 
     // GETTERS E SETTERS
@@ -121,10 +130,6 @@ public class Lobo {
 
     public static int getVelocidade() {
         return VELOCIDADE;
-    }
-
-    public static int getQtdeInimigos() {
-        return QTDE_INIMIGOS;
     }
 
     public Personagem getPersonagem() {

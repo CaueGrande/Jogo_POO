@@ -1,7 +1,7 @@
 package br.ifpr.jogo.modelo;
 
 import java.awt.Image;
-
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -27,6 +27,7 @@ public class Personagem {
     public static int TECLA_D = 3;
 
     private ArrayList<Tiro> tiros;
+    private ArrayList<SuperTiro> superTiros;
 
     // CONSTRUTOR
     public Personagem() {
@@ -36,6 +37,7 @@ public class Personagem {
         // PADRONIZA A DIRECAO INICIAL DO TIRO
         this.direcao = TECLA_W;
         this.tiros = new ArrayList<Tiro>();
+        this.superTiros = new ArrayList<SuperTiro>();
     }
 
     // CARREGA A IMAGEM INICIAL DO PERSONAGEM
@@ -124,9 +126,9 @@ public class Personagem {
             this.tiros.add(tiro);
 
         }else if(this.direcao == Personagem.TECLA_D) {
-
             int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) + 8;
             int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+
             Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.tiros.add(tiro);
 
@@ -138,6 +140,46 @@ public class Personagem {
             this.tiros.add(tiro);
 
         } 
+    }
+
+    public void superAtirar() {
+
+        if(this.direcao == Personagem.TECLA_W) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 2;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) + 2;
+
+            SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.superTiros.add(superTiro);
+
+        } else if(this.direcao == Personagem.TECLA_S) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 2;
+
+            SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.superTiros.add(superTiro);
+
+        }else if(this.direcao == Personagem.TECLA_D) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) + 8;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+
+            SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.superTiros.add(superTiro);
+
+        } else if(this.direcao == Personagem.TECLA_A) {
+            int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 8;
+            int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) - 20;
+            
+            SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
+            this.superTiros.add(superTiro);
+
+        } 
+
+    }
+
+    
+    public Rectangle getRectangle(){
+        return new Rectangle(this.posicaoX, this.posicaoY, (this.larguraImagem/3), (this.alturaImagem/2));
+
     }
 
     // GETTERS E SETTERS
@@ -219,6 +261,14 @@ public class Personagem {
 
     public void setTiros(ArrayList<Tiro> tiros) {
         this.tiros = tiros;
+    }
+
+    public ArrayList<SuperTiro> getSuperTiros() {
+        return superTiros;
+    }
+
+    public void setSuperTiros(ArrayList<SuperTiro> superTiros) {
+        this.superTiros = superTiros;
     }
 
 }

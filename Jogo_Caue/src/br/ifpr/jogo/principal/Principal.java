@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import br.ifpr.jogo.modelo.Fase;
 
 public class Principal extends JFrame {
+    
+    public static final int LARGURA_JANELA = 1280;
+    public static final int ALTURA_JANELA = 1080;
 
     // CONSTRUTOR
     public Principal() {
@@ -11,7 +14,7 @@ public class Principal extends JFrame {
         super.add(fase);
 
         super.setVisible(true);
-        super.setSize(1280, 1080);
+        super.setSize(LARGURA_JANELA, ALTURA_JANELA);
         super.setTitle("Savanna Survivor");
         super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
