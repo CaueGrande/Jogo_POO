@@ -5,8 +5,8 @@ import br.ifpr.jogo.modelo.Fase;
 
 public class Principal extends JFrame {
     
-    public static final int LARGURA_JANELA = 1280;
-    public static final int ALTURA_JANELA = 1080;
+    public final int LARGURA_JANELA = 1290;
+    public final int ALTURA_JANELA = 1080;
 
     // CONSTRUTOR
     public Principal() {
@@ -20,7 +20,7 @@ public class Principal extends JFrame {
         super.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         new Principal();
     }
 }

@@ -44,9 +44,13 @@ public class Lobo {
         int personagemX = personagem.getPosicaoX() - (personagem.getLarguraImagem() / 2);
         int personagemY = personagem.getPosicaoY() - (personagem.getAlturaImagem() / 2);
         
+        // REGISTRA A DIFERENCA ENTRE A POSICAO DO PERSONAGEM E DO LOBO
         int deltaX = personagemX - this.getPosicaoX();
         int deltaY = personagemY - this.getPosicaoY();
+        // FOI CRIADO ESSA VARIAVEL COMPARATORIA POIS
+        // COMPARAR AS VARIAVEIS DE POSICAO X E Y DO PERSONAGEM COM A DO LOBO ESTAVA BUGANDO GERANDO BUG
 
+        // MOVE O LOBO DE ACORDO COM A DIFERENCA DE POSICAO
         if(deltaY > 0){
             this.posicaoY += VELOCIDADE;
         } else if(deltaY < 0){
@@ -58,7 +62,7 @@ public class Lobo {
             this.posicaoX -= VELOCIDADE;
         }
         
-        //ESSE IF SO SERA USADO NO FUTURO, QUANDO O MAPA FOR MAIOR E O INIMIGO PODERA SER DEIXADO PARA TRAS
+        //ESSE IF SO SERA USADO QUANDO O MAPA FOR MAIOR E O INIMIGO PODERA SER DEIXADO PARA TRAS
         /*if (this.posicaoX < 0) {
             this.visibilidade = false;
         }

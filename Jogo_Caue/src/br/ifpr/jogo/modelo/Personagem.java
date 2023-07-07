@@ -36,6 +36,7 @@ public class Personagem {
         this.posicaoY = POSICAO_INICIAL_Y;
         // PADRONIZA A DIRECAO INICIAL DO TIRO
         this.direcao = TECLA_W;
+
         this.tiros = new ArrayList<Tiro>();
         this.superTiros = new ArrayList<SuperTiro>();
     }
@@ -54,36 +55,58 @@ public class Personagem {
         this.posicaoY += this.deslocamentoY;
     }
 
-    // DETECTA A TECLA APERTADA E MOVE DE ACORDO COM ELA
+    
     public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
 
-        if (codigo == KeyEvent.VK_W) {
+        // DETECTA A TECLA APERTADA E MOVE SE ESTIVER LIBERADO
+        if (codigo == KeyEvent.VK_W && Fase.podeMover_W == true) {
+            // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
             this.deslocamentoY = -this.velocidadeDeDeslocamento;
+
+            // CARREGA A IMAGEM CONDIZENTE A DIRECAO
             ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
             this.imagem = carregador_w.getImage();
-            this.direcao = TECLA_W;
 
+            // MUDA A VARIAVEL DIRECAO PARA A TECLA APERTADA
+            this.direcao = TECLA_W;     
+
+            // LIBERA O MOVIMENTO OPOSTO CASO ESTEJA TRAVADO 
+            Fase.podeMover_S = true;
+            
         }
-        if (codigo == KeyEvent.VK_S) {
+        if (codigo == KeyEvent.VK_S && Fase.podeMover_S == true) {
             this.deslocamentoY = this.velocidadeDeDeslocamento;
+
             ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
             this.imagem = carregador_s.getImage();
+
             this.direcao = TECLA_S;
 
+            Fase.podeMover_W = true;
+    
         }
-        if (codigo == KeyEvent.VK_D) {
+        if (codigo == KeyEvent.VK_D && Fase.podeMover_D == true) {
             this.deslocamentoX = this.velocidadeDeDeslocamento;
 
             ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
             this.imagem = carregador_d.getImage();
+
             this.direcao = TECLA_D;
+
+            Fase.podeMover_A = true;
+            
         }
-        if (codigo == KeyEvent.VK_A) {
+        if (codigo == KeyEvent.VK_A && Fase.podeMover_A == true) {
             this.deslocamentoX = -this.velocidadeDeDeslocamento;
+
             ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
             this.imagem = carregador_a.getImage();
+
             this.direcao = TECLA_A;
+
+            Fase.podeMover_D = true;
+            
         }
 
     }
@@ -108,9 +131,10 @@ public class Personagem {
 
     }
 
-    // DETECTA A TECLA APERTADA E ATIRA PARA A DIRECAO CORRESPONDENTE
+    
     public void atirar() {
 
+        // VERIFICA A TECLA APERTADA E ALTERA O TIRO PARA A DIRECAO CORRESPONDENTE
         if(this.direcao == Personagem.TECLA_W) {
             int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 2;
             int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) + 2;
@@ -144,6 +168,7 @@ public class Personagem {
 
     public void superAtirar() {
 
+        // VERIFICA A TECLA APERTADA E ALTERA O SUPER TIRO PARA A DIRECAO CORRESPONDENTE
         if(this.direcao == Personagem.TECLA_W) {
             int posicaoInicialTiroX = this.posicaoX + (this.larguraImagem / 2) - 2;
             int posicaoInicialTiroY = this.posicaoY + (this.alturaImagem / 2) + 2;
@@ -176,7 +201,7 @@ public class Personagem {
 
     }
 
-    
+    // PEGA AS DIMENSOES E POSICOES DA IMAGEM, PARA QUE POSSA HAVER A COLISAO
     public Rectangle getRectangle(){
         return new Rectangle(this.posicaoX, this.posicaoY, (this.larguraImagem/3), (this.alturaImagem/2));
 

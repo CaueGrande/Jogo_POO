@@ -24,18 +24,22 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
     private List<Lobo> lobo;
     private Timer timer;
 
-    private static final int DELAY = 5;
+    private static final int DELAY = 2;
 
     private final int TEMPO_SPAWN_INIMIGOS = 100;
     private final int TEMPO_SPAWN_TIROS = 30;
     private final int TEMPO_SPAWN_SUPER_TIROS = 200;
 
-    private int contaTempoSuperTiros;
     private int contaTempoLobos;
     private int contaTempoTiros;
+    private int contaTempoSuperTiros;
 
-    private boolean podeAtirar;
-    private boolean podeSuperAtirar;
+    private boolean podeAtirar = true;
+    private boolean podeSuperAtirar = true;
+    public static boolean podeMover_W = true;
+    public static boolean podeMover_S = true;
+    public static boolean podeMover_D = true;
+    public static boolean podeMover_A = true;
 
     // CONSTRUTOR
     public Fase() {
@@ -147,9 +151,36 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             this.podeSuperAtirar = false;
         
         }
+        
+        // VERIFICA SE O PERSONAGEM NAO ESTA SAINDO DA JANELA
+        if(personagem.getPosicaoY() < 10){
+            Fase.podeMover_W = false;
+
+        }
+        if(personagem.getPosicaoY() > 1080){
+            Fase.podeMover_S = false;
+
+        }
+        if(personagem.getPosicaoX() > 1150){
+            Fase.podeMover_D = false;
+
+        }
+        if(personagem.getPosicaoX() < 10){
+            Fase.podeMover_A = false;
+
+        }
+        
+        // PARA O PERSONAGEM CASO ESTEJA SAINDO DA JANELA
+        if(Fase.podeMover_W == false || Fase.podeMover_S == false ||  Fase.podeMover_A == false || Fase.podeMover_D == false){
+            this.personagem.parar(e);
+
+        } 
+        if(podeMover_D == false){
+            this.personagem.parar(e);
+        }
         // MOVE O PERSONAGEM
         this.personagem.mover(e);
-         
+        
     }
 
     // ACOES AO SOLTAR TECLA
