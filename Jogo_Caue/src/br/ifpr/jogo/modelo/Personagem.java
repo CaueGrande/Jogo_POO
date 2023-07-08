@@ -60,7 +60,7 @@ public class Personagem {
         int codigo = tecla.getKeyCode();
 
         // DETECTA A TECLA APERTADA E MOVE SE ESTIVER LIBERADO
-        if (codigo == KeyEvent.VK_W && Fase.podeMover_W == true) {
+        if ((codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP)&& Fase.podeMover_W == true) {
             // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
             this.deslocamentoY = -this.velocidadeDeDeslocamento;
 
@@ -75,7 +75,7 @@ public class Personagem {
             Fase.podeMover_S = true;
             
         }
-        if (codigo == KeyEvent.VK_S && Fase.podeMover_S == true) {
+        if ((codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN)&& Fase.podeMover_S == true) {
             this.deslocamentoY = this.velocidadeDeDeslocamento;
 
             ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
@@ -86,7 +86,7 @@ public class Personagem {
             Fase.podeMover_W = true;
     
         }
-        if (codigo == KeyEvent.VK_D && Fase.podeMover_D == true) {
+        if ((codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) && Fase.podeMover_D == true) {
             this.deslocamentoX = this.velocidadeDeDeslocamento;
 
             ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
@@ -97,7 +97,7 @@ public class Personagem {
             Fase.podeMover_A = true;
             
         }
-        if (codigo == KeyEvent.VK_A && Fase.podeMover_A == true) {
+        if ((codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) && Fase.podeMover_A == true) {
             this.deslocamentoX = -this.velocidadeDeDeslocamento;
 
             ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
@@ -115,16 +115,16 @@ public class Personagem {
     public void parar(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
 
-        if (codigo == KeyEvent.VK_W) {
+        if (codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP) {
             this.deslocamentoY = 0;
 
-        } else if (codigo == KeyEvent.VK_S) {
+        } else if (codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN) {
             this.deslocamentoY = 0;
 
-        } else if (codigo == KeyEvent.VK_D) {
+        } else if (codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) {
             this.deslocamentoX = 0;
 
-        } else if (codigo == KeyEvent.VK_A) {
+        } else if (codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) {
             this.deslocamentoX = 0;
 
         }
