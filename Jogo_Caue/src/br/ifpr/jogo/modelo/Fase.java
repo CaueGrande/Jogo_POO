@@ -1,8 +1,10 @@
 package br.ifpr.jogo.modelo;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -41,14 +43,31 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
     public static boolean podeMover_D = true;
     public static boolean podeMover_A = true;
 
+    public Dimension tamanhoTela;
+    public final int LARGURA_JANELA;
+    public final int ALTURA_JANELA;
+    protected int larguraImagem, alturaImagem;
+
     // CONSTRUTOR
     public Fase() {
+
+        // AJUSTA O TAMANHO DA JANELA DO JOGO DE ACORDO COM O MONITOR
+        tamanhoTela = Toolkit.getDefaultToolkit().getScreenSize();
+        LARGURA_JANELA = (int) tamanhoTela.getWidth();
+        ALTURA_JANELA = (int) tamanhoTela.getHeight();
+
         this.setFocusable(true);
         this.setDoubleBuffered(true);
 
         // CARREGA A IMAGEM INICIAL DA FASE
         ImageIcon carregando = new ImageIcon("recursos\\fundo.png");
         this.fundo = carregando.getImage();
+
+        this.fundo = this.fundo.getScaledInstance(
+            this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST
+            );
+        this.alturaImagem = this.fundo.getWidth(null);
+        this.larguraImagem = this.fundo.getHeight(null);
 
         // CRIA O PERSONAGEM NA FASE
         this.personagem = new Personagem();
@@ -153,7 +172,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
         }
         
         // VERIFICA SE O PERSONAGEM NAO ESTA SAINDO DA JANELA
-        if(personagem.getPosicaoY() < 10){
+        if(personagem.getPosicaoY() < 30){
             Fase.podeMover_W = false;
 
         }
@@ -196,7 +215,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
         this.personagem.atualizar();
 
-        // CONTAGEM DE TEMPO
+        // CONTAGENS DE TEMPO
         this.contaTempoLobos++;
         this.contaTempoTiros++;
         this.contaTempoSuperTiros++;
@@ -207,11 +226,11 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
         ArrayList<SuperTiro> superTiros = personagem.getSuperTiros();
         Iterator<SuperTiro> iteratorSuperTiro = superTiros.iterator();
 
-            // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA
+        // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA
         while (iteratorTiro.hasNext()) {
             Tiro tiro = iteratorTiro.next();
 
-            // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO, REMOVE OS TIROS
+            // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
             if (tiro.isVisivel()) {
                 tiro.atualizar();
             } else {
@@ -223,7 +242,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
         while (iteratorSuperTiro.hasNext()) {
             SuperTiro superTiro = iteratorSuperTiro.next();
 
-            // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO, REMOVE OS SUPER TIROS
+            // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
             if (superTiro.isVisivel()) {
                 superTiro.atualizar();
             } else {
@@ -267,5 +286,141 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
         // VAI PINTANDO AS IMAGENS DE ACORDO COM O DELAY DA FASE
         repaint();
+    }
+
+    public Image getFundo() {
+        return fundo;
+    }
+
+    public void setFundo(Image fundo) {
+        this.fundo = fundo;
+    }
+
+    public Personagem getPersonagem() {
+        return personagem;
+    }
+
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
+    }
+
+    public List<Lobo> getLobo() {
+        return lobo;
+    }
+
+    public void setLobo(List<Lobo> lobo) {
+        this.lobo = lobo;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public static int getDelay() {
+        return DELAY;
+    }
+
+    public int getTEMPO_SPAWN_INIMIGOS() {
+        return TEMPO_SPAWN_INIMIGOS;
+    }
+
+    public int getTEMPO_SPAWN_TIROS() {
+        return TEMPO_SPAWN_TIROS;
+    }
+
+    public int getTEMPO_SPAWN_SUPER_TIROS() {
+        return TEMPO_SPAWN_SUPER_TIROS;
+    }
+
+    public int getContaTempoLobos() {
+        return contaTempoLobos;
+    }
+
+    public void setContaTempoLobos(int contaTempoLobos) {
+        this.contaTempoLobos = contaTempoLobos;
+    }
+
+    public int getContaTempoTiros() {
+        return contaTempoTiros;
+    }
+
+    public void setContaTempoTiros(int contaTempoTiros) {
+        this.contaTempoTiros = contaTempoTiros;
+    }
+
+    public int getContaTempoSuperTiros() {
+        return contaTempoSuperTiros;
+    }
+
+    public void setContaTempoSuperTiros(int contaTempoSuperTiros) {
+        this.contaTempoSuperTiros = contaTempoSuperTiros;
+    }
+
+    public boolean isPodeAtirar() {
+        return podeAtirar;
+    }
+
+    public void setPodeAtirar(boolean podeAtirar) {
+        this.podeAtirar = podeAtirar;
+    }
+
+    public boolean isPodeSuperAtirar() {
+        return podeSuperAtirar;
+    }
+
+    public void setPodeSuperAtirar(boolean podeSuperAtirar) {
+        this.podeSuperAtirar = podeSuperAtirar;
+    }
+
+    public static boolean isPodeMover_W() {
+        return podeMover_W;
+    }
+
+    public static void setPodeMover_W(boolean podeMover_W) {
+        Fase.podeMover_W = podeMover_W;
+    }
+
+    public static boolean isPodeMover_S() {
+        return podeMover_S;
+    }
+
+    public static void setPodeMover_S(boolean podeMover_S) {
+        Fase.podeMover_S = podeMover_S;
+    }
+
+    public static boolean isPodeMover_D() {
+        return podeMover_D;
+    }
+
+    public static void setPodeMover_D(boolean podeMover_D) {
+        Fase.podeMover_D = podeMover_D;
+    }
+
+    public static boolean isPodeMover_A() {
+        return podeMover_A;
+    }
+
+    public static void setPodeMover_A(boolean podeMover_A) {
+        Fase.podeMover_A = podeMover_A;
+    }
+
+    public Dimension getTamanhoTela() {
+        return tamanhoTela;
+    }
+
+    public void setTamanhoTela(Dimension tamanhoTela) {
+        this.tamanhoTela = tamanhoTela;
+    }
+
+    public int getLARGURA_JANELA() {
+        return LARGURA_JANELA;
+    }
+
+    public int getALTURA_JANELA() {
+        return ALTURA_JANELA;
     }
 }

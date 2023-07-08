@@ -49,13 +49,13 @@ public class Personagem {
         this.larguraImagem = this.imagem.getHeight(null);
     }
 
-    // MUDA A POSICAO DO PERSONAGEM
+    // ATUALIZA A POSICAO DO PERSONAGEM
     public void atualizar() {
         this.posicaoX += this.deslocamentoX;
         this.posicaoY += this.deslocamentoY;
     }
-
     
+    // MOVE A POSICAO DO PERSONAGEM
     public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
 
