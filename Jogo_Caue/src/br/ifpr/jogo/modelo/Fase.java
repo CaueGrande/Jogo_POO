@@ -143,11 +143,11 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             // ATIRA COM O ESPACO
             if (e.getKeyCode() == KeyEvent.VK_SPACE){
                 this.personagem.atirar();
-            }
 
-            // VOLTA AS VARIAVEIS AO PADRAO
-            this.contaTempoTiros = 0;
-            this.podeAtirar = false;
+                // VOLTA AS VARIAVEIS AO PADRAO
+                this.contaTempoTiros = 0;
+                this.podeAtirar = false;
+            }
         
         }
     
@@ -163,11 +163,11 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             // DA O SUPER TIRO COM A TECLA Q
             if (e.getKeyCode() == KeyEvent.VK_Q){
                 this.personagem.superAtirar();
-            }
 
-            // VOLTA AS VARIAVEIS AO PADRAO
-            this.contaTempoSuperTiros = 0;
-            this.podeSuperAtirar = false;
+                // VOLTA AS VARIAVEIS AO PADRAO
+                this.contaTempoSuperTiros = 0;
+                this.podeSuperAtirar = false;
+            }
         
         }
         
