@@ -170,7 +170,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             }
         
         }
-        
+
         // VERIFICA SE O PERSONAGEM NAO ESTA SAINDO DA JANELA
         if(personagem.getPosicaoY() < 30){
             Fase.podeMover_W = false;
