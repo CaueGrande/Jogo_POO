@@ -2,7 +2,7 @@ package br.ifpr.jogo.modelo;
 
 import java.awt.Image;
 
-public abstract class AbstractPosicionamento {
+public abstract class AbstractDeslocamento {
     private int posicaoX;
     private int posicaoY;
     private Image imagem;

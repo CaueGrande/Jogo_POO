@@ -18,7 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import br.ifpr.jogo.modelo.Inimigos.Lobo;
+import br.ifpr.jogo.modelo.servivos.Lobo;
+import br.ifpr.jogo.modelo.servivos.Personagem;
+import br.ifpr.jogo.modelo.tiros.SuperTiro;
+import br.ifpr.jogo.modelo.tiros.Tiro;
 
 public class Fase extends JPanel implements KeyListener, ActionListener {
     private Image fundo;
@@ -243,7 +246,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             SuperTiro superTiro = iteratorSuperTiro.next();
 
             // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
-            if (superTiro.isVisivel()) {
+            if (superTiro.getVisivel()) {
                 superTiro.atualizar();
             } else {
                 iteratorSuperTiro.remove();
