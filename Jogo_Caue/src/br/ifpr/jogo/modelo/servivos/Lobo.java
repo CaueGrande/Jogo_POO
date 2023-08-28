@@ -1,30 +1,24 @@
 package br.ifpr.jogo.modelo.servivos;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Lobo {
-    private int posicaoX;
-    private int posicaoY;
-    private Image imagem;
-    private int larguraImagem;
-    private int alturaImagem;
+import br.ifpr.jogo.modelo.AbstractDeslocamento;
+
+public class Lobo extends AbstractDeslocamento{
 
     private static ArrayList<Lobo> lobos;
-
     private static final int VELOCIDADE = 1;
 
     private boolean visibilidade;
-
     private Personagem personagem;
 
     // CONSTRUTOR
     public Lobo(int posicaoX, int posicaoY, Personagem personagem) {
-        this.posicaoX = posicaoX;
-        this.posicaoY = posicaoY;
+        super.setPosicaoX(posicaoX);
+        super.setPosicaoY(posicaoY);
         this.visibilidade = true;
         this.personagem = personagem;
     }
@@ -32,9 +26,9 @@ public class Lobo {
     // CARREGA A IMAGEM INICIAL DO LOBO
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\lobo_s.png");
-        this.imagem = carregador.getImage();
-        this.alturaImagem = this.imagem.getWidth(null);
-        this.larguraImagem = this.imagem.getHeight(null);
+        super.setImagem(carregador.getImage());
+        super.setAlturaImagem(getImagem().getWidth(null));
+        super.setLarguraImagem(getImagem().getHeight(null)); 
     }
 
     // MUDA A POSICAO DOS LOBOS
@@ -50,14 +44,14 @@ public class Lobo {
 
         // MOVE O LOBO DE ACORDO COM A DIFERENCA DE POSICAO
         if(deltaY > 0){
-            this.posicaoY += VELOCIDADE;
+            super.setPosicaoY(getPosicaoY() + VELOCIDADE);
         } else if(deltaY < 0){
-            this.posicaoY -= VELOCIDADE;
+            super.setPosicaoY(getPosicaoY() - VELOCIDADE);
         }
         if(deltaX > 0){
-            this.posicaoX += VELOCIDADE;
+            super.setPosicaoX(getPosicaoX() + VELOCIDADE);
         }else if(deltaX < 0){
-            this.posicaoX -= VELOCIDADE;
+            super.setPosicaoX(getPosicaoX() - VELOCIDADE);
         }
         
         //ESSE IF SO SERA USADO QUANDO O MAPA FOR MAIOR E O INIMIGO PODERA SER DEIXADO PARA TRAS
@@ -77,51 +71,11 @@ public class Lobo {
 
     // PEGA AS DIMENSOES E POSICOES DA IMAGEM, PARA QUE POSSA HAVER A COLISAO
     public Rectangle getRectangle(){
-        return new Rectangle(this.posicaoX, this.posicaoY, (this.larguraImagem/2), (this.alturaImagem/2));
+        return new Rectangle(super.getPosicaoX(), super.getPosicaoY(), (super.getLarguraImagem()/2), (super.getAlturaImagem()/2));
 
     }
 
     // GETTERS E SETTERS
-    public int getPosicaoX() {
-        return posicaoX;
-    }
-
-    public void setPosicaoX(int posicaoX) {
-        this.posicaoX = posicaoX;
-    }
-
-    public int getPosicaoY() {
-        return posicaoY;
-    }
-
-    public void setPosicaoY(int posicaoY) {
-        this.posicaoY = posicaoY;
-    }
-
-    public Image getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(Image imagem) {
-        this.imagem = imagem;
-    }
-
-    public int getLarguraImagem() {
-        return larguraImagem;
-    }
-
-    public void setLarguraImagem(int larguraImagem) {
-        this.larguraImagem = larguraImagem;
-    }
-
-    public int getAlturaImagem() {
-        return alturaImagem;
-    }
-
-    public void setAlturaImagem(int alturaImagem) {
-        this.alturaImagem = alturaImagem;
-    }
-
     public ArrayList<Lobo> getLobos() {
         return lobos;
     }
@@ -149,5 +103,4 @@ public class Lobo {
     public void setVisibilidade(boolean visibilidade) {
         this.visibilidade = visibilidade;
     }
-
 }
