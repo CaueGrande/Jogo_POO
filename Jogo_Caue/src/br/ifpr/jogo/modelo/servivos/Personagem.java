@@ -31,6 +31,7 @@ public class Personagem extends AbstractVida{
         // PADRONIZA O LOCAL INICIAL DO PERSONAGEM
         super.setPosicaoX(POSICAO_INICIAL_X);
         super.setPosicaoY(POSICAO_INICIAL_Y);
+        super.setVida(5);
         // PADRONIZA A DIRECAO INICIAL DO TIRO
         this.direcao = TECLA_W;
 

@@ -49,12 +49,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
     protected int larguraImagem, alturaImagem;
 
-    // AJUSTA O TAMANHO DA JANELA DO JOGO DE ACORDO COM O MONITOR
+    private int pontuacao = 0;
+
+    // PEGA O TAMANHO DA JANELA DO JOGO DE ACORDO COM O MONITOR
     public Dimension tamanhoTela = Toolkit.getDefaultToolkit().getScreenSize();
     public final int LARGURA_JANELA = (int) tamanhoTela.getWidth();
     public final int ALTURA_JANELA = (int) tamanhoTela.getHeight();
 
-    // CONSTRUTOR
     public Fase() {
         this.setFocusable(true);
         this.setDoubleBuffered(true);
@@ -259,12 +260,12 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             int posicaoXAleatoria = random.nextInt(LARGURA_JANELA);
             int posicaoYAleatoria = random.nextInt(ALTURA_JANELA);  
 
-            Lobo novolobo1 = new Lobo(posicaoXInicio, posicaoYAleatoria, this.personagem);
-            Lobo novolobo2 = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
-            novolobo1.carregar();
-            novolobo2.carregar();
-            lobo.add(novolobo1);
-            lobo.add(novolobo2);
+            Lobo novoLoboCima = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
+            Lobo novoLoboEsquerda = new Lobo(posicaoXInicio, posicaoYAleatoria, this.personagem);
+            novoLoboCima.carregar();
+            novoLoboEsquerda.carregar();
+            lobo.add(novoLoboCima);
+            lobo.add(novoLoboEsquerda);
             
             this.contaTempoLobos = 0;
         }
@@ -282,22 +283,23 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
                 // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM, TIRO E SUPERTIRO
                 if (personagem.getRectangle().intersects(lobo.getRectangle())) {
                     lobo.setVisivel(false); 
+                    personagem.setVida(personagem.getVida() - 1);
                 }
 
                 for(Tiro tiro : personagem.getTiros()){
                     Rectangle formaTiro = tiro.getRectangle();
                     if(formaTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
-
                         tiro.setVisivel(false);
+                        this.pontuacao += 100;
                     }
                 }
                 for(SuperTiro supertiro : personagem.getSuperTiros()){
                     Rectangle formaSuperTiro = supertiro.getRectangle();
                     if(formaSuperTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
-
                         supertiro.setVisivel(false);
+                        this.pontuacao += 100;
                     }
                 }
                 
