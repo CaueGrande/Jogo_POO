@@ -4,7 +4,6 @@ import javax.swing.ImageIcon;
 
 public class SuperTiro extends AbstractTiro{
 
-    // CONSTRUTOR
     public SuperTiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
         super.setPosicaoX(posicaoPersonagemX);
         super.setPosicaoY(posicaoPersonagemY);
@@ -13,7 +12,7 @@ public class SuperTiro extends AbstractTiro{
         carregar();
     }
 
-    // CARREGA A IMAGEM DOS SUPER TIROS
+    @Override
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\granada.png");
         super.setImagem(carregador.getImage());

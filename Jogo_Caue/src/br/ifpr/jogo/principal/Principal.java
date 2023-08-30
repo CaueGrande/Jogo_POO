@@ -12,8 +12,6 @@ public class Principal extends JFrame {
     public final int LARGURA_JANELA;
     public final int ALTURA_JANELA;
 
-
-    // CONSTRUTOR
     public Principal() {
         Fase fase = new Fase();
         super.add(fase);

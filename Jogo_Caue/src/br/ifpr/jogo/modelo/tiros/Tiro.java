@@ -6,7 +6,6 @@ import br.ifpr.jogo.modelo.servivos.Personagem;
 
 public class Tiro extends AbstractTiro{
 
-    // CONSTRUTOR
     public Tiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
         super.setPosicaoX(posicaoPersonagemX);
         super.setPosicaoY(posicaoPersonagemY);
@@ -15,7 +14,7 @@ public class Tiro extends AbstractTiro{
         carregar();
     }
 
-    // CARREGA A IMAGEM INICIAL DOS TIROS
+    @Override
     public void carregar() {
         if(super.getDirecao() == Personagem.TECLA_W) {
             ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");

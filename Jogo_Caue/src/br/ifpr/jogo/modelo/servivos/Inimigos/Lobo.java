@@ -1,10 +1,11 @@
-package br.ifpr.jogo.modelo.servivos;
+package br.ifpr.jogo.modelo.servivos.Inimigos;
 
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
 import br.ifpr.jogo.modelo.AbstractVida;
+import br.ifpr.jogo.modelo.servivos.Personagem;
 
 public class Lobo extends AbstractVida{
 
@@ -13,7 +14,6 @@ public class Lobo extends AbstractVida{
 
     private Personagem personagem;
 
-    // CONSTRUTOR
     public Lobo(int posicaoX, int posicaoY, Personagem personagem) {
         super.setPosicaoX(posicaoX);
         super.setPosicaoY(posicaoY);
@@ -21,7 +21,7 @@ public class Lobo extends AbstractVida{
         this.personagem = personagem;
     }
 
-    // CARREGA A IMAGEM INICIAL DO LOBO
+    @Override
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\lobo_s.png");
         super.setImagem(carregador.getImage());
@@ -29,7 +29,7 @@ public class Lobo extends AbstractVida{
         super.setLarguraImagem(getImagem().getHeight(null)); 
     }
 
-    // MUDA A POSICAO DOS LOBOS
+    @Override
     public void atualizar() {
         int personagemX = personagem.getPosicaoX() - (personagem.getLarguraImagem() / 2);
         int personagemY = personagem.getPosicaoY() - (personagem.getAlturaImagem() / 2);

@@ -9,9 +9,12 @@ public abstract class AbstractDeslocamento {
     private int larguraImagem;
     private int alturaImagem;
 
+    // ALTERA DADOS
     public abstract void atualizar();
+    // CARREGA OS DADOS NA FASE
     public abstract void carregar();
     
+    // GETTERS E SETTERS
     public int getPosicaoX() {
         return posicaoX;
     }

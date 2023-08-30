@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +19,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import br.ifpr.jogo.modelo.servivos.Lobo;
 import br.ifpr.jogo.modelo.servivos.Personagem;
+import br.ifpr.jogo.modelo.servivos.Inimigos.Lobo;
 import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
 
@@ -46,19 +47,15 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
     public static boolean podeMover_D = true;
     public static boolean podeMover_A = true;
 
-    public Dimension tamanhoTela;
-    public final int LARGURA_JANELA;
-    public final int ALTURA_JANELA;
     protected int larguraImagem, alturaImagem;
+
+    // AJUSTA O TAMANHO DA JANELA DO JOGO DE ACORDO COM O MONITOR
+    public Dimension tamanhoTela = Toolkit.getDefaultToolkit().getScreenSize();
+    public final int LARGURA_JANELA = (int) tamanhoTela.getWidth();
+    public final int ALTURA_JANELA = (int) tamanhoTela.getHeight();
 
     // CONSTRUTOR
     public Fase() {
-
-        // AJUSTA O TAMANHO DA JANELA DO JOGO DE ACORDO COM O MONITOR
-        tamanhoTela = Toolkit.getDefaultToolkit().getScreenSize();
-        LARGURA_JANELA = (int) tamanhoTela.getWidth();
-        ALTURA_JANELA = (int) tamanhoTela.getHeight();
-
         this.setFocusable(true);
         this.setDoubleBuffered(true);
 
@@ -234,7 +231,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
             Tiro tiro = iteratorTiro.next();
 
             // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
-            if (tiro.isVisivel()) {
+            if (tiro.tiroVisivel()) {
                 tiro.atualizar();
             } else {
                 iteratorTiro.remove();
@@ -257,32 +254,55 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
         // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
         if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS) {
             Random random = new Random();
-            int posicaoX = random.nextInt(1280);
-            int posicaoY = random.nextInt(1080);  
+            int posicaoXInicio = -200;
+            int posicaoYInicio = -200;
+            int posicaoXAleatoria = random.nextInt(LARGURA_JANELA);
+            int posicaoYAleatoria = random.nextInt(ALTURA_JANELA);  
 
-            Lobo novolobo = new Lobo(posicaoX, posicaoY, this.personagem);
-            novolobo.carregar();
-            lobo.add(novolobo);
+            Lobo novolobo1 = new Lobo(posicaoXInicio, posicaoYAleatoria, this.personagem);
+            Lobo novolobo2 = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
+            novolobo1.carregar();
+            novolobo2.carregar();
+            lobo.add(novolobo1);
+            lobo.add(novolobo2);
             
             this.contaTempoLobos = 0;
         }
 
-        // ATUALIZA A POSICAO NA FASE OU REMOVE OS LOBOS
         Iterator<Lobo> iteratorLobo = lobo.iterator();
+        // ATUALIZA A POSICAO NA FASE OU REMOVE OS LOBOS
         while (iteratorLobo.hasNext()) {
-            // ENQUANTO O LOBO ESTIVER NA TELA, ATUALIZA A MOVIMENTACAO
             Lobo lobo = iteratorLobo.next();
-            if (lobo.isVisibilidade() == true) {
+            Rectangle formaLobo = lobo.getRectangle();
+            
+            // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
+            if (lobo.getVisivel() == true) {
                 lobo.atualizar();
 
-                // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM
+                // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM, TIRO E SUPERTIRO
                 if (personagem.getRectangle().intersects(lobo.getRectangle())) {
-                    iteratorLobo.remove(); // Remover o inimigo da lista
-                    lobo.setVisibilidade(false); // Marcar o inimigo como invisível
+                    lobo.setVisivel(false); 
+                }
+
+                for(Tiro tiro : personagem.getTiros()){
+                    Rectangle formaTiro = tiro.getRectangle();
+                    if(formaTiro.intersects(formaLobo)){
+                        lobo.setVisivel(false);
+
+                        tiro.setVisivel(false);
+                    }
+                }
+                for(SuperTiro supertiro : personagem.getSuperTiros()){
+                    Rectangle formaSuperTiro = supertiro.getRectangle();
+                    if(formaSuperTiro.intersects(formaLobo)){
+                        lobo.setVisivel(false);
+
+                        supertiro.setVisivel(false);
+                    }
                 }
                 
             } else {
-                // SE O LOBO NAO ESTIVER NA TELA ELE E REMOVIDO
+                // SE O LOBO NAO ESTIVER VISIVEL ELE E REMOVIDO
                 iteratorLobo.remove();
             }
         }
@@ -291,6 +311,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
         repaint();
     }
 
+
+    // GETTERS E SETTERS
     public Image getFundo() {
         return fundo;
     }

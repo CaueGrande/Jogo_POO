@@ -1,17 +1,16 @@
 package br.ifpr.jogo.modelo.servivos;
 
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import br.ifpr.jogo.modelo.AbstractDeslocamento;
+import br.ifpr.jogo.modelo.AbstractVida;
 import br.ifpr.jogo.modelo.Fase;
 import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
 
-public class Personagem extends AbstractDeslocamento{
+public class Personagem extends AbstractVida{
     private int deslocamentoX;
     private int deslocamentoY;
     private int velocidadeDeDeslocamento = 3;
@@ -28,7 +27,6 @@ public class Personagem extends AbstractDeslocamento{
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> superTiros;
 
-    // CONSTRUTOR
     public Personagem() {
         // PADRONIZA O LOCAL INICIAL DO PERSONAGEM
         super.setPosicaoX(POSICAO_INICIAL_X);
@@ -40,7 +38,7 @@ public class Personagem extends AbstractDeslocamento{
         this.superTiros = new ArrayList<SuperTiro>();
     }
 
-    // CARREGA A IMAGEM INICIAL DO PERSONAGEM
+    @Override
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\personagem_w.png");
         super.setImagem(carregador.getImage());
@@ -48,7 +46,7 @@ public class Personagem extends AbstractDeslocamento{
         super.setLarguraImagem(getImagem().getHeight(null));
     }
 
-    // ATUALIZA A POSICAO DO PERSONAGEM
+    @Override
     public void atualizar() {
         super.setPosicaoX(getPosicaoX() + this.deslocamentoX);
         super.setPosicaoY(getPosicaoY() + this.deslocamentoY);
@@ -197,12 +195,6 @@ public class Personagem extends AbstractDeslocamento{
             this.superTiros.add(superTiro);
 
         } 
-
-    }
-
-    // PEGA AS DIMENSOES E POSICOES DA IMAGEM, PARA QUE POSSA HAVER A COLISAO
-    public Rectangle getRectangle(){
-        return new Rectangle(super.getPosicaoX(), super.getPosicaoY(), (super.getLarguraImagem()/3), (super.getAlturaImagem()/2));
 
     }
 

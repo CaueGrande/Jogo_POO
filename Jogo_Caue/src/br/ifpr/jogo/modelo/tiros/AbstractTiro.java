@@ -1,16 +1,16 @@
 package br.ifpr.jogo.modelo.tiros;
 
-import br.ifpr.jogo.modelo.AbstractDeslocamento;
+import br.ifpr.jogo.modelo.AbstractVida;
 import br.ifpr.jogo.modelo.servivos.Personagem;
 
-public abstract class AbstractTiro extends AbstractDeslocamento{
+public abstract class AbstractTiro extends AbstractVida{
     public static final int VELOCIDADE = 5;
-    private boolean visivel;
     private int direcao;
 
-    public void atualizar() {
+    @Override
+    public final void atualizar() {
 
-        // MUDA A DIRECAO DO SUPER TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O PERSONAGEM
+        // MUDA A DIRECAO DO TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O PERSONAGEM
         if(this.direcao == Personagem.TECLA_W) {
             super.setPosicaoY(super.getPosicaoY() - VELOCIDADE);
 
@@ -26,21 +26,16 @@ public abstract class AbstractTiro extends AbstractDeslocamento{
         }
     }
 
-    public boolean isVisivel() {
+    public final boolean tiroVisivel() {
         if (super.getPosicaoX() > 1285 || super.getPosicaoX() < 0 || super.getPosicaoY() > 1085 || super.getPosicaoY() < 0) {
-            this.visivel = false;
+            super.setVisivel(false);
         } else {
-            this.visivel = true;
+            super.setVisivel(true);
         }
-        return this.visivel;
+        return super.getVisivel();
     }
     
-    public boolean getVisivel() {
-        return visivel;
-    }
-    public void setVisivel(boolean visivel) {
-        this.visivel = visivel;
-    }
+    // GETTERS E SETTERS
     public int getDirecao() {
         return direcao;
     }
