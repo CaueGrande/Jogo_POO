@@ -1,11 +1,9 @@
 package br.ifpr.jogo.modelo;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -24,7 +22,7 @@ import br.ifpr.jogo.modelo.servivos.Inimigos.Lobo;
 import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
 
-public class Fase extends JPanel implements KeyListener, ActionListener {
+public class Fase extends JPanel implements KeyListener, ActionListener, InterfaceTela {
     private Image fundo;
     private Personagem personagem;
     private List<Lobo> lobo;
@@ -51,10 +49,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
     private int pontuacao = 0;
 
-    // PEGA O TAMANHO DA JANELA DO JOGO DE ACORDO COM O MONITOR
-    public Dimension tamanhoTela = Toolkit.getDefaultToolkit().getScreenSize();
-    public final int LARGURA_JANELA = (int) tamanhoTela.getWidth();
-    public final int ALTURA_JANELA = (int) tamanhoTela.getHeight();
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
 
     public Fase() {
         this.setFocusable(true);
@@ -292,6 +293,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
                         lobo.setVisivel(false);
                         tiro.setVisivel(false);
                         this.pontuacao += 100;
+                        System.out.println(this.pontuacao);
                     }
                 }
                 for(SuperTiro supertiro : personagem.getSuperTiros()){
@@ -433,14 +435,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
     public static void setPodeMover_A(boolean podeMover_A) {
         Fase.podeMover_A = podeMover_A;
-    }
-
-    public Dimension getTamanhoTela() {
-        return tamanhoTela;
-    }
-
-    public void setTamanhoTela(Dimension tamanhoTela) {
-        this.tamanhoTela = tamanhoTela;
     }
 
     public int getLARGURA_JANELA() {
