@@ -14,7 +14,6 @@ import br.ifpr.jogo.modelo.tiros.Tiro;
 public class Personagem extends AbstractVida implements InterfaceTela{
     private int deslocamentoX;
     private int deslocamentoY;
-    private int velocidadeDeDeslocamento = 3;
     private int direcao;
 
     private static final int POSICAO_INICIAL_X = LARGURA_JANELA / 2;
@@ -33,6 +32,7 @@ public class Personagem extends AbstractVida implements InterfaceTela{
         super.setPosicaoX(POSICAO_INICIAL_X);
         super.setPosicaoY(POSICAO_INICIAL_Y);
         super.setVida(5);
+        super.setVELOCIDADE(3);
         // PADRONIZA A DIRECAO INICIAL DO TIRO
         this.direcao = TECLA_W;
 
@@ -61,7 +61,7 @@ public class Personagem extends AbstractVida implements InterfaceTela{
         // DETECTA A TECLA APERTADA E MOVE SE ESTIVER LIBERADO
         if ((codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP)&& Fase.podeMover_W == true) {
             // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
-            this.deslocamentoY = -this.velocidadeDeDeslocamento;
+            this.deslocamentoY = -super.getVELOCIDADE();
 
             // CARREGA A IMAGEM CONDIZENTE A DIRECAO
             ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
@@ -75,7 +75,7 @@ public class Personagem extends AbstractVida implements InterfaceTela{
             
         }
         if ((codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN)&& Fase.podeMover_S == true) {
-            this.deslocamentoY = this.velocidadeDeDeslocamento;
+            this.deslocamentoY = super.getVELOCIDADE();
 
             ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
             super.setImagem(carregador_s.getImage());
@@ -86,7 +86,7 @@ public class Personagem extends AbstractVida implements InterfaceTela{
     
         }
         if ((codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) && Fase.podeMover_D == true) {
-            this.deslocamentoX = this.velocidadeDeDeslocamento;
+            this.deslocamentoX = super.getVELOCIDADE();
 
             ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
             super.setImagem(carregador_d.getImage());
@@ -97,7 +97,7 @@ public class Personagem extends AbstractVida implements InterfaceTela{
             
         }
         if ((codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) && Fase.podeMover_A == true) {
-            this.deslocamentoX = -this.velocidadeDeDeslocamento;
+            this.deslocamentoX = -super.getVELOCIDADE();
 
             ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
             super.setImagem(carregador_a.getImage());
@@ -215,14 +215,6 @@ public class Personagem extends AbstractVida implements InterfaceTela{
 
     public void setDeslocamentoY(int deslocamentoY) {
         this.deslocamentoY = deslocamentoY;
-    }
-
-    public int getVelocidadeDeDeslocamento() {
-        return velocidadeDeDeslocamento;
-    }
-
-    public void setVelocidadeDeDeslocamento(int velocidadeDeDeslocamento) {
-        this.velocidadeDeDeslocamento = velocidadeDeDeslocamento;
     }
 
     public static int getPosicaoInicialX() {

@@ -8,6 +8,7 @@ public abstract class AbstractDeslocamento {
     private Image imagem;
     private int larguraImagem;
     private int alturaImagem;
+    private int VELOCIDADE;
 
     // ALTERA DADOS
     public abstract void atualizar();
@@ -44,5 +45,11 @@ public abstract class AbstractDeslocamento {
     }
     public void setAlturaImagem(int alturaImagem) {
         this.alturaImagem = alturaImagem;
+    }
+    public int getVELOCIDADE() {
+        return VELOCIDADE;
+    }
+    public void setVELOCIDADE(int VELOCIDADE) {
+        this.VELOCIDADE = VELOCIDADE;
     }
 }
