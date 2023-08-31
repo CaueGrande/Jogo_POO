@@ -1,11 +1,6 @@
 package br.ifpr.jogo.modelo;
 
 import java.awt.*;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,7 +21,8 @@ import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
 
 public class Fase extends JPanel implements KeyListener, ActionListener, InterfaceTela {
-    private Image fundo;
+    private Image fundo; 
+    private Image fimDeJogo;
     private Personagem personagem;
     private List<Lobo> lobos;
     private List<Animal> abelhas;
@@ -121,6 +117,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
         // DESENHA A STRING "PONTOS:" NA TELA
         this.desenhaPontuacao(graficos);
+        // DESENHA A STRING "VIDAS:" NA TELA
+        this.desenhaVida(graficos);
 
         graphics.dispose();
     }
@@ -342,7 +340,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
                         lobo.setVisivel(false);
                         tiro.setVisivel(false);
                         personagem.setPontuacao(personagem.getPontuacao() + Lobo.getPontuacaoPorLobo());
-                        System.out.println(personagem.getPontuacao());
                     }
                 }
                 for(SuperTiro supertiro : personagem.getSuperTiros()){
@@ -379,6 +376,33 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         graficos.setFont(fonte);
         graficos.setColor(Color.BLACK);
         graficos.drawString(textoPontuacao, 20, 25);
+    }
+    
+    public void desenhaVida(Graphics2D graficos) {
+        String textoVida = "VIDAS: " + personagem.getVida();
+        Font fonte = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22);
+        FontMetrics metrics = graficos.getFontMetrics(fonte);
+        int larguraTexto = metrics.stringWidth(textoVida);
+        int alturaTexto = metrics.getHeight();
+
+        // Definir a cor de fundo e preencher um retângulo branco
+        graficos.setColor(Color.WHITE);
+        graficos.fillRect( (getLARGURA_JANELA() - 120), 5, larguraTexto + 10, alturaTexto);
+
+        // Desenhar o texto por cima do retângulo branco
+        graficos.setFont(fonte);
+        graficos.setColor(Color.BLACK);
+        graficos.drawString(textoVida, (getLARGURA_JANELA() - 120), 25);
+    }
+
+    public void fimDeJogo() {
+        // CARREGA A IMAGEM INICIAL DA FASE
+        ImageIcon carregador = new ImageIcon("recursos\\fundo.png");
+        this.fimDeJogo = carregador.getImage();
+
+        this.fimDeJogo = this.fimDeJogo.getScaledInstance(this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST);
+        this.alturaImagem = this.fimDeJogo.getWidth(null);
+        this.larguraImagem = this.fimDeJogo.getHeight(null);
     }
 
     // GETTERS E SETTERS
