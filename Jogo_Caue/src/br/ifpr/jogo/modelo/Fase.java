@@ -208,7 +208,9 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         }
         
         // MOVE O PERSONAGEM
-        this.personagem.mover(e);
+        if(personagem.getVida() > 0){
+            this.personagem.mover(e);
+        }
         
     }
 
@@ -397,12 +399,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
     public void fimDeJogo() {
         // CARREGA A IMAGEM INICIAL DA FASE
-        ImageIcon carregador = new ImageIcon("recursos\\fundo.png");
+        ImageIcon carregador = new ImageIcon("recursos\\gameover.png");
         this.fimDeJogo = carregador.getImage();
-
-        this.fimDeJogo = this.fimDeJogo.getScaledInstance(this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST);
-        this.alturaImagem = this.fimDeJogo.getWidth(null);
-        this.larguraImagem = this.fimDeJogo.getHeight(null);
     }
 
     // GETTERS E SETTERS
