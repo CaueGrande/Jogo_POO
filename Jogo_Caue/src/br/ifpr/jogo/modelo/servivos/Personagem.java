@@ -27,6 +27,8 @@ public class Personagem extends AbstractVida implements InterfaceTela{
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> superTiros;
 
+    private int pontuacao = 0;
+
     public Personagem() {
         // PADRONIZA O LOCAL INICIAL DO PERSONAGEM
         super.setPosicaoX(POSICAO_INICIAL_X);
@@ -236,4 +238,11 @@ public class Personagem extends AbstractVida implements InterfaceTela{
         this.superTiros = superTiros;
     }
 
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
 }

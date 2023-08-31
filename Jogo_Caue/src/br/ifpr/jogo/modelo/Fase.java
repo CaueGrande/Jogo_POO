@@ -1,5 +1,7 @@
 package br.ifpr.jogo.modelo;
 
+import java.awt.*;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -51,15 +53,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
     protected int larguraImagem, alturaImagem;
 
-    private int pontuacao = 0;
-
-    public int getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao = pontuacao;
-    }
 
     public Fase() {
         this.setFocusable(true);
@@ -129,6 +122,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             graficos.drawImage(lobo.getImagem(), lobo.getPosicaoX(), lobo.getPosicaoY(), null);
         }
 
+        // DESENHA A STRING "PONTOS:" NA TELA
+        this.desenhaPontuacao(graficos);
 
         graphics.dispose();
     }
@@ -339,8 +334,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
                     if(formaTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
                         tiro.setVisivel(false);
-                        this.pontuacao += 100;
-                        System.out.println(this.pontuacao);
+                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.getPontuacaoPorLobo());
+                        System.out.println(personagem.getPontuacao());
                     }
                 }
                 for(SuperTiro supertiro : personagem.getSuperTiros()){
@@ -348,7 +343,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
                     if(formaSuperTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
                         supertiro.setVisivel(false);
-                        this.pontuacao += 100;
+                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.getPontuacaoPorLobo());
                     }
                 }
                 
@@ -362,6 +357,22 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         repaint();
     }
 
+    public void desenhaPontuacao(Graphics2D graficos) {
+        String textoPontuacao = "PONTOS: " + personagem.getPontuacao();
+        Font fonte = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22);
+        FontMetrics metrics = graficos.getFontMetrics(fonte);
+        int larguraTexto = metrics.stringWidth(textoPontuacao);
+        int alturaTexto = metrics.getHeight();
+
+        // Definir a cor de fundo e preencher um retângulo branco
+        graficos.setColor(Color.WHITE);
+        graficos.fillRect(20, 5, larguraTexto + 10, alturaTexto);
+
+        // Desenhar o texto por cima do retângulo branco
+        graficos.setFont(fonte);
+        graficos.setColor(Color.BLACK);
+        graficos.drawString(textoPontuacao, 20, 25);
+    }
 
     // GETTERS E SETTERS
     public Image getFundo() {

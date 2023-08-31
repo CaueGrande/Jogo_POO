@@ -9,6 +9,7 @@ import br.ifpr.jogo.modelo.servivos.Personagem;
 public class Lobo extends AbstractVida implements InterfaceTela{
 
     private Personagem personagem;
+    public static final int PONTUACAO_POR_LOBO = 100;
 
     public Lobo(int posicaoX, int posicaoY, Personagem personagem) {
         super.setPosicaoX(posicaoX);
@@ -76,5 +77,9 @@ public class Lobo extends AbstractVida implements InterfaceTela{
 
     public void setPersonagem(Personagem personagem) {
         this.personagem = personagem;
+    }
+
+    public static int getPontuacaoPorLobo() {
+        return PONTUACAO_POR_LOBO;
     }
 }
