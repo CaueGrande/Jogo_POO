@@ -1,16 +1,12 @@
 package br.ifpr.jogo.modelo.servivos.Inimigos;
 
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
 import br.ifpr.jogo.modelo.AbstractVida;
+import br.ifpr.jogo.modelo.InterfaceTela;
 import br.ifpr.jogo.modelo.servivos.Personagem;
 
-public class Lobo extends AbstractVida{
-
-    private static ArrayList<Lobo> lobos;
-    private static final int VELOCIDADE = 1;
+public class Lobo extends AbstractVida implements InterfaceTela{
 
     private Personagem personagem;
 
@@ -18,6 +14,7 @@ public class Lobo extends AbstractVida{
         super.setPosicaoX(posicaoX);
         super.setPosicaoY(posicaoY);
         super.setVisivel(true);
+        super.setVELOCIDADE(1);
         this.personagem = personagem;
     }
 
@@ -35,51 +32,43 @@ public class Lobo extends AbstractVida{
         int personagemY = personagem.getPosicaoY() - (personagem.getAlturaImagem() / 2);
         
         // REGISTRA A DIFERENCA ENTRE A POSICAO DO PERSONAGEM E DO LOBO
-        int deltaX = personagemX - this.getPosicaoX();
-        int deltaY = personagemY - this.getPosicaoY();
+        int deltaX = personagemX - super.getPosicaoX();
+        int deltaY = personagemY - super.getPosicaoY();
         // FOI CRIADO ESSA VARIAVEL COMPARATORIA POIS
         // COMPARAR AS VARIAVEIS DE POSICAO X E Y DO PERSONAGEM COM A DO LOBO ESTAVA BUGANDO GERANDO BUG
 
         // MOVE O LOBO DE ACORDO COM A DIFERENCA DE POSICAO
         if(deltaY > 0){
-            super.setPosicaoY(getPosicaoY() + VELOCIDADE);
+            super.setPosicaoY(super.getPosicaoY() + super.getVELOCIDADE());
         } else if(deltaY < 0){
-            super.setPosicaoY(getPosicaoY() - VELOCIDADE);
+            super.setPosicaoY(super.getPosicaoY() - super.getVELOCIDADE());
         }
         if(deltaX > 0){
-            super.setPosicaoX(getPosicaoX() + VELOCIDADE);
+            super.setPosicaoX(super.getPosicaoX() + super.getVELOCIDADE());
         }else if(deltaX < 0){
-            super.setPosicaoX(getPosicaoX() - VELOCIDADE);
+            super.setPosicaoX(super.getPosicaoX() - super.getVELOCIDADE());
         }
         
-        //ESSE IF SO SERA USADO QUANDO O MAPA FOR MAIOR E O INIMIGO PODERA SER DEIXADO PARA TRAS
-        /*if (super.getPosicaoX() < 0) {
-            super.setVisivel(false);
-        }
-        if (super.getPosicaoX() > 1300) {
-            super.setVisivel(false);
-        }
-        if (super.getPosicaoY() < 0) {
-            super.setVisivel(false);
-        }
-        if (super.getPosicaoY() > 1100) {
-            super.setVisivel(false);
-        }*/
+
+    
     }
+
+    /*  TENTEI CRIAR ESSE METODO PARA NAO FICAR TUDO ISSO NA CLASSE FASE, DEU ERRADO
+    public void spawnaLobo(){
+            Random random = new Random();
+            int posicaoXInicio = -200;
+            int posicaoYInicio = -200;
+            int posicaoXAleatoria = random.nextInt(LARGURA_JANELA);
+            int posicaoYAleatoria = random.nextInt(ALTURA_JANELA);  
+
+            Lobo novoLoboCima = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
+            Lobo novoLoboEsquerda = new Lobo(posicaoXInicio, posicaoYAleatoria, this.personagem);
+            novoLoboCima.carregar();
+            novoLoboEsquerda.carregar();
+    }*/
 
 
     // GETTERS E SETTERS
-    public ArrayList<Lobo> getLobos() {
-        return lobos;
-    }
-
-    public static void setLobos(ArrayList<Lobo> lobos) {
-        Lobo.lobos = lobos;
-    }
-
-    public static int getVelocidade() {
-        return VELOCIDADE;
-    }
 
     public Personagem getPersonagem() {
         return personagem;

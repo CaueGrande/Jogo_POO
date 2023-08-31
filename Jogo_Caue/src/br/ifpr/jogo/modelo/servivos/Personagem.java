@@ -16,7 +16,7 @@ public class Personagem extends AbstractVida implements InterfaceTela{
     private int deslocamentoY;
     private int direcao;
 
-    private static final int POSICAO_INICIAL_X = LARGURA_JANELA / 2;
+    private static final int POSICAO_INICIAL_X = LARGURA_JANELA * 3/7;
     private static final int POSICAO_INICIAL_Y = ALTURA_JANELA * 2/3;
 
     public static int TECLA_W = 0;
@@ -59,55 +59,50 @@ public class Personagem extends AbstractVida implements InterfaceTela{
         int codigo = tecla.getKeyCode();
 
         // DETECTA A TECLA APERTADA E MOVE SE ESTIVER LIBERADO
-        if ((codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP)&& Fase.podeMover_W == true) {
-            // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
-            this.deslocamentoY = -super.getVELOCIDADE();
+        if(Fase.podeMover_W == true){
+            if (codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP) {
+                // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
+                this.deslocamentoY = -super.getVELOCIDADE();
 
-            // CARREGA A IMAGEM CONDIZENTE A DIRECAO
-            ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
-            super.setImagem(carregador_w.getImage());
+                // CARREGA A IMAGEM CONDIZENTE A DIRECAO
+                ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
+                super.setImagem(carregador_w.getImage());
 
-            // MUDA A VARIAVEL DIRECAO PARA A TECLA APERTADA
-            this.direcao = TECLA_W;     
+                // MUDA A VARIAVEL DIRECAO PARA A TECLA APERTADA
+                this.direcao = TECLA_W;     
 
-            // LIBERA O MOVIMENTO OPOSTO CASO ESTEJA TRAVADO 
-            Fase.podeMover_S = true;
-            
+            }
         }
-        if ((codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN)&& Fase.podeMover_S == true) {
-            this.deslocamentoY = super.getVELOCIDADE();
+        if(Fase.podeMover_S == true){
+            if (codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN) {
+                this.deslocamentoY = super.getVELOCIDADE();
 
-            ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
-            super.setImagem(carregador_s.getImage());
+                ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
+                super.setImagem(carregador_s.getImage());
 
-            this.direcao = TECLA_S;
-
-            Fase.podeMover_W = true;
-    
+                this.direcao = TECLA_S;
+            }
         }
-        if ((codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) && Fase.podeMover_D == true) {
-            this.deslocamentoX = super.getVELOCIDADE();
+        if(Fase.podeMover_D == true){
+            if (codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) {
+                this.deslocamentoX = super.getVELOCIDADE();
 
-            ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
-            super.setImagem(carregador_d.getImage());
+                ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
+                super.setImagem(carregador_d.getImage());
 
-            this.direcao = TECLA_D;
-
-            Fase.podeMover_A = true;
-            
+                this.direcao = TECLA_D;           
+            }
         }
-        if ((codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) && Fase.podeMover_A == true) {
-            this.deslocamentoX = -super.getVELOCIDADE();
+        if(Fase.podeMover_A == true){
+            if (codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) {
+                this.deslocamentoX = -super.getVELOCIDADE();
 
-            ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
-            super.setImagem(carregador_a.getImage());
+                ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
+                super.setImagem(carregador_a.getImage());
 
-            this.direcao = TECLA_A;
-
-            Fase.podeMover_D = true;
-            
+                this.direcao = TECLA_A;
+            }
         }
-
     }
 
     // PARA O MOVIMENTO DO PERSONAGEM

@@ -9,11 +9,12 @@ public abstract class AbstractDeslocamento {
     private int larguraImagem;
     private int alturaImagem;
     private int VELOCIDADE;
-
-    // ALTERA DADOS
-    public abstract void atualizar();
+    private boolean visivel;
+    
     // CARREGA OS DADOS NA FASE
     public abstract void carregar();
+    // ALTERA DADOS
+    public abstract void atualizar();
     
     // GETTERS E SETTERS
     public int getPosicaoX() {
@@ -51,5 +52,11 @@ public abstract class AbstractDeslocamento {
     }
     public void setVELOCIDADE(int VELOCIDADE) {
         this.VELOCIDADE = VELOCIDADE;
+    }
+    public boolean getVisivel() {
+        return visivel;
+    }
+    public void setVisivel(boolean visivel) {
+        this.visivel = visivel;
     }
 }
