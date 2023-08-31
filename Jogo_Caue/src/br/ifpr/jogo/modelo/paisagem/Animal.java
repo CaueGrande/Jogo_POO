@@ -2,9 +2,9 @@ package br.ifpr.jogo.modelo.paisagem;
 
 import javax.swing.ImageIcon;
 
-import br.ifpr.jogo.modelo.AbstractDeslocamento;
+import br.ifpr.jogo.modelo.AbstractPosicionamento;
 
-public class Animal extends AbstractDeslocamento{
+public class Animal extends AbstractPosicionamento{
 
     public Animal(int posicaoX, int posicaoY) {
         super.setPosicaoX(posicaoX);
@@ -15,7 +15,7 @@ public class Animal extends AbstractDeslocamento{
 
     @Override
     public void carregar() {
-            ImageIcon carregador = new ImageIcon("recursos\\abelha_o.png");
+            ImageIcon carregador = new ImageIcon("recursos\\abelha.png");
             super.setImagem(carregador.getImage());
             super.setAlturaImagem(getImagem().getWidth(null));
             super.setLarguraImagem(getImagem().getHeight(null));

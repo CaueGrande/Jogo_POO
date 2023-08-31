@@ -21,8 +21,8 @@ import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
 
 public class Fase extends JPanel implements KeyListener, ActionListener, InterfaceTela {
-    private Image fundo; 
-    private Image fimDeJogo;
+    private Image fundo;
+    private FimDeJogo fimDeJogo;
     private Personagem personagem;
     private List<Lobo> lobos;
     private List<Animal> abelhas;
@@ -76,6 +76,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         // CRIA OS (INIMIGOS)LOBOS E (ANIMAIS INTANGIVEIS)ABELHAS NA FASE
         this.lobos = new ArrayList<>();
         this.abelhas = new ArrayList<>();
+
+        this.fimDeJogo = new FimDeJogo();
     }
 
     // DESENHA AS IMAGENS NA TELA
@@ -119,6 +121,10 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.desenhaPontuacao(graficos);
         // DESENHA A STRING "VIDAS:" NA TELA
         this.desenhaVida(graficos);
+
+        if(personagem.getVida() <= 0){
+            graficos.drawImage(fimDeJogo.getImagem(), fimDeJogo.getPosicaoX(), fimDeJogo.getPosicaoY(), this);
+        }
 
         graphics.dispose();
     }
@@ -395,12 +401,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         graficos.setFont(fonte);
         graficos.setColor(Color.BLACK);
         graficos.drawString(textoVida, (getLARGURA_JANELA() - 120), 25);
-    }
-
-    public void fimDeJogo() {
-        // CARREGA A IMAGEM INICIAL DA FASE
-        ImageIcon carregador = new ImageIcon("recursos\\gameover.png");
-        this.fimDeJogo = carregador.getImage();
     }
 
     // GETTERS E SETTERS

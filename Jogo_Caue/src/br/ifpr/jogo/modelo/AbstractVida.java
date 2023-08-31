@@ -2,7 +2,7 @@ package br.ifpr.jogo.modelo;
 
 import java.awt.Rectangle;
 
-public abstract class AbstractVida extends AbstractDeslocamento{
+public abstract class AbstractVida extends AbstractPosicionamento{
     private int vida;
 
     // DEFINE UM RETANGULO AO REDOR DA IMAGEM 
