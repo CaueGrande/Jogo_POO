@@ -15,7 +15,7 @@ public class Animal extends AbstractDeslocamento{
 
     @Override
     public void carregar() {
-            ImageIcon carregador = new ImageIcon("recursos\\personagem_a.png");
+            ImageIcon carregador = new ImageIcon("recursos\\abelha_o.png");
             super.setImagem(carregador.getImage());
             super.setAlturaImagem(getImagem().getWidth(null));
             super.setLarguraImagem(getImagem().getHeight(null));

@@ -62,9 +62,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         ImageIcon carregando = new ImageIcon("recursos\\fundo.png");
         this.fundo = carregando.getImage();
 
-        this.fundo = this.fundo.getScaledInstance(
-            this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST
-            );
+        this.fundo = this.fundo.getScaledInstance(this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST);
         this.alturaImagem = this.fundo.getWidth(null);
         this.larguraImagem = this.fundo.getHeight(null);
 
@@ -79,10 +77,9 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.timer = new Timer(DELAY, this);
         this.timer.start();
 
-        // CRIA AS ABELHAS NA FASE
-        this.abelhas = new ArrayList<>();
-        // CRIA OS LOBOS NA FASE
+        // CRIA OS (INIMIGOS)LOBOS E (ANIMAIS INTANGIVEIS)ABELHAS NA FASE
         this.lobos = new ArrayList<>();
+        this.abelhas = new ArrayList<>();
     }
 
     // DESENHA AS IMAGENS NA TELA
@@ -112,14 +109,14 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         // IMAGEM DO PERSONAGEM
         graficos.drawImage(personagem.getImagem(), personagem.getPosicaoX(), personagem.getPosicaoY(), this);
 
-        // IMAGEM DAS ABELHAS 
-        for (Animal abelha : this.abelhas) {
-            graficos.drawImage(abelha.getImagem(), abelha.getPosicaoX(), abelha.getPosicaoY(), null);
-        }
-
         // IMAGEM DOS LOBOS
         for (Lobo lobo : this.lobos) {
             graficos.drawImage(lobo.getImagem(), lobo.getPosicaoX(), lobo.getPosicaoY(), null);
+        }
+
+        // IMAGEM DAS ABELHAS 
+        for (Animal abelha : this.abelhas) {
+            graficos.drawImage(abelha.getImagem(), abelha.getPosicaoX(), abelha.getPosicaoY(), null);
         }
 
         // DESENHA A STRING "PONTOS:" NA TELA
@@ -229,13 +226,23 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
     public void actionPerformed(ActionEvent e) {
         Random random = new Random();
 
-        this.personagem.atualizar();
+        if(personagem.getVida() > 0){
+            this.personagem.atualizar();
+        }
 
         // CONTAGENS DE TEMPO
-        this.contaTempoAnimais++;
-        this.contaTempoLobos++;
-        this.contaTempoTiros++;
-        this.contaTempoSuperTiros++;
+        if(this.contaTempoAnimais < TEMPO_SPAWN_ANIMAIS){
+            this.contaTempoAnimais++;
+        }
+        if(this.contaTempoLobos < TEMPO_SPAWN_INIMIGOS){
+            this.contaTempoLobos++;
+        }
+        if(this.contaTempoTiros < TEMPO_SPAWN_TIROS){
+            this.contaTempoTiros++;
+        }
+        if(this.contaTempoSuperTiros < TEMPO_SPAWN_SUPER_TIROS){
+            this.contaTempoSuperTiros++;
+        }
 
         ArrayList<Tiro> tiros = personagem.getTiros();
         Iterator<Tiro> iteratorTiro = tiros.iterator();
@@ -248,7 +255,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             Tiro tiro = iteratorTiro.next();
 
             // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
-            if (tiro.tiroVisivel() == true) {
+            if (tiro.tiroVisivel() == true && personagem.getVida() > 0) {
                 tiro.atualizar();
             } else {
                 iteratorTiro.remove();
@@ -260,7 +267,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             SuperTiro superTiro = iteratorSuperTiro.next();
 
             // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
-            if (superTiro.tiroVisivel() == true) {
+            if (superTiro.tiroVisivel() == true && personagem.getVida() > 0) {
                 superTiro.atualizar();
             } else {
                 iteratorSuperTiro.remove();
@@ -268,7 +275,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         }
 
         // SO SPAWNA O ANIMAL APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_ANIMAIS
-        if(this.contaTempoAnimais >= TEMPO_SPAWN_ANIMAIS){
+        if(this.contaTempoAnimais >= TEMPO_SPAWN_ANIMAIS && personagem.getVida() > 0){
             int posicaoXFim = LARGURA_JANELA + 200;
             int posicaoYAleatoria = random.nextInt(ALTURA_JANELA); 
 
@@ -284,7 +291,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             Animal abelha = iteratorAbelha.next();
             
             // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
-            if (abelha.getVisivel() == true) {
+            if (abelha.getVisivel() == true && personagem.getVida() > 0) {
                 abelha.atualizar();
 
                 if(abelha.getPosicaoX() <= -50){
@@ -297,7 +304,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         }
 
         // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
-        if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS) {
+        if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
             int posicaoXInicio = -200;
             int posicaoYInicio = -200;
             int posicaoXAleatoria = random.nextInt(LARGURA_JANELA);
@@ -320,7 +327,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             Rectangle formaLobo = lobo.getRectangle();
             
             // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
-            if (lobo.getVisivel() == true) {
+            if (lobo.getVisivel() == true && personagem.getVida() > 0) {
                 lobo.atualizar();
 
                 // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM, TIRO E SUPERTIRO
