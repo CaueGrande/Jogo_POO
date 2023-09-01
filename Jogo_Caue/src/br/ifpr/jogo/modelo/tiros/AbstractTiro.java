@@ -26,12 +26,15 @@ public abstract class AbstractTiro extends AbstractVida{
         }
     }
 
-    public final boolean tiroVisivel() {
-        if (super.getPosicaoX() > 1285 || super.getPosicaoX() < 0 || super.getPosicaoY() > 1085 || super.getPosicaoY() < 0) {
-            super.setVisivel(false);
-        } else {
-            super.setVisivel(true);
+    public final boolean tiroDentroJanela() {
+        if(super.getVisivel() == true){
+            if (super.getPosicaoX() > 1285 || super.getPosicaoX() < 0 || super.getPosicaoY() > 1085 || super.getPosicaoY() < 0) {
+                super.setVisivel(false);
+            } else {
+                super.setVisivel(true);
+            }
         }
+        
         return super.getVisivel();
     }
     

@@ -31,7 +31,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
     private static final int DELAY = 2;
 
     private final int TEMPO_SPAWN_ANIMAIS = 100;
-    private final int TEMPO_SPAWN_INIMIGOS = 100;
+    private final int TEMPO_SPAWN_INIMIGOS = 50;
     private final int TEMPO_SPAWN_TIROS = 30;
     private final int TEMPO_SPAWN_SUPER_TIROS = 200;
 
@@ -264,11 +264,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         while (iteratorTiro.hasNext()) {
             Tiro tiro = iteratorTiro.next();
 
-            // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
-            if (tiro.tiroVisivel() == true && personagem.getVida() > 0) {
-                tiro.atualizar();
-            } else {
-                iteratorTiro.remove();
+            if(personagem.getVida() > 0){
+                // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
+                if (tiro.tiroDentroJanela() == true) {
+                    tiro.atualizar();
+                } else {
+                    iteratorTiro.remove();
+                }
             }
         }
 
@@ -276,11 +278,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         while (iteratorSuperTiro.hasNext()) {
             SuperTiro superTiro = iteratorSuperTiro.next();
 
-            // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
-            if (superTiro.tiroVisivel() == true && personagem.getVida() > 0) {
-                superTiro.atualizar();
-            } else {
-                iteratorSuperTiro.remove();
+            if(personagem.getVida() > 0){
+                // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
+                if (superTiro.tiroDentroJanela() == true) {
+                    superTiro.atualizar();
+                } else {
+                    iteratorSuperTiro.remove();
+                }
             }
         }
 
@@ -380,11 +384,11 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         int larguraTexto = metrics.stringWidth(textoPontuacao);
         int alturaTexto = metrics.getHeight();
 
-        // Definir a cor de fundo e preencher um retângulo branco
+        // DESENHA O FUNDO BRANCO DO TEXTO
         graficos.setColor(Color.WHITE);
         graficos.fillRect(20, 5, larguraTexto + 10, alturaTexto);
 
-        // Desenhar o texto por cima do retângulo branco
+        // DESENHA O TEXTO "PONTOS:"
         graficos.setFont(fonte);
         graficos.setColor(Color.BLACK);
         graficos.drawString(textoPontuacao, 20, 25);
@@ -397,14 +401,14 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         int larguraTexto = metrics.stringWidth(textoVida);
         int alturaTexto = metrics.getHeight();
 
-        // Definir a cor de fundo e preencher um retângulo branco
+        // DESENHA O FUNDO BRANCO DO TEXTO
         graficos.setColor(Color.WHITE);
-        graficos.fillRect( (getLARGURA_JANELA() - 120), 5, larguraTexto + 10, alturaTexto);
+        graficos.fillRect( (this.getLARGURA_JANELA() - 120), 5, larguraTexto + 10, alturaTexto);
 
-        // Desenhar o texto por cima do retângulo branco
+        // DESENHA O TEXTO "VIDA:"
         graficos.setFont(fonte);
         graficos.setColor(Color.BLACK);
-        graficos.drawString(textoVida, (getLARGURA_JANELA() - 120), 25);
+        graficos.drawString(textoVida, (this.getLARGURA_JANELA() - 120), 25);
     }
 
     // GETTERS E SETTERS
