@@ -59,8 +59,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.fundo = carregarFundo.getImage();
 
         this.fundo = this.fundo.getScaledInstance(this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST);
-        this.alturaImagem = this.fundo.getWidth(null);
-        this.larguraImagem = this.fundo.getHeight(null);
+        this.alturaImagem = this.fundo.getHeight(null);
+        this.larguraImagem = this.fundo.getWidth(null);
 
         // CRIA O PERSONAGEM NA FASE
         this.personagem = new Personagem();
@@ -124,8 +124,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.desenhaVida(graficos);
 
         if(personagem.getVida() == 0){
-            int x = LARGURA_JANELA/2 ; 
-            int y = ALTURA_JANELA/2 ; 
+            int x = (LARGURA_JANELA/2) - 250; 
+            int y = (ALTURA_JANELA/2) - 400; 
             // IMAGEM DE GAMEOVER
             graficos.drawImage(this.fimDeJogo, x , y, null);
         }

@@ -17,8 +17,8 @@ public class Animal extends AbstractPosicionamento{
     public void carregar() {
             ImageIcon carregador = new ImageIcon("recursos\\abelha.png");
             super.setImagem(carregador.getImage());
-            super.setAlturaImagem(getImagem().getWidth(null));
-            super.setLarguraImagem(getImagem().getHeight(null));
+            super.setAlturaImagem(getImagem().getHeight(null));
+            super.setLarguraImagem(getImagem().getWidth(null));
     }
 
     @Override

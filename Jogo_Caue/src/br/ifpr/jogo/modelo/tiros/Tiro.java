@@ -20,32 +20,31 @@ public class Tiro extends AbstractTiro{
             ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
             super.setImagem(carregador.getImage());
             
-            super.setAlturaImagem(getImagem().getWidth(null));
-            super.setLarguraImagem(getImagem().getHeight(null));
-
+            super.setAlturaImagem(super.getImagem().getHeight(null));
+            super.setLarguraImagem(super.getImagem().getWidth(null));
         }
         if(super.getDirecao() == Personagem.TECLA_S) {
             ImageIcon carregador = new ImageIcon("recursos\\tiro_s.png");
             super.setImagem(carregador.getImage());
             
-            super.setAlturaImagem(getImagem().getWidth(null));
-            super.setLarguraImagem(getImagem().getHeight(null));
+            super.setAlturaImagem(super.getImagem().getHeight(null));
+            super.setLarguraImagem(super.getImagem().getWidth(null));
             
         }
         if(super.getDirecao() == Personagem.TECLA_D) {
             ImageIcon carregador = new ImageIcon("recursos\\tiro_d.png");
             super.setImagem(carregador.getImage());
             
-            super.setAlturaImagem(getImagem().getWidth(null));
-            super.setLarguraImagem(getImagem().getHeight(null));
+            super.setAlturaImagem(super.getImagem().getHeight(null));
+            super.setLarguraImagem(super.getImagem().getWidth(null));
 
         }
         if(super.getDirecao() == Personagem.TECLA_A) {
             ImageIcon carregador = new ImageIcon("recursos\\tiro_a.png");
             super.setImagem(carregador.getImage());
             
-            super.setAlturaImagem(getImagem().getWidth(null));
-            super.setLarguraImagem(getImagem().getHeight(null));
+            super.setAlturaImagem(super.getImagem().getHeight(null));
+            super.setLarguraImagem(super.getImagem().getWidth(null));
 
         }
     }
