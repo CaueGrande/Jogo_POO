@@ -23,8 +23,8 @@ public class Lobo extends AbstractVida implements InterfaceTela{
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\lobo_s.png");
         super.setImagem(carregador.getImage());
-        super.setAlturaImagem(getImagem().getHeight(null));
-        super.setLarguraImagem(getImagem().getWidth(null)); 
+        super.setAlturaImagem(getImagem().getHeight(null) - 10);
+        super.setLarguraImagem(getImagem().getWidth(null) - 70); 
     }
 
     @Override

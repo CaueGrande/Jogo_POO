@@ -7,7 +7,7 @@ public abstract class AbstractVida extends AbstractPosicionamento{
 
     // DEFINE UM RETANGULO AO REDOR DA IMAGEM 
     public final Rectangle getRectangle(){
-        return new Rectangle(super.getPosicaoX(), super.getPosicaoY(), super.getLarguraImagem(), super.getAlturaImagem());
+        return new Rectangle(super.getPosicaoX(), super.getPosicaoY(), super.getLarguraImagem(),super.getAlturaImagem());
 
     }
 

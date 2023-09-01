@@ -31,9 +31,9 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
     private static final int DELAY = 2;
 
     private final int TEMPO_SPAWN_ANIMAIS = 100;
-    private final int TEMPO_SPAWN_INIMIGOS = 50;
-    private final int TEMPO_SPAWN_TIROS = 30;
-    private final int TEMPO_SPAWN_SUPER_TIROS = 200;
+    private final int TEMPO_SPAWN_INIMIGOS = 100;
+    private final int TEMPO_SPAWN_TIROS = 20;
+    private final int TEMPO_SPAWN_SUPER_TIROS = 150;
 
     private int contaTempoAnimais;
     private int contaTempoLobos;
@@ -317,6 +317,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
         }
 
+        
         // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
         if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
             int posicaoXInicio = -200;
@@ -344,12 +345,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             if (lobo.getVisivel() == true && personagem.getVida() > 0) {
                 lobo.atualizar();
 
-                // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM, TIRO E SUPERTIRO
+                // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM
                 if (personagem.getRectangle().intersects(lobo.getRectangle())) {
                     lobo.setVisivel(false); 
                     personagem.setVida(personagem.getVida() - 1);
                 }
 
+                // REMOVE LOBOS E TIROS AO COLIDIR COM TIROS E SUPER TIROS
                 for(Tiro tiro : personagem.getTiros()){
                     Rectangle formaTiro = tiro.getRectangle();
                     if(formaTiro.intersects(formaLobo)){
@@ -377,6 +379,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         repaint();
     }
 
+    // PONTUACAO DO PERSONAGEM
     public void desenhaPontuacao(Graphics2D graficos) {
         String textoPontuacao = "PONTOS: " + personagem.getPontuacao();
         Font fonte = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22);
@@ -394,6 +397,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         graficos.drawString(textoPontuacao, 20, 25);
     }
     
+    // VIDA DO PERSONAGEM
     public void desenhaVida(Graphics2D graficos) {
         String textoVida = "VIDAS: " + personagem.getVida();
         Font fonte = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22);

@@ -16,8 +16,8 @@ public class SuperTiro extends AbstractTiro{
     public void carregar() {
         ImageIcon carregador = new ImageIcon("recursos\\granada.png");
         super.setImagem(carregador.getImage());
-        super.setAlturaImagem(super.getImagem().getHeight(null));
-        super.setLarguraImagem(super.getImagem().getWidth(null));
+        super.setAlturaImagem(super.getImagem().getHeight(null) );
+        super.setLarguraImagem(super.getImagem().getWidth(null) );
     }
 
 }
