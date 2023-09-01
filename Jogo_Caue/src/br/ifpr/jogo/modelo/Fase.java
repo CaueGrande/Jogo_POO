@@ -22,7 +22,7 @@ import br.ifpr.jogo.modelo.tiros.Tiro;
 
 public class Fase extends JPanel implements KeyListener, ActionListener, InterfaceTela {
     private Image fundo;
-    private FimDeJogo fimDeJogo;
+    private Image fimDeJogo;
     private Personagem personagem;
     private List<Lobo> lobos;
     private List<Animal> abelhas;
@@ -30,7 +30,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
     private static final int DELAY = 2;
 
-    private final int TEMPO_SPAWN_ANIMAIS = 1000;
+    private final int TEMPO_SPAWN_ANIMAIS = 100;
     private final int TEMPO_SPAWN_INIMIGOS = 100;
     private final int TEMPO_SPAWN_TIROS = 30;
     private final int TEMPO_SPAWN_SUPER_TIROS = 200;
@@ -55,8 +55,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.setDoubleBuffered(true);
 
         // CARREGA A IMAGEM INICIAL DA FASE
-        ImageIcon carregando = new ImageIcon("recursos\\fundo.png");
-        this.fundo = carregando.getImage();
+        ImageIcon carregarFundo = new ImageIcon("recursos\\fundo.png");
+        this.fundo = carregarFundo.getImage();
 
         this.fundo = this.fundo.getScaledInstance(this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST);
         this.alturaImagem = this.fundo.getWidth(null);
@@ -77,7 +77,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.lobos = new ArrayList<>();
         this.abelhas = new ArrayList<>();
 
-        this.fimDeJogo = new FimDeJogo();
+        ImageIcon carregarFimJogo = new ImageIcon("recursos\\gameover.png");
+        this.fimDeJogo = carregarFimJogo.getImage();
     }
 
     // DESENHA AS IMAGENS NA TELA
@@ -122,8 +123,11 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         // DESENHA A STRING "VIDAS:" NA TELA
         this.desenhaVida(graficos);
 
-        if(personagem.getVida() <= 0){
-            graficos.drawImage(fimDeJogo.getImagem(), fimDeJogo.getPosicaoX(), fimDeJogo.getPosicaoY(), this);
+        if(personagem.getVida() == 0){
+            int x = LARGURA_JANELA/2 ; 
+            int y = ALTURA_JANELA/2 ; 
+            // IMAGEM DE GAMEOVER
+            graficos.drawImage(this.fimDeJogo, x , y, null);
         }
 
         graphics.dispose();
