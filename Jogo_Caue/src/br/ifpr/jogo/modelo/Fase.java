@@ -30,8 +30,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
     private static final int DELAY = 2;
 
-    private final int TEMPO_SPAWN_ANIMAIS = 400;
-    private final int TEMPO_SPAWN_INIMIGOS = 100;
+    private final int TEMPO_SPAWN_ANIMAIS = 600;
+    private final int TEMPO_SPAWN_INIMIGOS = 250;
     private final int TEMPO_SPAWN_TIROS = 20;
     private final int TEMPO_SPAWN_SUPER_TIROS = 150;
 
@@ -322,15 +322,23 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
             int posicaoXInicio = -200;
             int posicaoYInicio = -200;
+            int posicaoXFim = (int) LARGURA_JANELA;
+            int posicaoYFim = (int) ALTURA_JANELA;
             int posicaoXAleatoria = random.nextInt(LARGURA_JANELA);
             int posicaoYAleatoria = random.nextInt(ALTURA_JANELA);
 
             Lobo novoLoboCima = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
+            Lobo novoLoboBaixo = new Lobo(posicaoXAleatoria, posicaoYFim, this.personagem);
             Lobo novoLoboEsquerda = new Lobo(posicaoXInicio, posicaoYAleatoria, this.personagem);
+            Lobo novoLoboDireita = new Lobo(posicaoXFim, posicaoYAleatoria, this.personagem);
             novoLoboCima.carregar();
+            novoLoboBaixo.carregar();
             novoLoboEsquerda.carregar();
+            novoLoboDireita.carregar();
             this.lobos.add(novoLoboCima);
+            this.lobos.add(novoLoboBaixo);
             this.lobos.add(novoLoboEsquerda);
+            this.lobos.add(novoLoboDireita);
             
             this.contaTempoLobos = 0;
         }

@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import br.ifpr.jogo.modelo.AbstractPosicionamento;
 
 public class Animal extends AbstractPosicionamento{
+    private final int TEMPO_SPAWN_ANIMAIS = 400;
 
     public Animal(int posicaoX, int posicaoY) {
         super.setPosicaoX(posicaoX);
@@ -26,4 +27,7 @@ public class Animal extends AbstractPosicionamento{
         super.setPosicaoX(super.getPosicaoX() - super.getVELOCIDADE());
     }
     
+    public int getTEMPO_SPAWN_ANIMAIS() {
+        return TEMPO_SPAWN_ANIMAIS;
+    }
 }
