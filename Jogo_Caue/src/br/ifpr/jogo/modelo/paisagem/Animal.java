@@ -23,7 +23,7 @@ public class Animal extends AbstractPosicionamento{
 
     @Override
     public void atualizar() {
-        super.setPosicaoY(super.getPosicaoY() - super.getVELOCIDADE());
+        super.setPosicaoX(super.getPosicaoX() - super.getVELOCIDADE());
     }
     
 }

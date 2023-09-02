@@ -30,7 +30,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
     private static final int DELAY = 2;
 
-    private final int TEMPO_SPAWN_ANIMAIS = 100;
+    private final int TEMPO_SPAWN_ANIMAIS = 400;
     private final int TEMPO_SPAWN_INIMIGOS = 100;
     private final int TEMPO_SPAWN_TIROS = 20;
     private final int TEMPO_SPAWN_SUPER_TIROS = 150;
