@@ -7,17 +7,17 @@ import javax.swing.ImageIcon;
 
 import br.ifpr.jogo.modelo.AbstractVida;
 import br.ifpr.jogo.modelo.Fase;
-import br.ifpr.jogo.modelo.InterfaceTela;
 import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
+import br.ifpr.jogo.util.AbstractConstantes;
 
-public class Personagem extends AbstractVida implements InterfaceTela{
+public class Personagem extends AbstractVida {
     private int deslocamentoX;
     private int deslocamentoY;
     private int direcao;
 
-    private static final int POSICAO_INICIAL_X = LARGURA_JANELA * 3/7;
-    private static final int POSICAO_INICIAL_Y = ALTURA_JANELA * 2/3;
+    private static final int POSICAO_INICIAL_X = AbstractConstantes.LARGURA_JANELA * 3/7;
+    private static final int POSICAO_INICIAL_Y = AbstractConstantes.ALTURA_JANELA * 2/3;
 
     public static int TECLA_W = 0;
     public static int TECLA_S = 1;

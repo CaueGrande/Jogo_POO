@@ -1,6 +1,12 @@
 package br.ifpr.jogo.modelo;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,8 +25,9 @@ import br.ifpr.jogo.modelo.servivos.Personagem;
 import br.ifpr.jogo.modelo.servivos.Inimigos.Lobo;
 import br.ifpr.jogo.modelo.tiros.SuperTiro;
 import br.ifpr.jogo.modelo.tiros.Tiro;
+import br.ifpr.jogo.util.AbstractConstantes;
 
-public class Fase extends JPanel implements KeyListener, ActionListener, InterfaceTela {
+public class Fase extends JPanel implements KeyListener, ActionListener{
     private Image fundo;
     private Image fimDeJogo;
     private Personagem personagem;
@@ -31,7 +38,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
     private static final int DELAY = 2;
 
     private final int TEMPO_SPAWN_ANIMAIS = 600;
-    private final int TEMPO_SPAWN_INIMIGOS = 250;
+    private final int TEMPO_SPAWN_INIMIGOS = 220;
     private final int TEMPO_SPAWN_TIROS = 20;
     private final int TEMPO_SPAWN_SUPER_TIROS = 150;
 
@@ -58,7 +65,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         ImageIcon carregarFundo = new ImageIcon("recursos\\fundo.png");
         this.fundo = carregarFundo.getImage();
 
-        this.fundo = this.fundo.getScaledInstance(this.getLARGURA_JANELA(), this.getALTURA_JANELA(), Image.SCALE_FAST);
+        this.fundo = this.fundo.getScaledInstance(AbstractConstantes.LARGURA_JANELA, AbstractConstantes.ALTURA_JANELA, Image.SCALE_FAST);
         this.alturaImagem = this.fundo.getHeight(null);
         this.larguraImagem = this.fundo.getWidth(null);
 
@@ -124,8 +131,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         this.desenhaVida(graficos);
 
         if(personagem.getVida() == 0){
-            int x = (LARGURA_JANELA/2) - 250; 
-            int y = (ALTURA_JANELA/2) - 400; 
+            int x = (AbstractConstantes.LARGURA_JANELA/2) - 250; 
+            int y = (AbstractConstantes.ALTURA_JANELA/2) - 400; 
             // IMAGEM DE GAMEOVER
             graficos.drawImage(this.fimDeJogo, x , y, null);
         }
@@ -193,19 +200,19 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             Fase.podeMover_W = true;
         }
 
-        if(personagem.getPosicaoY() >= ALTURA_JANELA - 20){
+        if(personagem.getPosicaoY() >= AbstractConstantes.ALTURA_JANELA - 20){
             Fase.podeMover_S = false;
             this.personagem.parar(e);
 
-        }else if (personagem.getPosicaoX() < ALTURA_JANELA - 20){
+        }else if (personagem.getPosicaoX() < AbstractConstantes.ALTURA_JANELA - 20){
             Fase.podeMover_S = true;
         }
 
-        if(personagem.getPosicaoX() >= LARGURA_JANELA - 20){
+        if(personagem.getPosicaoX() >= AbstractConstantes.LARGURA_JANELA - 20){
             Fase.podeMover_D = false;
             this.personagem.parar(e);
 
-        }else if (personagem.getPosicaoX() < LARGURA_JANELA - 20){
+        }else if (personagem.getPosicaoX() < AbstractConstantes.LARGURA_JANELA - 20){
             Fase.podeMover_D = true;
         }
 
@@ -290,8 +297,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
         // SO SPAWNA O ANIMAL APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_ANIMAIS
         if(this.contaTempoAnimais >= TEMPO_SPAWN_ANIMAIS && personagem.getVida() > 0){
-            int posicaoXFim = LARGURA_JANELA + 200;
-            int posicaoYAleatoria = random.nextInt(ALTURA_JANELA); 
+            int posicaoXFim = AbstractConstantes.LARGURA_JANELA + 200;
+            int posicaoYAleatoria = random.nextInt(AbstractConstantes.ALTURA_JANELA); 
 
             Animal novaAbelha = new Animal(posicaoXFim, posicaoYAleatoria);
             novaAbelha.carregar();
@@ -301,6 +308,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         }
 
         Iterator<Animal> iteratorAbelha = abelhas.iterator();
+        // ATUALIZA A POSICAO NA FASE OU REMOVE OS ANIMAIS
         while (iteratorAbelha.hasNext()) {
             Animal abelha = iteratorAbelha.next();
             
@@ -314,7 +322,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
             } else{
                 iteratorAbelha.remove();
             }
-
         }
 
         
@@ -322,10 +329,10 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
             int posicaoXInicio = -200;
             int posicaoYInicio = -200;
-            int posicaoXFim = (int) LARGURA_JANELA;
-            int posicaoYFim = (int) ALTURA_JANELA;
-            int posicaoXAleatoria = random.nextInt(LARGURA_JANELA);
-            int posicaoYAleatoria = random.nextInt(ALTURA_JANELA);
+            int posicaoXFim = (int) AbstractConstantes.LARGURA_JANELA;
+            int posicaoYFim = (int) AbstractConstantes.ALTURA_JANELA;
+            int posicaoXAleatoria = random.nextInt(AbstractConstantes.LARGURA_JANELA);
+            int posicaoYAleatoria = random.nextInt(AbstractConstantes.ALTURA_JANELA);
 
             Lobo novoLoboCima = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
             Lobo novoLoboBaixo = new Lobo(posicaoXAleatoria, posicaoYFim, this.personagem);
@@ -415,12 +422,12 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
         // DESENHA O FUNDO BRANCO DO TEXTO
         graficos.setColor(Color.WHITE);
-        graficos.fillRect( (this.getLARGURA_JANELA() - 120), 5, larguraTexto + 10, alturaTexto);
+        graficos.fillRect( (AbstractConstantes.LARGURA_JANELA - 120), 5, larguraTexto + 10, alturaTexto);
 
         // DESENHA O TEXTO "VIDA:"
         graficos.setFont(fonte);
         graficos.setColor(Color.BLACK);
-        graficos.drawString(textoVida, (this.getLARGURA_JANELA() - 120), 25);
+        graficos.drawString(textoVida, (AbstractConstantes.LARGURA_JANELA - 120), 25);
     }
 
     // GETTERS E SETTERS
@@ -542,13 +549,5 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
     public static void setPodeMover_A(boolean podeMover_A) {
         Fase.podeMover_A = podeMover_A;
-    }
-
-    public int getLARGURA_JANELA() {
-        return LARGURA_JANELA;
-    }
-
-    public int getALTURA_JANELA() {
-        return ALTURA_JANELA;
     }
 }
