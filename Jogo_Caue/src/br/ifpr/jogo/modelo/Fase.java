@@ -266,7 +266,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
             if(personagem.getVida() > 0){
                 // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
-                if (tiro.tiroDentroJanela() == true) {
+                if (tiro.getVisivel() == true) {
                     tiro.atualizar();
                 } else {
                     iteratorTiro.remove();
@@ -280,7 +280,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
 
             if(personagem.getVida() > 0){
                 // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
-                if (superTiro.tiroDentroJanela() == true) {
+                if (superTiro.getVisivel() == true) {
                     superTiro.atualizar();
                 } else {
                     iteratorSuperTiro.remove();
