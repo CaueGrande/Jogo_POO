@@ -304,7 +304,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener, Interfa
         while (iteratorAbelha.hasNext()) {
             Animal abelha = iteratorAbelha.next();
             
-            // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
+            // ENQUANTO O ANIMAL ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
             if (abelha.getVisivel() == true && personagem.getVida() > 0) {
                 abelha.atualizar();
 
