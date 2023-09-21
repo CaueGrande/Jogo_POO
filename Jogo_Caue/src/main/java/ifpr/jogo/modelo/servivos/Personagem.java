@@ -1,15 +1,15 @@
-package br.ifpr.jogo.modelo.servivos;
+package main.java.ifpr.jogo.modelo.servivos;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import br.ifpr.jogo.modelo.AbstractVida;
-import br.ifpr.jogo.modelo.Fase;
-import br.ifpr.jogo.modelo.tiros.SuperTiro;
-import br.ifpr.jogo.modelo.tiros.Tiro;
-import br.ifpr.jogo.util.AbstractConstantes;
+import main.java.ifpr.jogo.modelo.AbstractVida;
+import main.java.ifpr.jogo.modelo.Fase;
+import main.java.ifpr.jogo.modelo.tiros.SuperTiro;
+import main.java.ifpr.jogo.modelo.tiros.Tiro;
+import main.java.ifpr.jogo.util.AbstractConstantes;
 
 public class Personagem extends AbstractVida {
     private int deslocamentoX;
@@ -44,7 +44,7 @@ public class Personagem extends AbstractVida {
 
     @Override
     public void carregar() {
-        ImageIcon carregador = new ImageIcon("recursos\\personagem_w.png");
+        ImageIcon carregador = new ImageIcon(getClass().getResource("/personagem_w.png"));
         super.setImagem(carregador.getImage());
         super.setAlturaImagem(getImagem().getHeight(null));
         super.setLarguraImagem(getImagem().getWidth(null));
@@ -67,7 +67,7 @@ public class Personagem extends AbstractVida {
                 this.deslocamentoY = -super.getVELOCIDADE();
 
                 // CARREGA A IMAGEM CONDIZENTE A DIRECAO
-                ImageIcon carregador_w = new ImageIcon("recursos\\personagem_w.png");
+                ImageIcon carregador_w = new ImageIcon(getClass().getResource("/personagem_w.png"));
                 super.setImagem(carregador_w.getImage());
 
                 // MUDA A VARIAVEL DIRECAO PARA A TECLA APERTADA
@@ -79,7 +79,7 @@ public class Personagem extends AbstractVida {
             if (codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN) {
                 this.deslocamentoY = super.getVELOCIDADE();
 
-                ImageIcon carregador_s = new ImageIcon("recursos\\personagem_s.png");
+                ImageIcon carregador_s = new ImageIcon(getClass().getResource("/personagem_s.png"));
                 super.setImagem(carregador_s.getImage());
 
                 this.direcao = TECLA_S;
@@ -89,7 +89,7 @@ public class Personagem extends AbstractVida {
             if (codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) {
                 this.deslocamentoX = super.getVELOCIDADE();
 
-                ImageIcon carregador_d = new ImageIcon("recursos\\personagem_d.png");
+                ImageIcon carregador_d = new ImageIcon(getClass().getResource("/personagem_d.png"));
                 super.setImagem(carregador_d.getImage());
 
                 this.direcao = TECLA_D;           
@@ -99,7 +99,7 @@ public class Personagem extends AbstractVida {
             if (codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) {
                 this.deslocamentoX = -super.getVELOCIDADE();
 
-                ImageIcon carregador_a = new ImageIcon("recursos\\personagem_a.png");
+                ImageIcon carregador_a = new ImageIcon(getClass().getResource("/personagem_a.png"));
                 super.setImagem(carregador_a.getImage());
 
                 this.direcao = TECLA_A;

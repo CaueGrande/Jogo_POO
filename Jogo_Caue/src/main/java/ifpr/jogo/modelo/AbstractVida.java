@@ -1,4 +1,4 @@
-package br.ifpr.jogo.modelo;
+package main.java.ifpr.jogo.modelo;
 
 import java.awt.Rectangle;
 

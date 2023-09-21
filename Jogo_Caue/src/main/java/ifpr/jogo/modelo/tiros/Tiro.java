@@ -1,8 +1,8 @@
-package br.ifpr.jogo.modelo.tiros;
+package main.java.ifpr.jogo.modelo.tiros;
 
 import javax.swing.ImageIcon;
 
-import br.ifpr.jogo.modelo.servivos.Personagem;
+import main.java.ifpr.jogo.modelo.servivos.Personagem;
 
 public class Tiro extends AbstractTiro{
 
@@ -17,7 +17,7 @@ public class Tiro extends AbstractTiro{
     @Override
     public void carregar() {
         if(super.getDirecao() == Personagem.TECLA_W) {
-            ImageIcon carregador = new ImageIcon("recursos\\tiro_w.png");
+            ImageIcon carregador = new ImageIcon(getClass().getResource("/tiro_w.png"));
             super.setImagem(carregador.getImage());
             
             super.setAlturaImagem(super.getImagem().getHeight(null));

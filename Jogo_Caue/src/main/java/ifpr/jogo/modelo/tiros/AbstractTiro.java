@@ -1,7 +1,7 @@
-package br.ifpr.jogo.modelo.tiros;
+package main.java.ifpr.jogo.modelo.tiros;
 
-import br.ifpr.jogo.modelo.AbstractVida;
-import br.ifpr.jogo.modelo.servivos.Personagem;
+import main.java.ifpr.jogo.modelo.AbstractVida;
+import main.java.ifpr.jogo.modelo.servivos.Personagem;
 
 public abstract class AbstractTiro extends AbstractVida{
     public static final int VELOCIDADE = 5;
@@ -22,7 +22,6 @@ public abstract class AbstractTiro extends AbstractVida{
 
         } else if(this.direcao == Personagem.TECLA_A) {
             super.setPosicaoX(super.getPosicaoX() - VELOCIDADE);
-        
         }
     }
 
@@ -30,6 +29,7 @@ public abstract class AbstractTiro extends AbstractVida{
         if(super.getVisivel() == true){
             if (super.getPosicaoX() > 1285 || super.getPosicaoX() < 0 || super.getPosicaoY() > 1085 || super.getPosicaoY() < 0) {
                 super.setVisivel(false);
+
             } else {
                 super.setVisivel(true);
             }

@@ -1,4 +1,4 @@
-package br.ifpr.jogo.modelo.tiros;
+package main.java.ifpr.jogo.modelo.tiros;
 
 import javax.swing.ImageIcon;
 
@@ -14,7 +14,7 @@ public class SuperTiro extends AbstractTiro{
 
     @Override
     public void carregar() {
-        ImageIcon carregador = new ImageIcon("recursos\\granada.png");
+        ImageIcon carregador = new ImageIcon(getClass().getResource("/granada.png"));
         super.setImagem(carregador.getImage());
         super.setAlturaImagem(super.getImagem().getHeight(null) );
         super.setLarguraImagem(super.getImagem().getWidth(null) );

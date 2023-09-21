@@ -1,8 +1,8 @@
-package br.ifpr.jogo.modelo.paisagem;
+package main.java.ifpr.jogo.modelo.paisagem;
 
 import javax.swing.ImageIcon;
 
-import br.ifpr.jogo.modelo.AbstractPosicionamento;
+import main.java.ifpr.jogo.modelo.AbstractPosicionamento;
 
 public class Animal extends AbstractPosicionamento{
     private final int TEMPO_SPAWN_ANIMAIS = 400;
@@ -16,7 +16,7 @@ public class Animal extends AbstractPosicionamento{
 
     @Override
     public void carregar() {
-            ImageIcon carregador = new ImageIcon("recursos\\abelha.png");
+            ImageIcon carregador = new ImageIcon(getClass().getResource("/abelha.png"));
             super.setImagem(carregador.getImage());
             super.setAlturaImagem(getImagem().getHeight(null));
             super.setLarguraImagem(getImagem().getWidth(null));
