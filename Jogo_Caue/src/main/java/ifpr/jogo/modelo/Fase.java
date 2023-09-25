@@ -344,6 +344,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                     Rectangle formaSuperTiro = supertiro.getRectangle();
                     if(formaSuperTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
+                        supertiro.explodir();
                         supertiro.setVisivel(false);
                         personagem.setPontuacao(personagem.getPontuacao() + Lobo.getPontuacaoPorLobo());
                     }

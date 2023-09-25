@@ -280,4 +280,36 @@ public class Personagem extends AbstractVida {
     public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
     }
+    
+    public boolean getPodeMoverW() {
+        return podeMoverW;
+    }
+
+    public void setPodeMoverW(boolean podeMoverW) {
+        this.podeMoverW = podeMoverW;
+    }
+
+    public boolean getPodeMoverS() {
+        return podeMoverS;
+    }
+
+    public void setPodeMoverS(boolean podeMoverS) {
+        this.podeMoverS = podeMoverS;
+    }
+
+    public boolean getPodeMoverA() {
+        return podeMoverA;
+    }
+
+    public void setPodeMoverA(boolean podeMoverA) {
+        this.podeMoverA = podeMoverA;
+    }
+
+    public boolean getPodeMoverD() {
+        return podeMoverD;
+    }
+
+    public void setPodeMoverD(boolean podeMoverD) {
+        this.podeMoverD = podeMoverD;
+    }
 }
