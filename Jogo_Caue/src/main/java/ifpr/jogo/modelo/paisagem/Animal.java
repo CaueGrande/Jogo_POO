@@ -1,8 +1,8 @@
-package main.java.ifpr.jogo.modelo.paisagem;
+package ifpr.jogo.modelo.paisagem;
 
 import javax.swing.ImageIcon;
 
-import main.java.ifpr.jogo.modelo.AbstractPosicionamento;
+import ifpr.jogo.modelo.AbstractPosicionamento;
 
 public class Animal extends AbstractPosicionamento{
     private final int TEMPO_SPAWN_ANIMAIS = 400;

@@ -1,8 +1,8 @@
-package main.java.ifpr.jogo.modelo.tiros;
+package ifpr.jogo.modelo.tiros;
 
 import javax.swing.ImageIcon;
 
-import main.java.ifpr.jogo.modelo.servivos.Personagem;
+import ifpr.jogo.modelo.servivos.Personagem;
 
 public class Tiro extends AbstractTiro{
 
@@ -24,7 +24,7 @@ public class Tiro extends AbstractTiro{
             super.setLarguraImagem(super.getImagem().getWidth(null));
         }
         if(super.getDirecao() == Personagem.TECLA_S) {
-            ImageIcon carregador = new ImageIcon("recursos\\tiro_s.png");
+            ImageIcon carregador = new ImageIcon(getClass().getResource("/tiro_s.png"));
             super.setImagem(carregador.getImage());
             
             super.setAlturaImagem(super.getImagem().getHeight(null));
@@ -32,7 +32,7 @@ public class Tiro extends AbstractTiro{
             
         }
         if(super.getDirecao() == Personagem.TECLA_D) {
-            ImageIcon carregador = new ImageIcon("recursos\\tiro_d.png");
+            ImageIcon carregador = new ImageIcon(getClass().getResource("/tiro_d.png"));
             super.setImagem(carregador.getImage());
             
             super.setAlturaImagem(super.getImagem().getHeight(null));
@@ -40,7 +40,7 @@ public class Tiro extends AbstractTiro{
 
         }
         if(super.getDirecao() == Personagem.TECLA_A) {
-            ImageIcon carregador = new ImageIcon("recursos\\tiro_a.png");
+            ImageIcon carregador = new ImageIcon(getClass().getResource("/tiro_a.png"));
             super.setImagem(carregador.getImage());
             
             super.setAlturaImagem(super.getImagem().getHeight(null));

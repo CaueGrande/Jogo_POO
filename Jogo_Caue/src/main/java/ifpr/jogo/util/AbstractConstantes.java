@@ -1,4 +1,4 @@
-package main.java.ifpr.jogo.util;
+package ifpr.jogo.util;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

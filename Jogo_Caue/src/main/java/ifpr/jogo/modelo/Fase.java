@@ -1,4 +1,4 @@
-package main.java.ifpr.jogo.modelo;
+package ifpr.jogo.modelo;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,12 +20,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import main.java.ifpr.jogo.modelo.paisagem.Animal;
-import main.java.ifpr.jogo.modelo.servivos.Personagem;
-import main.java.ifpr.jogo.modelo.servivos.Inimigos.Lobo;
-import main.java.ifpr.jogo.modelo.tiros.SuperTiro;
-import main.java.ifpr.jogo.modelo.tiros.Tiro;
-import main.java.ifpr.jogo.util.AbstractConstantes;
+import ifpr.jogo.modelo.paisagem.Animal;
+import ifpr.jogo.modelo.servivos.Personagem;
+import ifpr.jogo.modelo.servivos.Inimigos.Lobo;
+import ifpr.jogo.modelo.tiros.SuperTiro;
+import ifpr.jogo.modelo.tiros.Tiro;
+import ifpr.jogo.util.AbstractConstantes;
 
 public class Fase extends JPanel implements KeyListener, ActionListener{
     private Image fundo;

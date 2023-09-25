@@ -1,9 +1,9 @@
-package main.java.ifpr.jogo.principal;
+package ifpr.jogo.principal;
 
 import javax.swing.JFrame;
 
-import main.java.ifpr.jogo.modelo.Fase;
-import main.java.ifpr.jogo.util.AbstractConstantes;
+import ifpr.jogo.modelo.Fase;
+import ifpr.jogo.util.AbstractConstantes;
 
 public class Principal extends JFrame{
 

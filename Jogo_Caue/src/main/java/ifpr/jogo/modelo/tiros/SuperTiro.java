@@ -1,4 +1,4 @@
-package main.java.ifpr.jogo.modelo.tiros;
+package ifpr.jogo.modelo.tiros;
 
 import javax.swing.ImageIcon;
 

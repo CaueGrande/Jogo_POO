@@ -1,9 +1,9 @@
-package main.java.ifpr.jogo.modelo.servivos.Inimigos;
+package ifpr.jogo.modelo.servivos.Inimigos;
 
 import javax.swing.ImageIcon;
 
-import main.java.ifpr.jogo.modelo.AbstractVida;
-import main.java.ifpr.jogo.modelo.servivos.Personagem;
+import ifpr.jogo.modelo.AbstractVida;
+import ifpr.jogo.modelo.servivos.Personagem;
 
 public class Lobo extends AbstractVida{
 

@@ -1,15 +1,15 @@
-package main.java.ifpr.jogo.modelo.servivos;
+package ifpr.jogo.modelo.servivos;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import main.java.ifpr.jogo.modelo.AbstractVida;
-import main.java.ifpr.jogo.modelo.Fase;
-import main.java.ifpr.jogo.modelo.tiros.SuperTiro;
-import main.java.ifpr.jogo.modelo.tiros.Tiro;
-import main.java.ifpr.jogo.util.AbstractConstantes;
+import ifpr.jogo.modelo.AbstractVida;
+import ifpr.jogo.modelo.Fase;
+import ifpr.jogo.modelo.tiros.SuperTiro;
+import ifpr.jogo.modelo.tiros.Tiro;
+import ifpr.jogo.util.AbstractConstantes;
 
 public class Personagem extends AbstractVida {
     private int deslocamentoX;

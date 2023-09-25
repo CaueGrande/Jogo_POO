@@ -1,7 +1,7 @@
-package main.java.ifpr.jogo.modelo.tiros;
+package ifpr.jogo.modelo.tiros;
 
-import main.java.ifpr.jogo.modelo.AbstractVida;
-import main.java.ifpr.jogo.modelo.servivos.Personagem;
+import ifpr.jogo.modelo.AbstractVida;
+import ifpr.jogo.modelo.servivos.Personagem;
 
 public abstract class AbstractTiro extends AbstractVida{
     public static final int VELOCIDADE = 5;
