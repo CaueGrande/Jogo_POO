@@ -30,17 +30,19 @@ import ifpr.jogo.util.AbstractConstantes;
 public class Fase extends JPanel implements KeyListener, ActionListener{
     private Image fundo;
     private Image fimDeJogo;
+
     private Personagem personagem;
     private List<Lobo> lobos;
     private List<Animal> abelhas;
+
     private Timer timer;
 
     private static final int DELAY = 2;
 
-    private final int TEMPO_SPAWN_ANIMAIS = 600;
-    private final int TEMPO_SPAWN_INIMIGOS = 220;
-    private final int TEMPO_SPAWN_TIROS = 20;
-    private final int TEMPO_SPAWN_SUPER_TIROS = 150;
+    private static final int TEMPO_SPAWN_ANIMAIS = 600;
+    private static final int TEMPO_SPAWN_INIMIGOS = 220;
+    private static final int TEMPO_SPAWN_TIROS = 20;
+    private static final int TEMPO_SPAWN_SUPER_TIROS = 150;
 
     private int contaTempoAnimais;
     private int contaTempoLobos;
@@ -49,10 +51,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
     private boolean podeAtirar = true;
     private boolean podeSuperAtirar = true;
-    public static boolean podeMover_W = true;
-    public static boolean podeMover_S = true;
-    public static boolean podeMover_D = true;
-    public static boolean podeMover_A = true;
 
     protected int larguraImagem, alturaImagem;
 
@@ -153,7 +151,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         this.contaTempoSuperTiros++;
 
         // SE O TEMPORIZADOR CHEGAR NO TEMPO DEFINIDO, E DADO PERMISSAO PARA ATIRAR
-        if (this.contaTempoTiros >= this.TEMPO_SPAWN_TIROS) {
+        if (this.contaTempoTiros >= TEMPO_SPAWN_TIROS) {
             this.podeAtirar = true;
 
         }
@@ -172,7 +170,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         }
     
         // SE O TEMPORIZADOR CHEGAR NO TEMPO DEFINIDO, E DADO PERMISSAO PARA SUPER ATIRAR
-        if (this.contaTempoSuperTiros >= this.TEMPO_SPAWN_SUPER_TIROS) {
+        if (this.contaTempoSuperTiros >= TEMPO_SPAWN_SUPER_TIROS) {
             this.podeSuperAtirar = true;
 
         }
@@ -191,42 +189,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         
         }
 
-        // VERIFICA SE O PERSONAGEM NAO ESTA SAINDO DA JANELA
-        if(personagem.getPosicaoY() <= 20){
-            Fase.podeMover_W = false;
-            this.personagem.parar(e);
-            personagem.setPosicaoY(20);
-
-        }else if (personagem.getPosicaoX() > 20){
-            Fase.podeMover_W = true;
-        }
-
-        if(personagem.getPosicaoY() >= AbstractConstantes.ALTURA_JANELA - 20){
-            Fase.podeMover_S = false;
-            this.personagem.parar(e);
-
-        }else if (personagem.getPosicaoX() < AbstractConstantes.ALTURA_JANELA - 20){
-            Fase.podeMover_S = true;
-        }
-
-        if(personagem.getPosicaoX() >= AbstractConstantes.LARGURA_JANELA - 20){
-            Fase.podeMover_D = false;
-            this.personagem.parar(e);
-
-        }else if (personagem.getPosicaoX() < AbstractConstantes.LARGURA_JANELA - 20){
-            Fase.podeMover_D = true;
-        }
-
-        if(personagem.getPosicaoX() <= 20){
-            Fase.podeMover_A = false;
-            this.personagem.parar(e);
-
-        }else if (personagem.getPosicaoX() > 20){
-            Fase.podeMover_A = true;
-        }
-        
         // MOVE O PERSONAGEM
-        if(personagem.getVida() > 0){
+        if (personagem.getVida() > 0) {
             this.personagem.mover(e);
         }
         
@@ -327,7 +291,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
         
         // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
-        if (this.contaTempoLobos >= this.TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
+        if (this.contaTempoLobos >= TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
             int posicaoXInicio = -200;
             int posicaoYInicio = -200;
             int posicaoXFim = (int) AbstractConstantes.LARGURA_JANELA;
@@ -518,37 +482,5 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
     public void setPodeSuperAtirar(boolean podeSuperAtirar) {
         this.podeSuperAtirar = podeSuperAtirar;
-    }
-
-    public static boolean isPodeMover_W() {
-        return podeMover_W;
-    }
-
-    public static void setPodeMover_W(boolean podeMover_W) {
-        Fase.podeMover_W = podeMover_W;
-    }
-
-    public static boolean isPodeMover_S() {
-        return podeMover_S;
-    }
-
-    public static void setPodeMover_S(boolean podeMover_S) {
-        Fase.podeMover_S = podeMover_S;
-    }
-
-    public static boolean isPodeMover_D() {
-        return podeMover_D;
-    }
-
-    public static void setPodeMover_D(boolean podeMover_D) {
-        Fase.podeMover_D = podeMover_D;
-    }
-
-    public static boolean isPodeMover_A() {
-        return podeMover_A;
-    }
-
-    public static void setPodeMover_A(boolean podeMover_A) {
-        Fase.podeMover_A = podeMover_A;
     }
 }

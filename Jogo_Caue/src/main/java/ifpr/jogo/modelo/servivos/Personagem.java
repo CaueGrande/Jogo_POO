@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import ifpr.jogo.modelo.AbstractVida;
-import ifpr.jogo.modelo.Fase;
 import ifpr.jogo.modelo.tiros.SuperTiro;
 import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;
@@ -22,7 +21,12 @@ public class Personagem extends AbstractVida {
     public static int TECLA_W = 0;
     public static int TECLA_S = 1;
     public static int TECLA_A = 2;
-    public static int TECLA_D = 3;
+    public static int TECLA_D = 3; //????????????????????????????????????????????????????????????????
+
+    private boolean podeMoverW = true;
+    private boolean podeMoverS = true;
+    private boolean podeMoverA = true;
+    private boolean podeMoverD = true;
 
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> superTiros;
@@ -54,6 +58,32 @@ public class Personagem extends AbstractVida {
     public void atualizar() {
         super.setPosicaoX(getPosicaoX() + this.deslocamentoX);
         super.setPosicaoY(getPosicaoY() + this.deslocamentoY);
+
+        // VERIFICA SE O PERSONAGEM NAO ESTA SAINDO DA JANELA
+        if(this.getPosicaoY() < AbstractConstantes.ALTURA_JANELA - 200){
+            this.podeMoverS = true;
+        } else{
+            this.podeMoverS = false;
+            this.setPosicaoY(AbstractConstantes.ALTURA_JANELA - 200);
+        }
+        if (this.getPosicaoY() > 20) {
+            this.podeMoverW = true;
+        } else {
+            this.podeMoverW = false;
+            this.setPosicaoY(20);
+        }
+        if (this.getPosicaoX() < AbstractConstantes.LARGURA_JANELA - 150) {
+            this.podeMoverD = true;
+        } else {
+            this.podeMoverD = false;
+            this.setPosicaoX(AbstractConstantes.LARGURA_JANELA - 150);
+        }
+        if (this.getPosicaoX() > 10) {
+            this.podeMoverA = true;
+        } else {
+            this.podeMoverA = false;
+            this.setPosicaoX(10);
+        }
     }
     
     // MOVE A POSICAO DO PERSONAGEM
@@ -61,7 +91,7 @@ public class Personagem extends AbstractVida {
         int codigo = tecla.getKeyCode();
 
         // DETECTA A TECLA APERTADA E MOVE SE ESTIVER LIBERADO
-        if(Fase.podeMover_W == true){
+        if(this.podeMoverW){
             if (codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP) {
                 // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
                 this.deslocamentoY = -super.getVELOCIDADE();
@@ -75,7 +105,7 @@ public class Personagem extends AbstractVida {
 
             }
         }
-        if(Fase.podeMover_S == true){
+        if(this.podeMoverS = true){
             if (codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN) {
                 this.deslocamentoY = super.getVELOCIDADE();
 
@@ -85,7 +115,7 @@ public class Personagem extends AbstractVida {
                 this.direcao = TECLA_S;
             }
         }
-        if(Fase.podeMover_D == true){
+        if(this.podeMoverD == true){
             if (codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) {
                 this.deslocamentoX = super.getVELOCIDADE();
 
@@ -95,7 +125,7 @@ public class Personagem extends AbstractVida {
                 this.direcao = TECLA_D;           
             }
         }
-        if(Fase.podeMover_A == true){
+        if(this.podeMoverA == true){
             if (codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) {
                 this.deslocamentoX = -super.getVELOCIDADE();
 
@@ -105,6 +135,11 @@ public class Personagem extends AbstractVida {
                 this.direcao = TECLA_A;
             }
         }
+
+
+
+        
+        
     }
 
     // PARA O MOVIMENTO DO PERSONAGEM
