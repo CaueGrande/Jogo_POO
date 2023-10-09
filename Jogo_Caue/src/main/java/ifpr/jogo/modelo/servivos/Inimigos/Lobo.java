@@ -1,12 +1,18 @@
-package ifpr.jogo.modelo.servivos.Inimigos;
+package ifpr.jogo.modelo.servivos.inimigos;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 
+@Entity
+@Table(name="tb_lobo")
 public class Lobo extends AbstractVida{
 
+    @Transient
     private Personagem personagem;
 
     public static final int PONTUACAO_POR_LOBO = 100;

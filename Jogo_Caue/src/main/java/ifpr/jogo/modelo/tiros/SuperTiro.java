@@ -21,7 +21,7 @@ public class SuperTiro extends AbstractTiro{
     }
 
     public void explodir() {
-        super.setAlturaImagem(super.getAlturaImagem() + 300);
-        super.setLarguraImagem(super.getLarguraImagem() + 300);
+        super.setAlturaImagem(super.getAlturaImagem() + 200);
+        super.setLarguraImagem(super.getLarguraImagem() + 200);
     }
 }

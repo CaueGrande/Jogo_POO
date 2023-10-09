@@ -1,9 +1,13 @@
 package ifpr.jogo.modelo.paisagem;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.swing.ImageIcon;
 
 import ifpr.jogo.modelo.AbstractPosicionamento;
 
+@Entity
+@Table(name="tb_animal")
 public class Animal extends AbstractPosicionamento{
     private final int TEMPO_SPAWN_ANIMAIS = 400;
 

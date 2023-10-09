@@ -22,7 +22,7 @@ import javax.swing.Timer;
 
 import ifpr.jogo.modelo.paisagem.Animal;
 import ifpr.jogo.modelo.servivos.Personagem;
-import ifpr.jogo.modelo.servivos.Inimigos.Lobo;
+import ifpr.jogo.modelo.servivos.inimigos.Lobo;
 import ifpr.jogo.modelo.tiros.SuperTiro;
 import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;

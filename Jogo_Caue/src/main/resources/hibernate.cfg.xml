@@ -20,6 +20,8 @@
 
         <mapping class="ifpr.jogo.modelo.Jogador" />
          <mapping class="ifpr.jogo.modelo.servivos.Personagem" />
+         <mapping class="ifpr.jogo.modelo.servivos.inimigos.Lobo" />
+         <mapping class="ifpr.jogo.modelo.paisagem.Animal" />
 
     </session-factory>
 </hibernate-configuration>

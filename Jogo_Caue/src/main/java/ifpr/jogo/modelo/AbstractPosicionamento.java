@@ -2,13 +2,43 @@ package ifpr.jogo.modelo;
 
 import java.awt.Image;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractPosicionamento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_posicionamento")
+    private int idPosicionamento;
+
+    @Column(name="posicao_x")
     private int posicaoX;
+
+    @Column(name="posicao_y")
     private int posicaoY;
+
+    @Transient
     private Image imagem;
+
+    @Column(name="largura_imagem")
     private int larguraImagem;
+
+    @Column(name="altura_imagem")
     private int alturaImagem;
-    private int VELOCIDADE;
+
+    @Column(name="velocidade")
+    private int velocidade;
+
+    @Column(name="visivel")
     private boolean visivel;
     
     // CARREGA OS DADOS NA FASE
@@ -48,10 +78,10 @@ public abstract class AbstractPosicionamento {
         this.alturaImagem = alturaImagem;
     }
     public int getVELOCIDADE() {
-        return VELOCIDADE;
+        return velocidade;
     }
     public void setVELOCIDADE(int VELOCIDADE) {
-        this.VELOCIDADE = VELOCIDADE;
+        this.velocidade = VELOCIDADE;
     }
     public boolean getVisivel() {
         return visivel;

@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import ifpr.jogo.modelo.AbstractVida;
@@ -17,7 +14,7 @@ import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;
 
 @Entity
-@Table(name = "td_personagem")
+@Table(name="tb_personagem")
 public class Personagem extends AbstractVida {
 
     private static final int POSICAO_INICIAL_X = AbstractConstantes.LARGURA_JANELA * 3/7;
@@ -28,11 +25,6 @@ public class Personagem extends AbstractVida {
     public static int TECLA_A = 2;
     public static int TECLA_D = 3;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_personagem")
-    private int idPersonagem;
-
     @Column(name="deslocamento_em_x")
     private int deslocamentoX;
 
@@ -41,7 +33,7 @@ public class Personagem extends AbstractVida {
 
     @Column(name="direcao")
     private int direcao;
-    
+
     @Column(name="pontuacao")
     private int pontuacao = 0;
 
@@ -333,11 +325,4 @@ public class Personagem extends AbstractVida {
         this.podeMoverD = podeMoverD;
     }
 
-    public int getIdPersonagem() {
-        return idPersonagem;
-    }
-
-    public void setIdPersonagem(int idPersonagem) {
-        this.idPersonagem = idPersonagem;
-    }
 }
