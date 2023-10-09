@@ -4,16 +4,21 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.tiros.SuperTiro;
 import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;
 
+@Entity
+@Table(name = "td_personagem")
 public class Personagem extends AbstractVida {
-    private int deslocamentoX;
-    private int deslocamentoY;
-    private int direcao;
 
     private static final int POSICAO_INICIAL_X = AbstractConstantes.LARGURA_JANELA * 3/7;
     private static final int POSICAO_INICIAL_Y = AbstractConstantes.ALTURA_JANELA * 2/3;
@@ -21,7 +26,24 @@ public class Personagem extends AbstractVida {
     public static int TECLA_W = 0;
     public static int TECLA_S = 1;
     public static int TECLA_A = 2;
-    public static int TECLA_D = 3; //????????????????????????????????????????????????????????????????
+    public static int TECLA_D = 3;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_personagem")
+    private int idPersonagem;
+
+    @Column(name="deslocamento_em_x")
+    private int deslocamentoX;
+
+    @Column(name="deslocamento_em_y")
+    private int deslocamentoY;
+
+    @Column(name="direcao")
+    private int direcao;
+    
+    @Column(name="pontuacao")
+    private int pontuacao = 0;
 
     private boolean podeMoverW = true;
     private boolean podeMoverS = true;
@@ -30,8 +52,6 @@ public class Personagem extends AbstractVida {
 
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> superTiros;
-
-    private int pontuacao = 0;
 
     public Personagem() {
         // PADRONIZA O LOCAL INICIAL DO PERSONAGEM
@@ -311,5 +331,13 @@ public class Personagem extends AbstractVida {
 
     public void setPodeMoverD(boolean podeMoverD) {
         this.podeMoverD = podeMoverD;
+    }
+
+    public int getIdPersonagem() {
+        return idPersonagem;
+    }
+
+    public void setIdPersonagem(int idPersonagem) {
+        this.idPersonagem = idPersonagem;
     }
 }

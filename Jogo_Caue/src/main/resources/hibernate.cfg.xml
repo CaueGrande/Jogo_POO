@@ -19,6 +19,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping class="ifpr.jogo.modelo.Jogador" />
+         <mapping class="ifpr.jogo.modelo.servivos.Personagem" />
 
     </session-factory>
 </hibernate-configuration>
