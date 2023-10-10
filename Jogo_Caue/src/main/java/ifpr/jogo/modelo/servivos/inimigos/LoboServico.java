@@ -2,13 +2,6 @@ package ifpr.jogo.modelo.servivos.inimigos;
 
 import java.util.List;
 import java.util.Random;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.swing.ImageIcon;
-
-import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.util.AbstractConstantes;
 

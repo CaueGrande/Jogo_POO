@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
-import ifpr.jogo.util.AbstractConstantes;
 
 @Entity
 @Table(name = "tb_lobo")
