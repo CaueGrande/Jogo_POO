@@ -36,7 +36,7 @@ public abstract class AbstractPosicionamento {
     private int alturaImagem;
 
     @Column(name="velocidade")
-    private int velocidade;
+    private static int velocidade;
 
     @Column(name="visivel")
     private boolean visivel;
@@ -77,11 +77,11 @@ public abstract class AbstractPosicionamento {
     public void setAlturaImagem(int alturaImagem) {
         this.alturaImagem = alturaImagem;
     }
-    public int getVELOCIDADE() {
+    public int getVelocidade() {
         return velocidade;
     }
-    public void setVELOCIDADE(int VELOCIDADE) {
-        this.velocidade = VELOCIDADE;
+    public void setVelocidade(int velocidade) {
+        this.velocidade = velocidade;
     }
     public boolean getVisivel() {
         return visivel;

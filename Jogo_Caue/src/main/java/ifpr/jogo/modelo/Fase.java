@@ -79,7 +79,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         this.timer = new Timer(DELAY, this);
         this.timer.start();
 
-        // CRIA OS (INIMIGOS)LOBOS E (ANIMAIS INTANGIVEIS)ABELHAS NA FASE
+        // CRIA OS LOBOS E ABELHAS NA FASE
         this.lobos = new ArrayList<>();
         this.abelhas = new ArrayList<>();
 
@@ -173,7 +173,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         // SE O TEMPORIZADOR CHEGAR NO TEMPO DEFINIDO, E DADO PERMISSAO PARA SUPER ATIRAR
         if (this.contaTempoSuperTiros >= TEMPO_SPAWN_SUPER_TIROS) {
             this.podeSuperAtirar = true;
-
         }
 
         // SE TIVER PERMISSAO, SUPER ATIRA
@@ -301,7 +300,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         while (iteratorLobo.hasNext()) {
             Lobo lobo = iteratorLobo.next();
             Rectangle formaLobo = lobo.getRectangle();
-            
+
             // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
             if (lobo.getVisivel() == true && personagem.getVida() > 0) {
                 lobo.atualizar();
@@ -336,6 +335,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                 iteratorLobo.remove();
             }
         }
+
+        Lobo.aumentaVelocidadeLobos(personagem);
 
         // VAI PINTANDO AS IMAGENS DE ACORDO COM O DELAY DA FASE
         repaint();

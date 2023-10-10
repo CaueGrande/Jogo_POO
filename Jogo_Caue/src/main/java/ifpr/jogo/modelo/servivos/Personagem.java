@@ -50,7 +50,7 @@ public class Personagem extends AbstractVida {
         super.setPosicaoX(POSICAO_INICIAL_X);
         super.setPosicaoY(POSICAO_INICIAL_Y);
         super.setVida(5);
-        super.setVELOCIDADE(3);
+        super.setVelocidade(3);
         // PADRONIZA A DIRECAO INICIAL DO TIRO
         this.direcao = TECLA_W;
 
@@ -106,7 +106,7 @@ public class Personagem extends AbstractVida {
         if(this.podeMoverW){
             if (codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP) {
                 // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
-                this.deslocamentoY = -super.getVELOCIDADE();
+                this.deslocamentoY = -super.getVelocidade();
 
                 // CARREGA A IMAGEM CONDIZENTE A DIRECAO
                 ImageIcon carregador_w = new ImageIcon(getClass().getResource("/personagem_w.png"));
@@ -119,7 +119,7 @@ public class Personagem extends AbstractVida {
         }
         if(this.podeMoverS = true){
             if (codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN) {
-                this.deslocamentoY = super.getVELOCIDADE();
+                this.deslocamentoY = super.getVelocidade();
 
                 ImageIcon carregador_s = new ImageIcon(getClass().getResource("/personagem_s.png"));
                 super.setImagem(carregador_s.getImage());
@@ -129,7 +129,7 @@ public class Personagem extends AbstractVida {
         }
         if(this.podeMoverD == true){
             if (codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) {
-                this.deslocamentoX = super.getVELOCIDADE();
+                this.deslocamentoX = super.getVelocidade();
 
                 ImageIcon carregador_d = new ImageIcon(getClass().getResource("/personagem_d.png"));
                 super.setImagem(carregador_d.getImage());
@@ -139,7 +139,7 @@ public class Personagem extends AbstractVida {
         }
         if(this.podeMoverA == true){
             if (codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) {
-                this.deslocamentoX = -super.getVELOCIDADE();
+                this.deslocamentoX = -super.getVelocidade();
 
                 ImageIcon carregador_a = new ImageIcon(getClass().getResource("/personagem_a.png"));
                 super.setImagem(carregador_a.getImage());

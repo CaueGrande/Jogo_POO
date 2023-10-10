@@ -14,7 +14,7 @@ public class Animal extends AbstractPosicionamento{
     public Animal(int posicaoX, int posicaoY) {
         super.setPosicaoX(posicaoX);
         super.setPosicaoY(posicaoY);
-        super.setVELOCIDADE(2);
+        super.setVelocidade(2);
         super.setVisivel(true);
     }
 
@@ -28,7 +28,7 @@ public class Animal extends AbstractPosicionamento{
 
     @Override
     public void atualizar() {
-        super.setPosicaoX(super.getPosicaoX() - super.getVELOCIDADE());
+        super.setPosicaoX(super.getPosicaoX() - super.getVelocidade());
     }
     
     public int getTEMPO_SPAWN_ANIMAIS() {
