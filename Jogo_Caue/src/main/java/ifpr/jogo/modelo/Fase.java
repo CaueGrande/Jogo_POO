@@ -289,29 +289,9 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
             }
         }
 
-        
         // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
         if (this.contaTempoLobos >= TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
-            int posicaoXInicio = -200;
-            int posicaoYInicio = -200;
-            int posicaoXFim = (int) AbstractConstantes.LARGURA_JANELA;
-            int posicaoYFim = (int) AbstractConstantes.ALTURA_JANELA;
-            int posicaoXAleatoria = random.nextInt(AbstractConstantes.LARGURA_JANELA);
-            int posicaoYAleatoria = random.nextInt(AbstractConstantes.ALTURA_JANELA);
-
-            Lobo novoLoboCima = new Lobo(posicaoXAleatoria, posicaoYInicio, this.personagem);
-            Lobo novoLoboBaixo = new Lobo(posicaoXAleatoria, posicaoYFim, this.personagem);
-            Lobo novoLoboEsquerda = new Lobo(posicaoXInicio, posicaoYAleatoria, this.personagem);
-            Lobo novoLoboDireita = new Lobo(posicaoXFim, posicaoYAleatoria, this.personagem);
-            novoLoboCima.carregar();
-            novoLoboBaixo.carregar();
-            novoLoboEsquerda.carregar();
-            novoLoboDireita.carregar();
-            this.lobos.add(novoLoboCima);
-            this.lobos.add(novoLoboBaixo);
-            this.lobos.add(novoLoboEsquerda);
-            this.lobos.add(novoLoboDireita);
-            
+            Lobo.gerarLobos(lobos);
             this.contaTempoLobos = 0;
         }
 
