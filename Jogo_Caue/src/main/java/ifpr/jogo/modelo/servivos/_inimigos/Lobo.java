@@ -1,4 +1,4 @@
-package ifpr.jogo.modelo.servivos.inimigos;
+package ifpr.jogo.modelo.servivos._inimigos;
 
 import java.util.List;
 import java.util.Random;
