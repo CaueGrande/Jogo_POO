@@ -23,6 +23,7 @@ import javax.swing.Timer;
 import ifpr.jogo.modelo.paisagem.Animal;
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.modelo.servivos.inimigos.Lobo;
+import ifpr.jogo.modelo.servivos.inimigos.LoboServico;
 import ifpr.jogo.modelo.tiros.SuperTiro;
 import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;
@@ -291,7 +292,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
         // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
         if (this.contaTempoLobos >= TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
-            Lobo.gerarLobos(lobos);
+            LoboServico.gerarLobos(lobos, personagem);
             this.contaTempoLobos = 0;
         }
 
