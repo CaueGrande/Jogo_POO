@@ -41,16 +41,15 @@ public class LoboServico {
         lobos.add(novoLoboDireita);
     }
    
-    /*
-    public void aumentaVelocidadeLobos(Personagem personagem) {
+    public static void aumentaVelocidadeLobos(Personagem personagem) {
         if (personagem.getPontuacao() % 1000 != 0 && podeAumentarVelocidade != true) {
             podeAumentarVelocidade = true;
         }
 
         if (personagem.getPontuacao() % 1000 == 0 && podeAumentarVelocidade == true) {
-            Lobo.setVelocidade(Lobo.getVelocidade() + 1);
+            Lobo.velocidadeLobos++;
             podeAumentarVelocidade = false;
             System.out.println("Aumentou a velocidade dos lobos!");
         }
-    } */
+    } 
 }

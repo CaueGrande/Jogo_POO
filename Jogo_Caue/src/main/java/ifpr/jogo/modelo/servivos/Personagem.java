@@ -25,6 +25,11 @@ public class Personagem extends AbstractVida {
     public static int TECLA_A = 2;
     public static int TECLA_D = 3;
 
+    private boolean podeMoverW = true;
+    private boolean podeMoverS = true;
+    private boolean podeMoverA = true;
+    private boolean podeMoverD = true;
+
     @Column(name="deslocamento_em_x")
     private int deslocamentoX;
 
@@ -36,11 +41,6 @@ public class Personagem extends AbstractVida {
 
     @Column(name="pontuacao")
     private int pontuacao = 0;
-
-    private boolean podeMoverW = true;
-    private boolean podeMoverS = true;
-    private boolean podeMoverA = true;
-    private boolean podeMoverD = true;
 
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> superTiros;

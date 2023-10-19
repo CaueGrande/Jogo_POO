@@ -13,7 +13,9 @@ import ifpr.jogo.modelo.servivos.Personagem;
 public class Lobo extends AbstractVida {
 
     public static final int PONTUACAO_POR_LOBO = 100;
-    
+
+    public static int velocidadeLobos = 1;
+
     @Transient
     private Personagem personagem;
 
@@ -21,7 +23,7 @@ public class Lobo extends AbstractVida {
         super.setPosicaoX(posicaoX);
         super.setPosicaoY(posicaoY);
         super.setVisivel(true);
-        super.setVelocidade(1);
+        super.setVelocidade(velocidadeLobos);
         this.personagem = personagem;
     }
 
@@ -64,7 +66,11 @@ public class Lobo extends AbstractVida {
         this.personagem = personagem;
     }
 
-    public static int getPontuacaoPorLobo() {
-        return PONTUACAO_POR_LOBO;
+    public int getVelocidadeLobos() {
+        return velocidadeLobos;
+    }
+
+    public void setVelocidadeLobos(int velocidadeLobos) {
+        this.velocidadeLobos = velocidadeLobos;
     }
 }

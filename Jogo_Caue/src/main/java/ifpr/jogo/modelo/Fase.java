@@ -317,7 +317,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                     if(formaTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
                         tiro.setVisivel(false);
-                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.getPontuacaoPorLobo());
+                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
                     }
                 }
                 for(SuperTiro supertiro : personagem.getSuperTiros()){
@@ -326,7 +326,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                         lobo.setVisivel(false);
                         supertiro.explodir();
                         supertiro.setVisivel(false);
-                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.getPontuacaoPorLobo());
+                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
                     }
                 }
                 
@@ -336,7 +336,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
             }
         }
 
-        Lobo.aumentaVelocidadeLobos(personagem);
+        LoboServico.aumentaVelocidadeLobos(personagem);
 
         // VAI PINTANDO AS IMAGENS DE ACORDO COM O DELAY DA FASE
         repaint();
