@@ -47,14 +47,17 @@ public class Lobo extends AbstractVida {
         int deltaY = personagemY - super.getPosicaoY();
 
         // MOVE O LOBO DE ACORDO COM A DIFERENCA DE POSICAO
-        if (deltaY > 0) {
+    
+
+        if (deltaY > 30) {
             super.setPosicaoY(super.getPosicaoY() + super.getVelocidade());
-        } else if (deltaY < 0) {
+        } else if (deltaY < 30) {
             super.setPosicaoY(super.getPosicaoY() - super.getVelocidade());
         }
-        if (deltaX > 0) {
+
+        if (deltaX > 30) {
             super.setPosicaoX(super.getPosicaoX() + super.getVelocidade());
-        } else if (deltaX < 0) {
+        } else if (deltaX < 30) {
             super.setPosicaoX(super.getPosicaoX() - super.getVelocidade());
         }
     }

@@ -2,9 +2,9 @@ package ifpr.jogo.modelo.tiros;
 
 import javax.swing.ImageIcon;
 
-public class SuperTiro extends AbstractTiro{
+public class SuperTiro extends AbstractTiro {
 
-    boolean explodido;
+    public boolean explodido;
 
     public SuperTiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
         super.setPosicaoX(posicaoPersonagemX);
@@ -17,24 +17,22 @@ public class SuperTiro extends AbstractTiro{
 
     @Override
     public void carregar() {
-        if (this.explodido == false) {
-            ImageIcon carregador = new ImageIcon(getClass().getResource("/granada.png"));
-            super.setImagem(carregador.getImage());
-            super.setAlturaImagem(super.getImagem().getHeight(null));
-            super.setLarguraImagem(super.getImagem().getWidth(null));
+        ImageIcon carregador = new ImageIcon(getClass().getResource("/granada.png"));
+        super.setImagem(carregador.getImage());
+        super.setAlturaImagem(super.getImagem().getHeight(null));
+        super.setLarguraImagem(super.getImagem().getWidth(null));
 
-        } else {
-            ImageIcon carregador = new ImageIcon(getClass().getResource("/explosao.png"));
-            super.setImagem(carregador.getImage());
-            super.setAlturaImagem(super.getImagem().getHeight(null));
-            super.setLarguraImagem(super.getImagem().getWidth(null));
-
-        }
     }
 
     public void explodir() {
         this.explodido = true;
-        super.setPosicaoX(this.getPosicaoX() - 50);
-        super.setPosicaoY(this.getPosicaoY() - 50);
+
+        ImageIcon carregador = new ImageIcon(getClass().getResource("/explosao.gif"));
+        super.setImagem(carregador.getImage());
+        super.setAlturaImagem(super.getImagem().getHeight(null));
+        super.setLarguraImagem(super.getImagem().getWidth(null));
+
+        super.setPosicaoX(this.getPosicaoX() - 250);
+        super.setPosicaoY(this.getPosicaoY() - 250);
     }
 }

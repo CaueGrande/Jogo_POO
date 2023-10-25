@@ -252,7 +252,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
             if(personagem.getVida() > 0){
                 // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
-                if (superTiro.getVisivel() == true) {
+                if (superTiro.getVisivel() == true && superTiro.explodido == false) {
                     superTiro.atualizar();
                 } else {
                     iteratorSuperTiro.remove();
@@ -300,6 +300,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         while (iteratorLobo.hasNext()) {
             Lobo lobo = iteratorLobo.next();
             Rectangle formaLobo = lobo.getRectangle();
+            int contaTempoExplosao = 0;
 
             // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
             if (lobo.getVisivel() == true && personagem.getVida() > 0) {
@@ -322,10 +323,18 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                 }
                 for(SuperTiro supertiro : personagem.getSuperTiros()){
                     Rectangle formaSuperTiro = supertiro.getRectangle();
+
                     if(formaSuperTiro.intersects(formaLobo)){
                         lobo.setVisivel(false);
                         supertiro.explodir();
-                        supertiro.setVisivel(false);
+
+                        if(contaTempoExplosao == 600){
+                            supertiro.setVisivel(false);
+                            contaTempoExplosao = 0;
+                        }
+
+                        contaTempoExplosao++;
+
                         personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
                     }
                 }
