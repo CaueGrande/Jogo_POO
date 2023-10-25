@@ -7,15 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_vida")
-public abstract class AbstractVida extends AbstractPosicionamento{
+@Table(name = "tb_vida")
+public abstract class AbstractVida extends AbstractPosicionamento {
 
-    @Column(name="vida")
+    @Column(name = "vida")
     private int vida;
 
-    // DEFINE UM RETANGULO AO REDOR DA IMAGEM 
-    public final Rectangle getRectangle(){
-        return new Rectangle(super.getPosicaoX(), super.getPosicaoY(), super.getLarguraImagem(),super.getAlturaImagem());
+    // DEFINE UM RETANGULO AO REDOR DA IMAGEM
+    public final Rectangle getRectangle() {
+        return new Rectangle(super.getPosicaoX(), super.getPosicaoY(), super.getLarguraImagem(),
+                super.getAlturaImagem());
 
     }
 

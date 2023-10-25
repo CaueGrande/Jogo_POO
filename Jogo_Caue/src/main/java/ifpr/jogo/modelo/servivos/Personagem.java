@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.tiros.SuperTiro;
@@ -14,44 +15,50 @@ import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;
 
 @Entity
-@Table(name="tb_personagem")
+@Table(name = "tb_personagem")
 public class Personagem extends AbstractVida {
 
-    private static final int POSICAO_INICIAL_X = AbstractConstantes.LARGURA_JANELA * 3/7;
-    private static final int POSICAO_INICIAL_Y = AbstractConstantes.ALTURA_JANELA * 2/3;
+    private static final int POSICAO_INICIAL_X = AbstractConstantes.LARGURA_JANELA * 3 / 7;
+    private static final int POSICAO_INICIAL_Y = AbstractConstantes.ALTURA_JANELA * 2 / 3;
 
     public static int TECLA_W = 0;
     public static int TECLA_S = 1;
     public static int TECLA_A = 2;
     public static int TECLA_D = 3;
 
+    @Column(name = "pode_mover_w")
     private boolean podeMoverW = true;
+    @Column(name = "pode_mover_s")
     private boolean podeMoverS = true;
+    @Column(name = "pode_mover_a")
     private boolean podeMoverA = true;
+    @Column(name = "pode_mover_d")
     private boolean podeMoverD = true;
 
-    @Column(name="deslocamento_em_x")
+    @Column(name = "deslocamento_em_x")
     private int deslocamentoX;
-
-    @Column(name="deslocamento_em_y")
+    @Column(name = "deslocamento_em_y")
     private int deslocamentoY;
 
-    @Column(name="direcao")
+    @Column(name = "direcao")
     private int direcao;
 
-    @Column(name="pontuacao")
+    @Column(name = "pontuacao")
     private int pontuacao = 0;
 
+    @Transient
     private ArrayList<Tiro> tiros;
+    @Transient
     private ArrayList<SuperTiro> superTiros;
 
+    // PADRONIZA A POSICAO INICIAL, VIDA, VELOCIDADE E A DIRECAO DO TIRO
     public Personagem() {
-        // PADRONIZA O LOCAL INICIAL DO PERSONAGEM
         super.setPosicaoX(POSICAO_INICIAL_X);
         super.setPosicaoY(POSICAO_INICIAL_Y);
+
         super.setVida(5);
         super.setVelocidade(3);
-        // PADRONIZA A DIRECAO INICIAL DO TIRO
+
         this.direcao = TECLA_W;
 
         this.tiros = new ArrayList<Tiro>();
@@ -72,9 +79,9 @@ public class Personagem extends AbstractVida {
         super.setPosicaoY(getPosicaoY() + this.deslocamentoY);
 
         // VERIFICA SE O PERSONAGEM NAO ESTA SAINDO DA JANELA
-        if(this.getPosicaoY() < AbstractConstantes.ALTURA_JANELA - 200){
+        if (this.getPosicaoY() < AbstractConstantes.ALTURA_JANELA - 200) {
             this.podeMoverS = true;
-        } else{
+        } else {
             this.podeMoverS = false;
             this.setPosicaoY(AbstractConstantes.ALTURA_JANELA - 200);
         }
@@ -97,13 +104,13 @@ public class Personagem extends AbstractVida {
             this.setPosicaoX(10);
         }
     }
-    
+
     // MOVE A POSICAO DO PERSONAGEM
     public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
 
         // DETECTA A TECLA APERTADA E MOVE SE ESTIVER LIBERADO
-        if(this.podeMoverW){
+        if (this.podeMoverW) {
             if (codigo == KeyEvent.VK_W || codigo == KeyEvent.VK_UP) {
                 // MUDA A DIRECAO DO DESLOCAMENTO A SER FEITO
                 this.deslocamentoY = -super.getVelocidade();
@@ -113,11 +120,11 @@ public class Personagem extends AbstractVida {
                 super.setImagem(carregador_w.getImage());
 
                 // MUDA A VARIAVEL DIRECAO PARA A TECLA APERTADA
-                this.direcao = TECLA_W;     
+                this.direcao = TECLA_W;
 
             }
         }
-        if(this.podeMoverS = true){
+        if (this.podeMoverS = true) {
             if (codigo == KeyEvent.VK_S || codigo == KeyEvent.VK_DOWN) {
                 this.deslocamentoY = super.getVelocidade();
 
@@ -127,17 +134,17 @@ public class Personagem extends AbstractVida {
                 this.direcao = TECLA_S;
             }
         }
-        if(this.podeMoverD == true){
+        if (this.podeMoverD == true) {
             if (codigo == KeyEvent.VK_D || codigo == KeyEvent.VK_RIGHT) {
                 this.deslocamentoX = super.getVelocidade();
 
                 ImageIcon carregador_d = new ImageIcon(getClass().getResource("/personagem_d.png"));
                 super.setImagem(carregador_d.getImage());
 
-                this.direcao = TECLA_D;           
+                this.direcao = TECLA_D;
             }
         }
-        if(this.podeMoverA == true){
+        if (this.podeMoverA == true) {
             if (codigo == KeyEvent.VK_A || codigo == KeyEvent.VK_LEFT) {
                 this.deslocamentoX = -super.getVelocidade();
 
@@ -148,10 +155,6 @@ public class Personagem extends AbstractVida {
             }
         }
 
-
-
-        
-        
     }
 
     // PARA O MOVIMENTO DO PERSONAGEM
@@ -171,77 +174,74 @@ public class Personagem extends AbstractVida {
             this.deslocamentoX = 0;
 
         }
-
     }
 
-    
     public void atirar() {
 
         // VERIFICA A TECLA APERTADA E ALTERA O TIRO PARA A DIRECAO CORRESPONDENTE
-        if(this.direcao == Personagem.TECLA_W) {
+        if (this.direcao == Personagem.TECLA_W) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) - 2;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) + 2;
 
             Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.tiros.add(tiro);
 
-        } else if(this.direcao == Personagem.TECLA_S) {
+        } else if (this.direcao == Personagem.TECLA_S) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) - 8;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) - 2;
 
             Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.tiros.add(tiro);
 
-        }else if(this.direcao == Personagem.TECLA_D) {
+        } else if (this.direcao == Personagem.TECLA_D) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) + 8;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) - 20;
 
             Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.tiros.add(tiro);
 
-        } else if(this.direcao == Personagem.TECLA_A) {
+        } else if (this.direcao == Personagem.TECLA_A) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) - 8;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) - 20;
 
             Tiro tiro = new Tiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.tiros.add(tiro);
 
-        } 
+        }
     }
 
     public void superAtirar() {
 
         // VERIFICA A TECLA APERTADA E ALTERA O SUPER TIRO PARA A DIRECAO CORRESPONDENTE
-        if(this.direcao == Personagem.TECLA_W) {
+        if (this.direcao == Personagem.TECLA_W) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) - 2;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) + 2;
 
             SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.superTiros.add(superTiro);
 
-        } else if(this.direcao == Personagem.TECLA_S) {
+        } else if (this.direcao == Personagem.TECLA_S) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) - 8;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) - 2;
 
             SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.superTiros.add(superTiro);
 
-        }else if(this.direcao == Personagem.TECLA_D) {
+        } else if (this.direcao == Personagem.TECLA_D) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) + 8;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) - 20;
 
             SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.superTiros.add(superTiro);
 
-        } else if(this.direcao == Personagem.TECLA_A) {
+        } else if (this.direcao == Personagem.TECLA_A) {
             int posicaoInicialTiroX = super.getPosicaoX() + (super.getLarguraImagem() / 2) - 8;
             int posicaoInicialTiroY = super.getPosicaoY() + (super.getAlturaImagem() / 2) - 20;
-            
+
             SuperTiro superTiro = new SuperTiro(posicaoInicialTiroX, posicaoInicialTiroY, this.direcao);
             this.superTiros.add(superTiro);
 
-        } 
-
+        }
     }
 
     // GETTERS E SETTERS
@@ -292,7 +292,7 @@ public class Personagem extends AbstractVida {
     public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
     }
-    
+
     public boolean getPodeMoverW() {
         return podeMoverW;
     }

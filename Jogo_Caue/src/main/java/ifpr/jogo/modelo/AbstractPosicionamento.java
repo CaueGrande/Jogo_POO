@@ -36,7 +36,7 @@ public abstract class AbstractPosicionamento {
     private int alturaImagem;
 
     @Column(name="velocidade")
-    private static int velocidade;
+    private int velocidade;
 
     @Column(name="visivel")
     private boolean visivel;

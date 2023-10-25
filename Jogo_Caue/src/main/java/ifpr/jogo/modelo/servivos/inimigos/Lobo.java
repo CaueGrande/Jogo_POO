@@ -1,5 +1,6 @@
 package ifpr.jogo.modelo.servivos.inimigos;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -14,6 +15,7 @@ public class Lobo extends AbstractVida {
 
     public static final int PONTUACAO_POR_LOBO = 100;
 
+    @Column(name="velocidade_lobos")
     public static int velocidadeLobos = 1;
 
     @Transient
@@ -64,13 +66,5 @@ public class Lobo extends AbstractVida {
 
     public void setPersonagem(Personagem personagem) {
         this.personagem = personagem;
-    }
-
-    public int getVelocidadeLobos() {
-        return velocidadeLobos;
-    }
-
-    public void setVelocidadeLobos(int velocidadeLobos) {
-        this.velocidadeLobos = velocidadeLobos;
     }
 }

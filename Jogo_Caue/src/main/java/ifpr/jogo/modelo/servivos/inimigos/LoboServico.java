@@ -5,16 +5,16 @@ import java.util.Random;
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.util.AbstractConstantes;
 
-
 public class LoboServico {
-    
+
     private static final int POSICAO_INICIAL_X = -200;
     private static final int POSICAO_INICIAL_Y = -200;
     private static final int POSICAO_FINAL_X = (int) AbstractConstantes.LARGURA_JANELA;
     private static final int POSICAO_FINAL_Y = (int) AbstractConstantes.ALTURA_JANELA;
 
+
     private static boolean podeAumentarVelocidade = false;
-   
+
     public static void gerarLobos(List lobos, Personagem personagem) {
         Random random = new Random();
 
@@ -40,16 +40,15 @@ public class LoboServico {
         lobos.add(novoLoboEsquerda);
         lobos.add(novoLoboDireita);
     }
-   
+
     public static void aumentaVelocidadeLobos(Personagem personagem) {
-        if (personagem.getPontuacao() % 1000 != 0 && podeAumentarVelocidade != true) {
+        if (personagem.getPontuacao() % 2000 != 0 && podeAumentarVelocidade != true) {
             podeAumentarVelocidade = true;
         }
 
-        if (personagem.getPontuacao() % 1000 == 0 && podeAumentarVelocidade == true) {
+        if (personagem.getPontuacao() % 2000 == 0 && podeAumentarVelocidade == true) {
             Lobo.velocidadeLobos++;
             podeAumentarVelocidade = false;
-            System.out.println("Aumentou a velocidade dos lobos!");
         }
-    } 
+    }
 }
