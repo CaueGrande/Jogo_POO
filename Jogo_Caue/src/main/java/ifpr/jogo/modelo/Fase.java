@@ -49,6 +49,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
     private int contaTempoLobos;
     private int contaTempoTiros;
     private int contaTempoSuperTiros;
+    private int contaTempoExplosao;
 
     private boolean podeAtirar = true;
     private boolean podeSuperAtirar = true;
@@ -107,7 +108,12 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         // IMAGEM DO SUPER TIRO
         for (int J = 0; J < superTiros.size(); J++) {
             SuperTiro superTiro = superTiros.get(J);
-            superTiro.carregar();
+
+            if(superTiro.getExplodido() == false){
+                superTiro.carregar();
+            } else{
+                superTiro.carregarExplodido();
+            }
             graficos.drawImage(superTiro.getImagem(), superTiro.getPosicaoX(), superTiro.getPosicaoY(), null);
         }
 
@@ -243,20 +249,29 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                 } else {
                     iteratorTiro.remove();
                 }
+
+            } else {
+                iteratorTiro.remove();
             }
         }
 
         // SO SPAWNA O SUPER TIRO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_SUPER_TIROS
         while (iteratorSuperTiro.hasNext()) {
             SuperTiro superTiro = iteratorSuperTiro.next();
+        
+            if(superTiro.getExplodido() == true){
+                this.contaTempoExplosao++;
+            }
 
             if(personagem.getVida() > 0){
                 // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
-                if (superTiro.getVisivel() == true && superTiro.explodido == false) {
+                if (superTiro.getVisivel() == true && superTiro.getExplodido() == false) {
                     superTiro.atualizar();
-                } else {
+                } else if (superTiro.getVisivel() == false){
                     iteratorSuperTiro.remove();
                 }
+            } else {
+                iteratorTiro.remove();
             }
         }
 
@@ -300,7 +315,6 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         while (iteratorLobo.hasNext()) {
             Lobo lobo = iteratorLobo.next();
             Rectangle formaLobo = lobo.getRectangle();
-            int contaTempoExplosao = 0;
 
             // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
             if (lobo.getVisivel() == true && personagem.getVida() > 0) {
@@ -328,14 +342,12 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
                         lobo.setVisivel(false);
                         supertiro.explodir();
 
-                        if(contaTempoExplosao == 600){
-                            supertiro.setVisivel(false);
-                            contaTempoExplosao = 0;
-                        }
-
-                        contaTempoExplosao++;
-
                         personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
+                    }
+                    
+                    if(contaTempoExplosao >= 20){
+                        supertiro.setVisivel(false);
+                        contaTempoExplosao = 0;
                     }
                 }
                 
@@ -388,91 +400,13 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
     }
 
     // GETTERS E SETTERS
-    public Image getFundo() {
-        return fundo;
-    }
-
-    public void setFundo(Image fundo) {
-        this.fundo = fundo;
-    }
-
-    public Personagem getPersonagem() {
-        return personagem;
-    }
-
-    public void setPersonagem(Personagem personagem) {
-        this.personagem = personagem;
-    }
-
-    public List<Lobo> getLobo() {
-        return lobos;
-    }
-
-    public void setLobo(List<Lobo> lobos) {
-        this.lobos = lobos;
-    }
-
     public Timer getTimer() {
         return timer;
     }
-
     public void setTimer(Timer timer) {
         this.timer = timer;
     }
-
     public static int getDelay() {
         return DELAY;
-    }
-
-    public int getTEMPO_SPAWN_INIMIGOS() {
-        return TEMPO_SPAWN_INIMIGOS;
-    }
-
-    public int getTEMPO_SPAWN_TIROS() {
-        return TEMPO_SPAWN_TIROS;
-    }
-
-    public int getTEMPO_SPAWN_SUPER_TIROS() {
-        return TEMPO_SPAWN_SUPER_TIROS;
-    }
-
-    public int getContaTempoLobos() {
-        return contaTempoLobos;
-    }
-
-    public void setContaTempoLobos(int contaTempoLobos) {
-        this.contaTempoLobos = contaTempoLobos;
-    }
-
-    public int getContaTempoTiros() {
-        return contaTempoTiros;
-    }
-
-    public void setContaTempoTiros(int contaTempoTiros) {
-        this.contaTempoTiros = contaTempoTiros;
-    }
-
-    public int getContaTempoSuperTiros() {
-        return contaTempoSuperTiros;
-    }
-
-    public void setContaTempoSuperTiros(int contaTempoSuperTiros) {
-        this.contaTempoSuperTiros = contaTempoSuperTiros;
-    }
-
-    public boolean getPodeAtirar() {
-        return podeAtirar;
-    }
-
-    public void setPodeAtirar(boolean podeAtirar) {
-        this.podeAtirar = podeAtirar;
-    }
-
-    public boolean isPodeSuperAtirar() {
-        return podeSuperAtirar;
-    }
-
-    public void setPodeSuperAtirar(boolean podeSuperAtirar) {
-        this.podeSuperAtirar = podeSuperAtirar;
     }
 }

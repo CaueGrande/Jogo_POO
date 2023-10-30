@@ -19,22 +19,19 @@ public class Jogador {
     @Column(name = "nome", unique = true, nullable = false, length = 100)
     private String nome;
 
+    //GETTERS AND SETTERS
     public Jogador(String nome) {
         this.nome = nome;
     }
-
     public Integer getJogadorId() {
         return jogadorId;
     }
-
     public void setJogadorId(Integer jogadorId) {
         this.jogadorId = jogadorId;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }

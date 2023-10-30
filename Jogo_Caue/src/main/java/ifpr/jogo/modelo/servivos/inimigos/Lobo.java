@@ -13,6 +13,7 @@ import ifpr.jogo.modelo.servivos.Personagem;
 @Table(name = "tb_lobo")
 public class Lobo extends AbstractVida {
 
+    @Transient
     public static final int PONTUACAO_POR_LOBO = 100;
 
     @Column(name="velocidade_lobos")

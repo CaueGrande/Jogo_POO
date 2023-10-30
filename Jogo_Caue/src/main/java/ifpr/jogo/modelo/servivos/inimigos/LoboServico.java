@@ -2,17 +2,29 @@ package ifpr.jogo.modelo.servivos.inimigos;
 
 import java.util.List;
 import java.util.Random;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.util.AbstractConstantes;
 
+@Entity
+@Table(name = "tb_lobo_servico")
 public class LoboServico {
 
+    @Transient      
     private static final int POSICAO_INICIAL_X = -200;
+    @Transient
     private static final int POSICAO_INICIAL_Y = -200;
+    @Transient
     private static final int POSICAO_FINAL_X = (int) AbstractConstantes.LARGURA_JANELA;
+    @Transient
     private static final int POSICAO_FINAL_Y = (int) AbstractConstantes.ALTURA_JANELA;
 
-
+    @Column(name="pode_aumentar_velocidade")
     private static boolean podeAumentarVelocidade = false;
 
     public static void gerarLobos(List lobos, Personagem personagem) {

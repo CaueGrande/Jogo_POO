@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 public class SuperTiro extends AbstractTiro {
 
-    public boolean explodido;
+    private boolean explodido;
 
     public SuperTiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
         super.setPosicaoX(posicaoPersonagemX);
@@ -12,7 +12,7 @@ public class SuperTiro extends AbstractTiro {
         super.setDirecao(direcao);
         this.explodido = false;
         super.setVisivel(true);
-        carregar();
+        this.carregar();
     }
 
     @Override
@@ -24,15 +24,28 @@ public class SuperTiro extends AbstractTiro {
 
     }
 
-    public void explodir() {
-        this.explodido = true;
-
+    public void carregarExplodido() {
         ImageIcon carregador = new ImageIcon(getClass().getResource("/explosao.gif"));
         super.setImagem(carregador.getImage());
         super.setAlturaImagem(super.getImagem().getHeight(null));
         super.setLarguraImagem(super.getImagem().getWidth(null));
 
-        super.setPosicaoX(this.getPosicaoX() - 250);
-        super.setPosicaoY(this.getPosicaoY() - 250);
+    }
+
+    public void explodir() {
+        if(this.explodido == false){
+            super.setPosicaoX(this.getPosicaoX() - 250);
+            super.setPosicaoY(this.getPosicaoY() - 250);
+        }
+        
+        this.explodido = true;
+    }
+
+
+    public boolean getExplodido() {
+        return explodido;
+    }
+    public void setExplodido(boolean explodido) {
+        this.explodido = explodido;
     }
 }

@@ -4,7 +4,7 @@ import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 
 public abstract class AbstractTiro extends AbstractVida{
-    public static final int VELOCIDADE = 5;
+    public static final int ABSTRACT_VELOCIDADE_TIROS = 5;
     private int direcao;
 
     @Override
@@ -12,16 +12,16 @@ public abstract class AbstractTiro extends AbstractVida{
 
         // MUDA A DIRECAO DO TIRO DE ACORDO COM A TECLA SENDO APERTADA PARA MOVER O PERSONAGEM
         if(this.direcao == Personagem.TECLA_W) {
-            super.setPosicaoY(super.getPosicaoY() - VELOCIDADE);
+            super.setPosicaoY(super.getPosicaoY() - ABSTRACT_VELOCIDADE_TIROS);
 
         } else if(this.direcao == Personagem.TECLA_S) {
-            super.setPosicaoY(super.getPosicaoY() + VELOCIDADE);
+            super.setPosicaoY(super.getPosicaoY() + ABSTRACT_VELOCIDADE_TIROS);
             
         } else if(this.direcao == Personagem.TECLA_D) {
-            super.setPosicaoX(super.getPosicaoX() + VELOCIDADE);
+            super.setPosicaoX(super.getPosicaoX() + ABSTRACT_VELOCIDADE_TIROS);
 
         } else if(this.direcao == Personagem.TECLA_A) {
-            super.setPosicaoX(super.getPosicaoX() - VELOCIDADE);
+            super.setPosicaoX(super.getPosicaoX() - ABSTRACT_VELOCIDADE_TIROS);
         }
     }
 

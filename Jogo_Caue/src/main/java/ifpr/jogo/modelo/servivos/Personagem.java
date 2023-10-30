@@ -18,12 +18,18 @@ import ifpr.jogo.util.AbstractConstantes;
 @Table(name = "tb_personagem")
 public class Personagem extends AbstractVida {
 
+    @Transient
     private static final int POSICAO_INICIAL_X = AbstractConstantes.LARGURA_JANELA * 3 / 7;
+    @Transient
     private static final int POSICAO_INICIAL_Y = AbstractConstantes.ALTURA_JANELA * 2 / 3;
 
+    @Transient
     public static int TECLA_W = 0;
+    @Transient
     public static int TECLA_S = 1;
+    @Transient
     public static int TECLA_A = 2;
+    @Transient
     public static int TECLA_D = 3;
 
     @Column(name = "pode_mover_w")
@@ -248,15 +254,12 @@ public class Personagem extends AbstractVida {
     public int getDeslocamentoX() {
         return deslocamentoX;
     }
-
     public void setDeslocamentoX(int deslocamentoX) {
         this.deslocamentoX = deslocamentoX;
     }
-
     public int getDeslocamentoY() {
         return deslocamentoY;
     }
-
     public void setDeslocamentoY(int deslocamentoY) {
         this.deslocamentoY = deslocamentoY;
     }
@@ -264,7 +267,6 @@ public class Personagem extends AbstractVida {
     public static int getPosicaoInicialX() {
         return POSICAO_INICIAL_X;
     }
-
     public static int getPosicaoInicialY() {
         return POSICAO_INICIAL_Y;
     }
@@ -272,15 +274,12 @@ public class Personagem extends AbstractVida {
     public ArrayList<Tiro> getTiros() {
         return tiros;
     }
-
     public void setTiros(ArrayList<Tiro> tiros) {
         this.tiros = tiros;
     }
-
     public ArrayList<SuperTiro> getSuperTiros() {
         return superTiros;
     }
-
     public void setSuperTiros(ArrayList<SuperTiro> superTiros) {
         this.superTiros = superTiros;
     }
@@ -288,7 +287,6 @@ public class Personagem extends AbstractVida {
     public int getPontuacao() {
         return pontuacao;
     }
-
     public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
     }
@@ -296,33 +294,25 @@ public class Personagem extends AbstractVida {
     public boolean getPodeMoverW() {
         return podeMoverW;
     }
-
     public void setPodeMoverW(boolean podeMoverW) {
         this.podeMoverW = podeMoverW;
     }
-
     public boolean getPodeMoverS() {
         return podeMoverS;
     }
-
     public void setPodeMoverS(boolean podeMoverS) {
         this.podeMoverS = podeMoverS;
     }
-
     public boolean getPodeMoverA() {
         return podeMoverA;
     }
-
     public void setPodeMoverA(boolean podeMoverA) {
         this.podeMoverA = podeMoverA;
     }
-
     public boolean getPodeMoverD() {
         return podeMoverD;
     }
-
     public void setPodeMoverD(boolean podeMoverD) {
         this.podeMoverD = podeMoverD;
     }
-
 }
