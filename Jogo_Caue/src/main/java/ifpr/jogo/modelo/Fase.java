@@ -16,6 +16,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -28,34 +35,50 @@ import ifpr.jogo.modelo.tiros.SuperTiro;
 import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.util.AbstractConstantes;
 
-public class Fase extends JPanel implements KeyListener, ActionListener{
+@Entity
+@Table(name = "tb_fase")
+public class Fase extends JPanel implements KeyListener, ActionListener {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(name = "id_fase", unique = true, nullable = false)
+    private Integer faseId;
+
+    // EX:  @Column(name = "nome", unique = true, nullable = false, length = 100)
+
+    @Transient
+    protected int larguraImagemFundo, alturaImagemFundo;
+    @Transient
     private Image fundo;
+    @Transient
     private Image fimDeJogo;
 
+    @Transient
     private Personagem personagem;
+    @Transient
     private List<Lobo> lobos;
+    @Transient
     private List<Animal> abelhas;
 
+    @Transient
     private Timer timer;
 
-    private static final int DELAY = 2;
-
-    private static final int TEMPO_SPAWN_ANIMAIS = 600;
-    private static final int TEMPO_SPAWN_INIMIGOS = 220;
-    private static final int TEMPO_SPAWN_TIROS = 20;
-    private static final int TEMPO_SPAWN_SUPER_TIROS = 150;
-
+    @Column(name = "conta_Tempo_Animais", unique = true, nullable = false)
     private int contaTempoAnimais;
+    @Column(name = "conta_Tempo_Lobos", unique = true, nullable = false)
     private int contaTempoLobos;
+    @Column(name = "conta_Tempo_Tiros", unique = true, nullable = false)
     private int contaTempoTiros;
+    @Column(name = "conta_Tempo_SuperTiros", unique = true, nullable = false)
     private int contaTempoSuperTiros;
+    @Column(name = "conta_Tempo_Explosao", unique = true, nullable = false)
     private int contaTempoExplosao;
-
+    
+    @Column(name = "pode_Atirar", unique = true, nullable = false)
     private boolean podeAtirar = true;
+    @Column(name = "pode_Super_Atirar", unique = true, nullable = false)
     private boolean podeSuperAtirar = true;
-
-    protected int larguraImagem, alturaImagem;
-
 
     public Fase() {
         this.setFocusable(true);
@@ -65,9 +88,10 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         ImageIcon carregarFundo = new ImageIcon(getClass().getResource("/fundo.png"));
         this.fundo = carregarFundo.getImage();
 
-        this.fundo = this.fundo.getScaledInstance(AbstractConstantes.LARGURA_JANELA, AbstractConstantes.ALTURA_JANELA, Image.SCALE_FAST);
-        this.alturaImagem = this.fundo.getHeight(null);
-        this.larguraImagem = this.fundo.getWidth(null);
+        this.fundo = this.fundo.getScaledInstance(AbstractConstantes.LARGURA_JANELA, AbstractConstantes.ALTURA_JANELA,
+                Image.SCALE_FAST);
+        this.alturaImagemFundo = this.fundo.getHeight(null);
+        this.larguraImagemFundo = this.fundo.getWidth(null);
 
         // CRIA O PERSONAGEM NA FASE
         this.personagem = new Personagem();
@@ -77,7 +101,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         this.addKeyListener(this);
 
         // ADICIONA O DELAY NA FASE
-        this.timer = new Timer(DELAY, this);
+        this.timer = new Timer(AbstractConstantes.DELAY, this);
         this.timer.start();
 
         // CRIA OS LOBOS E ABELHAS NA FASE
@@ -109,9 +133,9 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         for (int J = 0; J < superTiros.size(); J++) {
             SuperTiro superTiro = superTiros.get(J);
 
-            if(superTiro.getExplodido() == false){
+            if (superTiro.getExplodido() == false) {
                 superTiro.carregar();
-            } else{
+            } else {
                 superTiro.carregarExplodido();
             }
             graficos.drawImage(superTiro.getImagem(), superTiro.getPosicaoX(), superTiro.getPosicaoY(), null);
@@ -125,7 +149,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
             graficos.drawImage(lobo.getImagem(), lobo.getPosicaoX(), lobo.getPosicaoY(), null);
         }
 
-        // IMAGEM DAS ABELHAS 
+        // IMAGEM DAS ABELHAS
         for (Animal abelha : this.abelhas) {
             graficos.drawImage(abelha.getImagem(), abelha.getPosicaoX(), abelha.getPosicaoY(), null);
         }
@@ -135,11 +159,11 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         // DESENHA A STRING "VIDAS:" NA TELA
         this.desenhaVida(graficos);
 
-        if(personagem.getVida() == 0){
-            int x = (AbstractConstantes.LARGURA_JANELA/2) - 250; 
-            int y = (AbstractConstantes.ALTURA_JANELA/2) - 400; 
+        if (personagem.getVida() == 0) {
+            int x = (AbstractConstantes.LARGURA_JANELA / 2) - 250;
+            int y = (AbstractConstantes.ALTURA_JANELA / 2) - 400;
             // IMAGEM DE GAMEOVER
-            graficos.drawImage(this.fimDeJogo, x , y, null);
+            graficos.drawImage(this.fimDeJogo, x, y, null);
         }
 
         graphics.dispose();
@@ -153,53 +177,59 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
     // ACOES AO APERTAR TECLA
     @Override
     public void keyPressed(KeyEvent e) {
-        // TEMPORIZADORES EM MILISEGUNDOS 
+
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            FaseServico.pausarFase();
+        }
+
+        // TEMPORIZADORES EM MILISEGUNDOS
         this.contaTempoTiros++;
         this.contaTempoSuperTiros++;
 
         // SE O TEMPORIZADOR CHEGAR NO TEMPO DEFINIDO, E DADO PERMISSAO PARA ATIRAR
-        if (this.contaTempoTiros >= TEMPO_SPAWN_TIROS) {
+        if (this.contaTempoTiros >= AbstractConstantes.TEMPO_SPAWN_TIROS) {
             this.podeAtirar = true;
 
         }
         // SE TIVER PERMISSAO, ATIRA
-        if(this.podeAtirar == true){
+        if (this.podeAtirar == true) {
 
             // ATIRA COM O ESPACO
-            if (e.getKeyCode() == KeyEvent.VK_SPACE){
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 this.personagem.atirar();
 
                 // VOLTA AS VARIAVEIS AO PADRAO
                 this.contaTempoTiros = 0;
                 this.podeAtirar = false;
             }
-        
+
         }
-    
-        // SE O TEMPORIZADOR CHEGAR NO TEMPO DEFINIDO, E DADO PERMISSAO PARA SUPER ATIRAR
-        if (this.contaTempoSuperTiros >= TEMPO_SPAWN_SUPER_TIROS) {
+
+        // SE O TEMPORIZADOR CHEGAR NO TEMPO DEFINIDO, E DADO PERMISSAO PARA SUPER
+        // ATIRAR
+        if (this.contaTempoSuperTiros >= AbstractConstantes.TEMPO_SPAWN_SUPER_TIROS) {
             this.podeSuperAtirar = true;
         }
 
         // SE TIVER PERMISSAO, SUPER ATIRA
-        if(this.podeSuperAtirar == true){
+        if (this.podeSuperAtirar == true) {
 
             // DA O SUPER TIRO COM A TECLA Q
-            if (e.getKeyCode() == KeyEvent.VK_Q){
+            if (e.getKeyCode() == KeyEvent.VK_Q) {
                 this.personagem.superAtirar();
 
                 // VOLTA AS VARIAVEIS AO PADRAO
                 this.contaTempoSuperTiros = 0;
                 this.podeSuperAtirar = false;
             }
-        
+
         }
 
         // MOVE O PERSONAGEM
         if (personagem.getVida() > 0) {
             this.personagem.mover(e);
         }
-        
+
     }
 
     // ACOES AO SOLTAR TECLA
@@ -214,153 +244,146 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
     public void actionPerformed(ActionEvent e) {
         Random random = new Random();
 
-        if(personagem.getVida() > 0){
+        if (personagem.getVida() > 0 && FaseServico.pausarFase == false) {
             this.personagem.atualizar();
-        }
 
-        // CONTAGENS DE TEMPO
-        if(this.contaTempoAnimais < TEMPO_SPAWN_ANIMAIS){
-            this.contaTempoAnimais++;
-        }
-        if(this.contaTempoLobos < TEMPO_SPAWN_INIMIGOS){
-            this.contaTempoLobos++;
-        }
-        if(this.contaTempoTiros < TEMPO_SPAWN_TIROS){
-            this.contaTempoTiros++;
-        }
-        if(this.contaTempoSuperTiros < TEMPO_SPAWN_SUPER_TIROS){
-            this.contaTempoSuperTiros++;
-        }
+            // CONTAGENS DE TEMPO
+            if (this.contaTempoAnimais < AbstractConstantes.TEMPO_SPAWN_ANIMAIS) {
+                this.contaTempoAnimais++;
+            }
+            if (this.contaTempoLobos < AbstractConstantes.TEMPO_SPAWN_INIMIGOS) {
+                this.contaTempoLobos++;
+            }
+            if (this.contaTempoTiros < AbstractConstantes.TEMPO_SPAWN_TIROS) {
+                this.contaTempoTiros++;
+            }
+            if (this.contaTempoSuperTiros < AbstractConstantes.TEMPO_SPAWN_SUPER_TIROS) {
+                this.contaTempoSuperTiros++;
+            }
 
-        ArrayList<Tiro> tiros = personagem.getTiros();
-        Iterator<Tiro> iteratorTiro = tiros.iterator();
-        
-        ArrayList<SuperTiro> superTiros = personagem.getSuperTiros();
-        Iterator<SuperTiro> iteratorSuperTiro = superTiros.iterator();
+            ArrayList<Tiro> tiros = personagem.getTiros();
+            Iterator<Tiro> iteratorTiro = tiros.iterator();
 
-        // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA
-        while (iteratorTiro.hasNext()) {
-            Tiro tiro = iteratorTiro.next();
+            ArrayList<SuperTiro> superTiros = personagem.getSuperTiros();
+            Iterator<SuperTiro> iteratorSuperTiro = superTiros.iterator();
 
-            if(personagem.getVida() > 0){
-                // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS TIROS
+            // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA
+            while (iteratorTiro.hasNext()) {
+                Tiro tiro = iteratorTiro.next();
+
+                // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL,
+                // REMOVE OS TIROS
                 if (tiro.getVisivel() == true) {
                     tiro.atualizar();
                 } else {
                     iteratorTiro.remove();
                 }
-
-            } else {
-                iteratorTiro.remove();
-            }
-        }
-
-        // SO SPAWNA O SUPER TIRO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_SUPER_TIROS
-        while (iteratorSuperTiro.hasNext()) {
-            SuperTiro superTiro = iteratorSuperTiro.next();
-        
-            if(superTiro.getExplodido() == true){
-                this.contaTempoExplosao++;
             }
 
-            if(personagem.getVida() > 0){
-                // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL, REMOVE OS SUPER TIROS
+            // SO SPAWNA O SUPER TIRO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_SUPER_TIROS
+            while (iteratorSuperTiro.hasNext()) {
+                SuperTiro superTiro = iteratorSuperTiro.next();
+
+                if (superTiro.getExplodido() == true) {
+                    this.contaTempoExplosao++;
+                }
+
+                // VAI ATUALIZANDO AS POSICOES ENQUANTO ESTIVER VISIVEL, SE NAO ESTIVER VISIVEL,
+                // REMOVE OS SUPER TIROS
                 if (superTiro.getVisivel() == true && superTiro.getExplodido() == false) {
                     superTiro.atualizar();
-                } else if (superTiro.getVisivel() == false){
+                } else if (superTiro.getVisivel() == false) {
                     iteratorSuperTiro.remove();
                 }
-            } else {
-                iteratorTiro.remove();
             }
-        }
 
-        // SO SPAWNA O ANIMAL APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_ANIMAIS
-        if(this.contaTempoAnimais >= TEMPO_SPAWN_ANIMAIS && personagem.getVida() > 0){
-            int posicaoXFim = AbstractConstantes.LARGURA_JANELA + 200;
-            int posicaoYAleatoria = random.nextInt(AbstractConstantes.ALTURA_JANELA); 
+            // SO SPAWNA O ANIMAL APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_ANIMAIS
+            if (this.contaTempoAnimais >= AbstractConstantes.TEMPO_SPAWN_ANIMAIS) {
+                int posicaoXFim = AbstractConstantes.LARGURA_JANELA + 200;
+                int posicaoYAleatoria = random.nextInt(AbstractConstantes.ALTURA_JANELA);
 
-            Animal novaAbelha = new Animal(posicaoXFim, posicaoYAleatoria);
-            novaAbelha.carregar();
-            abelhas.add(novaAbelha);
+                Animal novaAbelha = new Animal(posicaoXFim, posicaoYAleatoria);
+                novaAbelha.carregar();
+                abelhas.add(novaAbelha);
 
-            this.contaTempoAnimais = 0;
-        }
-
-        Iterator<Animal> iteratorAbelha = abelhas.iterator();
-        // ATUALIZA A POSICAO NA FASE OU REMOVE OS ANIMAIS
-        while (iteratorAbelha.hasNext()) {
-            Animal abelha = iteratorAbelha.next();
-            
-            // ENQUANTO O ANIMAL ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
-            if (abelha.getVisivel() == true && personagem.getVida() > 0) {
-                abelha.atualizar();
-
-                if(abelha.getPosicaoX() <= -50){
-                    abelha.setVisivel(false);
-                }
-            } else{
-                iteratorAbelha.remove();
+                this.contaTempoAnimais = 0;
             }
-        }
 
-        // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
-        if (this.contaTempoLobos >= TEMPO_SPAWN_INIMIGOS && personagem.getVida() > 0) {
-            LoboServico.gerarLobos(lobos, personagem);
-            this.contaTempoLobos = 0;
-        }
+            Iterator<Animal> iteratorAbelha = abelhas.iterator();
+            // ATUALIZA A POSICAO NA FASE OU REMOVE OS ANIMAIS
+            while (iteratorAbelha.hasNext()) {
+                Animal abelha = iteratorAbelha.next();
 
-        Iterator<Lobo> iteratorLobo = this.lobos.iterator();
-        // ATUALIZA A POSICAO NA FASE OU REMOVE OS LOBOS
-        while (iteratorLobo.hasNext()) {
-            Lobo lobo = iteratorLobo.next();
-            Rectangle formaLobo = lobo.getRectangle();
+                // ENQUANTO O ANIMAL ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
+                if (abelha.getVisivel() == true) {
+                    abelha.atualizar();
 
-            // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
-            if (lobo.getVisivel() == true && personagem.getVida() > 0) {
-                lobo.atualizar();
-
-                // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM
-                if (personagem.getRectangle().intersects(lobo.getRectangle())) {
-                    lobo.setVisivel(false); 
-                    personagem.setVida(personagem.getVida() - 1);
+                    if (abelha.getPosicaoX() <= -50) {
+                        abelha.setVisivel(false);
+                    }
+                } else {
+                    iteratorAbelha.remove();
                 }
+            }
 
-                // REMOVE LOBOS E TIROS AO COLIDIR COM TIROS E SUPER TIROS
-                for(Tiro tiro : personagem.getTiros()){
-                    Rectangle formaTiro = tiro.getRectangle();
-                    if(formaTiro.intersects(formaLobo)){
+            // SO SPAWNA O INIMIGO APOS O TEMPO DA VARIAVEL TEMPO_SPAWN_INIMIGOS
+            if (this.contaTempoLobos >= AbstractConstantes.TEMPO_SPAWN_INIMIGOS) {
+                LoboServico.gerarLobos(lobos, personagem);
+                this.contaTempoLobos = 0;
+            }
+
+            Iterator<Lobo> iteratorLobo = this.lobos.iterator();
+            // ATUALIZA A POSICAO NA FASE OU REMOVE OS LOBOS
+            while (iteratorLobo.hasNext()) {
+                Lobo lobo = iteratorLobo.next();
+                Rectangle formaLobo = lobo.getRectangle();
+
+                // ENQUANTO O LOBO ESTIVER VISIVEL, ATUALIZA A MOVIMENTACAO
+                if (lobo.getVisivel() == true) {
+                    lobo.atualizar();
+
+                    // REMOVE OS LOBOS AO COLIDIR COM O PERSONAGEM
+                    if (personagem.getRectangle().intersects(lobo.getRectangle())) {
                         lobo.setVisivel(false);
-                        tiro.setVisivel(false);
-                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
+                        personagem.setVida(personagem.getVida() - 1);
                     }
-                }
-                for(SuperTiro supertiro : personagem.getSuperTiros()){
-                    Rectangle formaSuperTiro = supertiro.getRectangle();
 
-                    if(formaSuperTiro.intersects(formaLobo)){
-                        lobo.setVisivel(false);
-                        supertiro.explodir();
+                    // REMOVE LOBOS E TIROS AO COLIDIR COM TIROS E SUPER TIROS
+                    for (Tiro tiro : personagem.getTiros()) {
+                        Rectangle formaTiro = tiro.getRectangle();
+                        if (formaTiro.intersects(formaLobo)) {
+                            lobo.setVisivel(false);
+                            tiro.setVisivel(false);
+                            personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
+                        }
+                    }
+                    for (SuperTiro supertiro : personagem.getSuperTiros()) {
+                        Rectangle formaSuperTiro = supertiro.getRectangle();
 
-                        personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
+                        if (formaSuperTiro.intersects(formaLobo)) {
+                            lobo.setVisivel(false);
+                            supertiro.explodir();
+
+                            personagem.setPontuacao(personagem.getPontuacao() + Lobo.PONTUACAO_POR_LOBO);
+                        }
+
+                        if (contaTempoExplosao >= 20) {
+                            supertiro.setVisivel(false);
+                            contaTempoExplosao = 0;
+                        }
                     }
-                    
-                    if(contaTempoExplosao >= 20){
-                        supertiro.setVisivel(false);
-                        contaTempoExplosao = 0;
-                    }
+
+                } else {
+                    // SE O LOBO NAO ESTIVER VISIVEL ELE E REMOVIDO
+                    iteratorLobo.remove();
                 }
-                
-            } else {
-                // SE O LOBO NAO ESTIVER VISIVEL ELE E REMOVIDO
-                iteratorLobo.remove();
             }
+
+            LoboServico.aumentaVelocidadeLobos(personagem);
+
+            // VAI PINTANDO AS IMAGENS DE ACORDO COM O DELAY DA FASE
+            repaint();
         }
-
-        LoboServico.aumentaVelocidadeLobos(personagem);
-
-        // VAI PINTANDO AS IMAGENS DE ACORDO COM O DELAY DA FASE
-        repaint();
     }
 
     // PONTUACAO DO PERSONAGEM
@@ -380,7 +403,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
         graficos.setColor(Color.BLACK);
         graficos.drawString(textoPontuacao, 20, 25);
     }
-    
+
     // VIDA DO PERSONAGEM
     public void desenhaVida(Graphics2D graficos) {
         String textoVida = "VIDAS: " + personagem.getVida();
@@ -391,7 +414,7 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
 
         // DESENHA O FUNDO BRANCO DO TEXTO
         graficos.setColor(Color.WHITE);
-        graficos.fillRect( (AbstractConstantes.LARGURA_JANELA - 120), 5, larguraTexto + 10, alturaTexto);
+        graficos.fillRect((AbstractConstantes.LARGURA_JANELA - 120), 5, larguraTexto + 10, alturaTexto);
 
         // DESENHA O TEXTO "VIDA:"
         graficos.setFont(fonte);
@@ -403,10 +426,8 @@ public class Fase extends JPanel implements KeyListener, ActionListener{
     public Timer getTimer() {
         return timer;
     }
+
     public void setTimer(Timer timer) {
         this.timer = timer;
-    }
-    public static int getDelay() {
-        return DELAY;
     }
 }
