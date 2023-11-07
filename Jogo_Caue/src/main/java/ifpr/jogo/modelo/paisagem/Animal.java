@@ -5,11 +5,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
-import ifpr.jogo.modelo.AbstractPosicionamento;
+import ifpr.jogo.modelo.AbstractEntidade;
 
 @Entity
 @Table(name="tb_animal")
-public class Animal extends AbstractPosicionamento{
+public class Animal extends AbstractEntidade{
 
     @Transient
     public static final int TEMPO_SPAWN_ANIMAIS = 400;

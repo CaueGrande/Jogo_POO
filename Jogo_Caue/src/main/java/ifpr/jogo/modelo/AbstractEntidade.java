@@ -13,12 +13,12 @@ import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class AbstractPosicionamento {
+public abstract class AbstractEntidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_posicionamento")
-    private int idPosicionamento;
+    @Column(name="id_Entidade")
+    private int idEntidade;
 
     @Column(name="posicao_x")
     private int posicaoX;

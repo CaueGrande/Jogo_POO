@@ -41,14 +41,15 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id_fase", unique = true, nullable = false)
     private Integer faseId;
 
     // EX:  @Column(name = "nome", unique = true, nullable = false, length = 100)
 
-    @Transient
-    protected int larguraImagemFundo, alturaImagemFundo;
+    @Column(name = "largura_Fundo")
+    protected int larguraImagemFundo;
+    @Column(name = "altura_Fundo")
+    protected int alturaImagemFundo;
     @Transient
     private Image fundo;
     @Transient
@@ -64,20 +65,20 @@ public class Fase extends JPanel implements KeyListener, ActionListener {
     @Transient
     private Timer timer;
 
-    @Column(name = "conta_Tempo_Animais", unique = true, nullable = false)
+    @Column(name = "conta_tempo_animais")
     private int contaTempoAnimais;
-    @Column(name = "conta_Tempo_Lobos", unique = true, nullable = false)
+    @Column(name = "conta_tempo_lobos")
     private int contaTempoLobos;
-    @Column(name = "conta_Tempo_Tiros", unique = true, nullable = false)
+    @Column(name = "conta_tempo_tiros")
     private int contaTempoTiros;
-    @Column(name = "conta_Tempo_SuperTiros", unique = true, nullable = false)
+    @Column(name = "conta_tempo_superTiros")
     private int contaTempoSuperTiros;
-    @Column(name = "conta_Tempo_Explosao", unique = true, nullable = false)
+    @Column(name = "conta_tempo_explosao")
     private int contaTempoExplosao;
     
-    @Column(name = "pode_Atirar", unique = true, nullable = false)
+    @Column(name = "pode_atirar")
     private boolean podeAtirar = true;
-    @Column(name = "pode_Super_Atirar", unique = true, nullable = false)
+    @Column(name = "pode_super_atirar")
     private boolean podeSuperAtirar = true;
 
     public Fase() {

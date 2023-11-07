@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_vida")
-public abstract class AbstractVida extends AbstractPosicionamento {
+public abstract class AbstractVida extends AbstractEntidade {
 
     @Column(name = "vida")
     private int vida;
