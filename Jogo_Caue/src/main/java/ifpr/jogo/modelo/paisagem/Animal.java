@@ -2,7 +2,6 @@ package ifpr.jogo.modelo.paisagem;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
 import ifpr.jogo.modelo.AbstractEntidade;
@@ -10,9 +9,6 @@ import ifpr.jogo.modelo.AbstractEntidade;
 @Entity
 @Table(name="tb_animal")
 public class Animal extends AbstractEntidade{
-
-    @Transient
-    public static final int TEMPO_SPAWN_ANIMAIS = 400;
 
     public Animal(int posicaoX, int posicaoY) {
         super.setPosicaoX(posicaoX);

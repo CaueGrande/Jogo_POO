@@ -24,13 +24,13 @@ public class Personagem extends AbstractVida {
     private static final int POSICAO_INICIAL_Y = AbstractConstantes.ALTURA_JANELA * 2 / 3;
 
     @Transient
-    public static int TECLA_W = 0;
+    public static final int TECLA_W = 0;
     @Transient
-    public static int TECLA_S = 1;
+    public static final int TECLA_S = 1;
     @Transient
-    public static int TECLA_A = 2;
+    public static final int TECLA_A = 2;
     @Transient
-    public static int TECLA_D = 3;
+    public static final int TECLA_D = 3;
 
     @Column(name = "pode_mover_w")
     private boolean podeMoverW = true;
