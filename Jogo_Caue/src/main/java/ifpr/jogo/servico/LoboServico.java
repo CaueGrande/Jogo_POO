@@ -1,5 +1,6 @@
-package ifpr.jogo.modelo.servivos.inimigos;
+package ifpr.jogo.servico;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -8,7 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import ifpr.jogo.dao.LoboDao;
+import ifpr.jogo.dao.LoboDaoImpl;
+
 import ifpr.jogo.modelo.servivos.Personagem;
+import ifpr.jogo.modelo.servivos.inimigos.Lobo;
 import ifpr.jogo.util.AbstractConstantes;
 
 @Entity
@@ -27,7 +32,7 @@ public class LoboServico {
     @Column(name="pode_aumentar_velocidade")
     private static boolean podeAumentarVelocidade = false;
 
-    public static void gerarLobos(List lobos, Personagem personagem) {
+    public static void gerarLobos(List<Lobo> lobos, Personagem personagem) {
         Random random = new Random();
 
         int posicaoXAleatoria = random.nextInt(AbstractConstantes.LARGURA_JANELA);
@@ -53,6 +58,16 @@ public class LoboServico {
         lobos.add(novoLoboDireita);
     }
 
+    public static void carregarLobos(List<Lobo> lobos, Personagem personagem) {
+
+        Iterator<Lobo> iteratorLobo = lobos.iterator();
+
+        while (iteratorLobo.hasNext()) {
+            Lobo lobo = iteratorLobo.next();
+            lobo.carregar();
+        }
+    }
+
     public static void aumentaVelocidadeLobos(Personagem personagem) {
         if (personagem.getPontuacao() % 2000 != 0 && podeAumentarVelocidade != true) {
             podeAumentarVelocidade = true;
@@ -62,5 +77,28 @@ public class LoboServico {
             Lobo.velocidadeLobos++;
             podeAumentarVelocidade = false;
         }
+    }
+
+    // -------------------------------- DAO --------------------------------
+    private static LoboDao dao = new LoboDaoImpl();
+
+    public static List<Lobo> buscarTodos() {
+        return dao.buscarTodos();
+    }
+
+    public static List<Lobo> buscarPorId(Integer id, List<Lobo> lobos) {
+        return dao.buscarPorId(id, lobos);
+    }
+
+    public static void inserir(List<Lobo> lobos) {
+        dao.inserir(lobos);
+    }
+
+    public static void atualizar(Lobo lobo) {
+        dao.atualizar(lobo);
+    }
+
+    public static void excluir(Lobo lobo) {
+        dao.excluir(lobo);
     }
 }

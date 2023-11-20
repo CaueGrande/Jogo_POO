@@ -29,10 +29,10 @@ public abstract class AbstractEntidade {
     @Transient
     private Image imagem;
 
-    @Column(name="largura_imagem")
+    @Transient
     private int larguraImagem;
 
-    @Column(name="altura_imagem")
+    @Transient
     private int alturaImagem;
 
     @Column(name="velocidade")

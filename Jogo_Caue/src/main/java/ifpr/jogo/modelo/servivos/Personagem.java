@@ -41,9 +41,9 @@ public class Personagem extends AbstractVida {
     @Column(name = "pode_mover_d")
     private boolean podeMoverD = true;
 
-    @Column(name = "deslocamento_em_x")
+    @Transient
     private int deslocamentoX;
-    @Column(name = "deslocamento_em_y")
+    @Transient
     private int deslocamentoY;
 
     @Column(name = "direcao")
