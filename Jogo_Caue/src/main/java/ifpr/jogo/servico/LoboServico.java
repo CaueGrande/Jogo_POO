@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import ifpr.jogo.dao.LoboDao;
-import ifpr.jogo.dao.LoboDaoImpl;
-
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.modelo.servivos.inimigos.Lobo;
 import ifpr.jogo.util.AbstractConstantes;
@@ -70,26 +67,4 @@ public class LoboServico {
         }
     }
 
-    // -------------------------------- DAO --------------------------------
-    private static LoboDao dao = new LoboDaoImpl();
-
-    public static List<Lobo> buscarTodos() {
-        return dao.buscarTodos();
-    }
-
-    public static List<Lobo> buscarPorId(Integer id, List<Lobo> lobos) {
-        return dao.buscarPorId(id, lobos);
-    }
-
-    public static void inserir(List<Lobo> lobos) {
-        dao.inserir(lobos);
-    }
-
-    public static void atualizar(Lobo lobo) {
-        dao.atualizar(lobo);
-    }
-
-    public static void excluir(Lobo lobo) {
-        dao.excluir(lobo);
-    }
 }
