@@ -2,12 +2,14 @@ package ifpr.jogo.controle;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,12 +29,12 @@ public class FaseEntidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_fase", unique = true, nullable = false)
-    private Integer idFase;
+    public Integer idFase;
 
-    @Transient // @OneToMany(mappedBy = "tb_lobo")
+    @OneToMany(mappedBy = "faseId")
     private List<Lobo> lobos;
 
-    @Transient // @OneToOne(mappedBy = "tb_personagem")
+    @Transient //@OneToOne(mappedBy = "tb_personagem")
     private Personagem personagem;
 
     @Transient
@@ -70,16 +72,26 @@ public class FaseEntidade {
 
     public FaseEntidade() {
         lobos = new ArrayList<Lobo>();
+
+    }
+
+    public void removeLobos(List<Lobo> lobos) {
+        Iterator<Lobo> iteratorLobo = lobos.iterator();
+
+        while (iteratorLobo.hasNext()) {
+            iteratorLobo.next();
+            iteratorLobo.remove();
+        }
     }
 
     
     // GETTERS E SETTERS
 
-    public Integer getFaseId() {
+    public Integer getIdFase() {
         return idFase;
     }
 
-    public void setFaseId(Integer idFase) {
+    public void setIdFase(Integer idFase) {
         this.idFase = idFase;
     }
 

@@ -15,6 +15,7 @@ import ifpr.jogo.dao.LoboDaoImpl;
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.modelo.servivos.inimigos.Lobo;
 import ifpr.jogo.util.AbstractConstantes;
+import  ifpr.jogo.controle.FaseEntidade;
 
 @Entity
 @Table(name = "tb_lobo_servico")
@@ -33,6 +34,7 @@ public class LoboServico {
     private static boolean podeAumentarVelocidade = false;
 
     public static void gerarLobos(List<Lobo> lobos, Personagem personagem) {
+
         Random random = new Random();
 
         int posicaoXAleatoria = random.nextInt(AbstractConstantes.LARGURA_JANELA);

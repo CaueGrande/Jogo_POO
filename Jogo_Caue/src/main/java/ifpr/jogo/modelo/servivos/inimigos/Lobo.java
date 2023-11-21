@@ -23,7 +23,7 @@ public class Lobo extends AbstractVida {
     public static int velocidadeLobos = 1;
 
     @ManyToOne 
-    @JoinColumn(name = "fk_fase", referencedColumnName = "idFase")
+    @JoinColumn(name = "fk_fase", referencedColumnName = "id_fase")
     private FaseEntidade faseId;
 
     @Transient
@@ -69,5 +69,14 @@ public class Lobo extends AbstractVida {
         } else if (deltaX < 30) {
             super.setPosicaoX(super.getPosicaoX() - super.getVelocidade());
         }
+    }
+
+    
+    public FaseEntidade getFaseId() {
+        return faseId;
+    }
+
+    public void setFaseId(FaseEntidade idFase) {
+        this.faseId = idFase;
     }
 }

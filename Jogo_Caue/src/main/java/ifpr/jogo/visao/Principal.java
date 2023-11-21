@@ -1,3 +1,4 @@
+
 package ifpr.jogo.visao;
 
 import javax.swing.JFrame;

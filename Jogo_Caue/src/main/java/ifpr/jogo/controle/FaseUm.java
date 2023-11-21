@@ -44,23 +44,17 @@ public class FaseUm extends Fase{
         // CRIA O PERSONAGEM NA FASE
         faseEntidade.setPersonagem(new Personagem());
         faseEntidade.getPersonagem().carregar();
-        PersonagemServico.inserir(faseEntidade.getPersonagem());
-
 
         // ADICIONA O DELAY NA FASE
         faseEntidade.setTimer(new Timer(AbstractConstantes.DELAY, this));
         faseEntidade.getTimer().start();
 
-        // CRIA OS LOBOS E ABELHAS NA FASE
-        faseEntidade.setLobos(new ArrayList<>());
-        LoboServico.inserir(faseEntidade.getLobos());
-
+        // CRIA AS ABELHAS NA FASE
         faseEntidade.setAbelhas(new ArrayList<>());
 
         ImageIcon carregarFimJogo = new ImageIcon(getClass().getResource("/gameover.png"));
         faseEntidade.setFimDeJogo(carregarFimJogo.getImage());
 
-        FaseServico.inserir(faseEntidade);
     }
 
     // DESENHA AS IMAGENS NA TELA
@@ -136,10 +130,10 @@ public class FaseUm extends Fase{
 
         // SALVA A FASE
         if (e.getKeyCode() == KeyEvent.VK_L) {
+            FaseServico.inserir(faseEntidade);
+
             PersonagemServico.inserir(faseEntidade.getPersonagem());
             LoboServico.inserir(faseEntidade.getLobos());
-
-            FaseServico.inserir(faseEntidade);
         }
 
         if (e.getKeyCode() == KeyEvent.VK_P) {
