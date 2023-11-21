@@ -140,11 +140,13 @@ public class FaseUm extends Fase{
             String idDigitado = JOptionPane.showInputDialog("Digite seu ID:");
 
             if (idDigitado != null && ! idDigitado.isEmpty()) {
+                faseEntidade.removerLobos(faseEntidade.getLobos());
                 int id = Integer.parseInt(idDigitado);
                 faseEntidade.setPersonagem(PersonagemServico.buscarPorId(id));
                 faseEntidade.getPersonagem().carregar();
-                //faseEntidade.setLobos(LoboServico.buscarPorId(id,faseEntidade.getLobos()));
-                //faseEntidade.getLobos().carregar();
+                faseEntidade.setLobos(LoboServico.buscarPorId(id,faseEntidade.getLobos()));
+                faseEntidade.carregarLobos(faseEntidade.getLobos(), faseEntidade.getPersonagem());
+
             }
         }
 

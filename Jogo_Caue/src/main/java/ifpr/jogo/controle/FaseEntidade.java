@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,10 +32,12 @@ public class FaseEntidade {
     @Column(name = "id_fase", unique = true, nullable = false)
     public Integer idFase;
 
-    @OneToMany(mappedBy = "faseId")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_fase")
     private List<Lobo> lobos;
 
-    @Transient //@OneToOne(mappedBy = "tb_personagem")
+    @OneToOne
+    @JoinColumn(name = "id_fase")
     private Personagem personagem;
 
     @Transient
@@ -75,12 +78,22 @@ public class FaseEntidade {
 
     }
 
-    public void removeLobos(List<Lobo> lobos) {
+    public void removerLobos(List<Lobo> lobos) {
         Iterator<Lobo> iteratorLobo = lobos.iterator();
 
         while (iteratorLobo.hasNext()) {
             iteratorLobo.next();
             iteratorLobo.remove();
+        }
+    }
+
+    public void carregarLobos(List<Lobo> lobos, Personagem personagem) {
+
+        Iterator<Lobo> iteratorLobo = lobos.iterator();
+
+        while (iteratorLobo.hasNext()) {
+            Lobo lobo = iteratorLobo.next();
+            lobo.carregar();
         }
     }
 

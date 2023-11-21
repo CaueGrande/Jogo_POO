@@ -15,7 +15,6 @@ import ifpr.jogo.dao.LoboDaoImpl;
 import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.modelo.servivos.inimigos.Lobo;
 import ifpr.jogo.util.AbstractConstantes;
-import  ifpr.jogo.controle.FaseEntidade;
 
 @Entity
 @Table(name = "tb_lobo_servico")
@@ -58,16 +57,6 @@ public class LoboServico {
         lobos.add(novoLoboBaixo);
         lobos.add(novoLoboEsquerda);
         lobos.add(novoLoboDireita);
-    }
-
-    public static void carregarLobos(List<Lobo> lobos, Personagem personagem) {
-
-        Iterator<Lobo> iteratorLobo = lobos.iterator();
-
-        while (iteratorLobo.hasNext()) {
-            Lobo lobo = iteratorLobo.next();
-            lobo.carregar();
-        }
     }
 
     public static void aumentaVelocidadeLobos(Personagem personagem) {

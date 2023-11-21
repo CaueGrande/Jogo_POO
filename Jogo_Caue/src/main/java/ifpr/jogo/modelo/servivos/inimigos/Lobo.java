@@ -2,13 +2,11 @@ package ifpr.jogo.modelo.servivos.inimigos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
-import ifpr.jogo.controle.FaseEntidade;
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 
@@ -22,13 +20,9 @@ public class Lobo extends AbstractVida {
     @Column(name="velocidade_lobos")
     public static int velocidadeLobos = 1;
 
-    @ManyToOne 
-    @JoinColumn(name = "fk_fase", referencedColumnName = "id_fase")
-    private FaseEntidade faseId;
-
     @Transient
     private Personagem personagem;
-
+    
     public Lobo(int posicaoX, int posicaoY, Personagem personagem) {
         super.setPosicaoX(posicaoX);
         super.setPosicaoY(posicaoY);
@@ -71,12 +65,4 @@ public class Lobo extends AbstractVida {
         }
     }
 
-    
-    public FaseEntidade getFaseId() {
-        return faseId;
-    }
-
-    public void setFaseId(FaseEntidade idFase) {
-        this.faseId = idFase;
-    }
 }
