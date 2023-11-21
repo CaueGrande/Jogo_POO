@@ -27,7 +27,7 @@ public class FaseEntidade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_fase", unique = true, nullable = false)
-    private Integer faseId;
+    private Integer idFase;
 
     @Transient // @OneToMany(mappedBy = "tb_lobo")
     private List<Lobo> lobos;
@@ -76,11 +76,11 @@ public class FaseEntidade {
     // GETTERS E SETTERS
 
     public Integer getFaseId() {
-        return faseId;
+        return idFase;
     }
 
-    public void setFaseId(Integer faseId) {
-        this.faseId = faseId;
+    public void setFaseId(Integer idFase) {
+        this.idFase = idFase;
     }
 
     public int getLarguraImagemFundo() {

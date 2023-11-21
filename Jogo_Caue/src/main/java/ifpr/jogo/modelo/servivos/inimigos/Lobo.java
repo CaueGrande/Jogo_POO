@@ -22,8 +22,9 @@ public class Lobo extends AbstractVida {
     @Column(name="velocidade_lobos")
     public static int velocidadeLobos = 1;
 
-    // @ManyToOne @JoinColumn(name = "fk_fase")
-    // private FaseEntidade faseId;
+    @ManyToOne 
+    @JoinColumn(name = "fk_fase", referencedColumnName = "idFase")
+    private FaseEntidade faseId;
 
     @Transient
     private Personagem personagem;
