@@ -17,7 +17,7 @@ public abstract class AbstractEntidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_Entidade")
+    @Column(name="id_entidade")
     private int idEntidade;
 
     @Column(name="posicao_x")

@@ -1,8 +1,10 @@
 package ifpr.jogo.modelo.servivos.inimigos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
@@ -20,8 +22,13 @@ public class Lobo extends AbstractVida {
     @Column(name="velocidade_lobos")
     public static int velocidadeLobos = 1;
 
-    @Transient
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_personagem")
     private Personagem personagem;
+
+    public Lobo(){
+
+    }
     
     public Lobo(int posicaoX, int posicaoY, Personagem personagem) {
         super.setPosicaoX(posicaoX);

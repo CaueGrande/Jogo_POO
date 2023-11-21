@@ -33,14 +33,15 @@ public class FaseEntidade {
     public Integer idFase;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_fase")
+    @JoinColumn(name = "id_lobo")
     private List<Lobo> lobos;
 
-    @OneToOne
-    @JoinColumn(name = "id_fase")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_personagem")
     private Personagem personagem;
 
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_abelhas")
     private List<Animal> abelhas;
 
     // EX:  @Column(name = "nome", unique = true, nullable = false, length = 100)
@@ -74,8 +75,9 @@ public class FaseEntidade {
     private boolean podeSuperAtirar = true;
 
     public FaseEntidade() {
-        lobos = new ArrayList<Lobo>();
-
+        lobos = new ArrayList<>();
+        personagem = new Personagem();
+        abelhas = new ArrayList<>();
     }
 
     public void removerLobos(List<Lobo> lobos) {

@@ -27,7 +27,7 @@ import ifpr.jogo.servico.LoboServico;
 import ifpr.jogo.servico.PersonagemServico;
 import ifpr.jogo.util.AbstractConstantes;
 
-public class FaseUm extends Fase{
+public class FaseUm extends AbstractFase{
 
     public FaseUm() {
         super();
@@ -42,15 +42,16 @@ public class FaseUm extends Fase{
         faseEntidade.setLarguraImagemFundo(faseEntidade.getFundo().getWidth(null));
 
         // CRIA O PERSONAGEM NA FASE
-        faseEntidade.setPersonagem(new Personagem());
         faseEntidade.getPersonagem().carregar();
+        
+        faseEntidade.carregarLobos(faseEntidade.getLobos(), faseEntidade.getPersonagem());
+        
+        // CRIA AS ABELHAS NA FASE
+        faseEntidade.setAbelhas(new ArrayList<>());
 
         // ADICIONA O DELAY NA FASE
         faseEntidade.setTimer(new Timer(AbstractConstantes.DELAY, this));
         faseEntidade.getTimer().start();
-
-        // CRIA AS ABELHAS NA FASE
-        faseEntidade.setAbelhas(new ArrayList<>());
 
         ImageIcon carregarFimJogo = new ImageIcon(getClass().getResource("/gameover.png"));
         faseEntidade.setFimDeJogo(carregarFimJogo.getImage());
@@ -132,21 +133,19 @@ public class FaseUm extends Fase{
         if (e.getKeyCode() == KeyEvent.VK_L) {
             FaseServico.inserir(faseEntidade);
 
-            PersonagemServico.inserir(faseEntidade.getPersonagem());
-            LoboServico.inserir(faseEntidade.getLobos());
         }
 
         if (e.getKeyCode() == KeyEvent.VK_P) {
-            String idDigitado = JOptionPane.showInputDialog("Digite seu ID:");
+            String idDigitado = JOptionPane.showInputDialog("Digite o ID da fa:");
 
             if (idDigitado != null && ! idDigitado.isEmpty()) {
                 faseEntidade.removerLobos(faseEntidade.getLobos());
                 int id = Integer.parseInt(idDigitado);
-                faseEntidade.setPersonagem(PersonagemServico.buscarPorId(id));
-                faseEntidade.getPersonagem().carregar();
-                faseEntidade.setLobos(LoboServico.buscarPorId(id,faseEntidade.getLobos()));
-                faseEntidade.carregarLobos(faseEntidade.getLobos(), faseEntidade.getPersonagem());
-
+                faseEntidade = FaseServico.buscarPorId(id);
+                personagem = faseEntidade.getPersonagem();
+                lobos = faseEntidade.getLobos();
+                abelhas = faseEntidade.getAbelhas();
+                repaint();
             }
         }
 

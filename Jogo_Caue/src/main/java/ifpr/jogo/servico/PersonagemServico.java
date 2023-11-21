@@ -5,6 +5,11 @@ import ifpr.jogo.dao.PersonagemDao;
 import ifpr.jogo.dao.PersonagemDaoImpl;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_personagem_servico")
 public class PersonagemServico {
     private static PersonagemDao dao = new PersonagemDaoImpl();
 

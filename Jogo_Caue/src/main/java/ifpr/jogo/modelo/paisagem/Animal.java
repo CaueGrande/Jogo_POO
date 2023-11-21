@@ -10,6 +10,10 @@ import ifpr.jogo.modelo.AbstractEntidade;
 @Table(name="tb_animal")
 public class Animal extends AbstractEntidade{
 
+    public Animal(){
+
+    }
+    
     public Animal(int posicaoX, int posicaoY) {
         super.setPosicaoX(posicaoX);
         super.setPosicaoY(posicaoY);
