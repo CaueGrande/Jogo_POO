@@ -26,9 +26,9 @@
         <mapping class="ifpr.jogo.modelo.servivos.Personagem" />
         <mapping class="ifpr.jogo.modelo.servivos.inimigos.Lobo" />
         <mapping class="ifpr.jogo.modelo.paisagem.Animal" />
-        <!-- <mapping class="ifpr.jogo.modelo.tiros.AbstractTiro" />
+        <mapping class="ifpr.jogo.modelo.tiros.AbstractTiro" />
         <mapping class="ifpr.jogo.modelo.tiros.Tiro" />
-        <mapping class="ifpr.jogo.modelo.tiros.SuperTiro" /> -->
+        <mapping class="ifpr.jogo.modelo.tiros.SuperTiro" />
 
     </session-factory>
 </hibernate-configuration>

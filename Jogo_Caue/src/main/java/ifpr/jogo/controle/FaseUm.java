@@ -45,7 +45,7 @@ public class FaseUm extends AbstractFase{
         faseEntidade.carregarLobos(faseEntidade.getLobos(), faseEntidade.getPersonagem());
         
         // CRIA AS ABELHAS NA FASE
-        faseEntidade.setAbelhas(new ArrayList<>());
+        // faseEntidade.setAbelhas(new ArrayList<>());
 
         // ADICIONA O DELAY NA FASE
         timer = new Timer(AbstractConstantes.DELAY, this);

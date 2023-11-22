@@ -12,14 +12,7 @@ import javax.persistence.Transient;
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractTiro extends AbstractVida{
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_tiro")
-    public Integer idTiro;
 
     @Transient
     public static final int ABSTRACT_VELOCIDADE_TIROS = 5;
