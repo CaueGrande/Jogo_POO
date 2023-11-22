@@ -12,6 +12,10 @@ public class SuperTiro extends AbstractTiro {
     @Column(name="explodindo")
     private boolean explodido;
 
+    public SuperTiro(){
+        
+    }
+
     public SuperTiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
         super.setPosicaoX(posicaoPersonagemX);
         super.setPosicaoY(posicaoPersonagemY);

@@ -10,6 +10,10 @@ import ifpr.jogo.modelo.servivos.Personagem;
 @Table(name = "tb_tiro")
 public class Tiro extends AbstractTiro {
 
+    public Tiro(){
+
+    }
+
     public Tiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
         super.setPosicaoX(posicaoPersonagemX);
         super.setPosicaoY(posicaoPersonagemY);

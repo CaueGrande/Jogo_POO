@@ -9,7 +9,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -45,7 +45,7 @@ public class FaseUm extends AbstractFase{
         faseEntidade.carregarLobos(faseEntidade.getLobos(), faseEntidade.getPersonagem());
         
         // CRIA AS ABELHAS NA FASE
-        // faseEntidade.setAbelhas(new ArrayList<>());
+        // faseEntidade.setAbelhas(new List<>());
 
         // ADICIONA O DELAY NA FASE
         timer = new Timer(AbstractConstantes.DELAY, this);
@@ -61,8 +61,8 @@ public class FaseUm extends AbstractFase{
 
         Graphics2D graficos = (Graphics2D) graphics;
 
-        ArrayList<Tiro> tiros = faseEntidade.getPersonagem().getTiros();
-        ArrayList<SuperTiro> superTiros = faseEntidade.getPersonagem().getSuperTiros();
+        List<Tiro> tiros = faseEntidade.getPersonagem().getTiros();
+        List<SuperTiro> superTiros = faseEntidade.getPersonagem().getSuperTiros();
 
         // IMAGEM DE FUNDO
         graficos.drawImage(faseEntidade.getFundo(), 0, 0, null);
@@ -229,10 +229,10 @@ public class FaseUm extends AbstractFase{
                 faseEntidade.setContaTempoSuperTiros(faseEntidade.getContaTempoSuperTiros() + 1);
             }
 
-            ArrayList<Tiro> tiros = faseEntidade.getPersonagem().getTiros();
+            List<Tiro> tiros = faseEntidade.getPersonagem().getTiros();
             Iterator<Tiro> iteratorTiro = tiros.iterator();
 
-            ArrayList<SuperTiro> superTiros = faseEntidade.getPersonagem().getSuperTiros();
+            List<SuperTiro> superTiros = faseEntidade.getPersonagem().getSuperTiros();
             Iterator<SuperTiro> iteratorSuperTiro = superTiros.iterator();
 
             // PASSA PELOS TIROS QUE ESTIVEREM NA LISTA

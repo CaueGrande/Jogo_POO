@@ -2,10 +2,14 @@ package ifpr.jogo.modelo.servivos;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -52,10 +56,13 @@ public class Personagem extends AbstractVida {
     @Column(name = "pontuacao")
     private int pontuacao = 0;
 
-    @Transient
-    private ArrayList<Tiro> tiros;
-    @Transient
-    private ArrayList<SuperTiro> superTiros;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personagem_id")
+    private List<Tiro> tiros;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personagem_super_id")
+    private List<SuperTiro> superTiros;
 
     // PADRONIZA A POSICAO INICIAL, VIDA, VELOCIDADE E A DIRECAO DO TIRO
     public Personagem() {
@@ -67,8 +74,8 @@ public class Personagem extends AbstractVida {
 
         this.direcao = TECLA_W;
 
-        this.tiros = new ArrayList<Tiro>();
-        this.superTiros = new ArrayList<SuperTiro>();
+        this.tiros = new ArrayList<>();
+        this.superTiros = new ArrayList<>();
     }
 
     @Override
@@ -271,16 +278,16 @@ public class Personagem extends AbstractVida {
         return POSICAO_INICIAL_Y;
     }
 
-    public ArrayList<Tiro> getTiros() {
+    public List<Tiro> getTiros() {
         return tiros;
     }
-    public void setTiros(ArrayList<Tiro> tiros) {
+    public void setTiros(List<Tiro> tiros) {
         this.tiros = tiros;
     }
-    public ArrayList<SuperTiro> getSuperTiros() {
+    public List<SuperTiro> getSuperTiros() {
         return superTiros;
     }
-    public void setSuperTiros(ArrayList<SuperTiro> superTiros) {
+    public void setSuperTiros(List<SuperTiro> superTiros) {
         this.superTiros = superTiros;
     }
 

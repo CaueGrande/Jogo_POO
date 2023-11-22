@@ -2,16 +2,14 @@ package ifpr.jogo.modelo.tiros;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 
+@Entity
+@Table(name = "tb_abst_tiro")
 public abstract class AbstractTiro extends AbstractVida{
 
     @Transient
