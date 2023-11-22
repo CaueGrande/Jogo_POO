@@ -18,13 +18,11 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import ifpr.jogo.modelo.paisagem.Animal;
-import ifpr.jogo.modelo.servivos.Personagem;
 import ifpr.jogo.modelo.servivos.inimigos.Lobo;
 import ifpr.jogo.modelo.tiros.SuperTiro;
 import ifpr.jogo.modelo.tiros.Tiro;
 import ifpr.jogo.servico.FaseServico;
 import ifpr.jogo.servico.LoboServico;
-import ifpr.jogo.servico.PersonagemServico;
 import ifpr.jogo.util.AbstractConstantes;
 
 public class FaseUm extends AbstractFase{
@@ -50,8 +48,8 @@ public class FaseUm extends AbstractFase{
         faseEntidade.setAbelhas(new ArrayList<>());
 
         // ADICIONA O DELAY NA FASE
-        faseEntidade.setTimer(new Timer(AbstractConstantes.DELAY, this));
-        faseEntidade.getTimer().start();
+        timer = new Timer(AbstractConstantes.DELAY, this);
+        timer.start();
 
         ImageIcon carregarFimJogo = new ImageIcon(getClass().getResource("/gameover.png"));
         faseEntidade.setFimDeJogo(carregarFimJogo.getImage());
@@ -60,6 +58,7 @@ public class FaseUm extends AbstractFase{
 
     // DESENHA AS IMAGENS NA TELA
     public void paint(Graphics graphics) {
+
         Graphics2D graficos = (Graphics2D) graphics;
 
         ArrayList<Tiro> tiros = faseEntidade.getPersonagem().getTiros();
@@ -139,13 +138,12 @@ public class FaseUm extends AbstractFase{
             String idDigitado = JOptionPane.showInputDialog("Digite o ID da fa:");
 
             if (idDigitado != null && ! idDigitado.isEmpty()) {
-                faseEntidade.removerLobos(faseEntidade.getLobos());
+                //faseEntidade.removerLobos(faseEntidade.getLobos());
                 int id = Integer.parseInt(idDigitado);
                 faseEntidade = FaseServico.buscarPorId(id);
                 personagem = faseEntidade.getPersonagem();
                 lobos = faseEntidade.getLobos();
                 abelhas = faseEntidade.getAbelhas();
-                repaint();
             }
         }
 

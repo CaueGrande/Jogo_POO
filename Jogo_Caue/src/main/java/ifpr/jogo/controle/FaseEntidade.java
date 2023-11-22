@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.swing.Timer;
 
 import java.util.List;
 
@@ -55,9 +54,6 @@ public class FaseEntidade {
     @Transient
     private Image fimDeJogo;
 
-    @Transient
-    private Timer timer;
-
     @Column(name = "conta_tempo_animais")
     private int contaTempoAnimais;
     @Column(name = "conta_tempo_lobos")
@@ -78,6 +74,7 @@ public class FaseEntidade {
         lobos = new ArrayList<>();
         personagem = new Personagem();
         abelhas = new ArrayList<>();
+
     }
 
     public void removerLobos(List<Lobo> lobos) {
@@ -164,14 +161,6 @@ public class FaseEntidade {
 
     public void setAbelhas(List<Animal> abelhas) {
         this.abelhas = abelhas;
-    }
-
-    public Timer getTimer() {
-        return timer;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
     }
 
     public int getContaTempoAnimais() {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import ifpr.jogo.modelo.paisagem.Animal;
 import ifpr.jogo.modelo.servivos.Personagem;
@@ -19,6 +20,8 @@ public abstract class AbstractFase extends JPanel  implements KeyListener, Actio
     Personagem personagem;
     List<Lobo> lobos;
     List<Animal> abelhas;
+
+    protected Timer timer;
 
     public AbstractFase(){
         faseEntidade = new FaseEntidade();
