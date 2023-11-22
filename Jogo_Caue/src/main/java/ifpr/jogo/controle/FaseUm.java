@@ -138,7 +138,7 @@ public class FaseUm extends AbstractFase{
             String idDigitado = JOptionPane.showInputDialog("Digite o ID da fa:");
 
             if (idDigitado != null && ! idDigitado.isEmpty()) {
-                
+
                 int id = Integer.parseInt(idDigitado);
                 faseEntidade = FaseServico.buscarPorId(id);
 

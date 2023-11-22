@@ -28,19 +28,19 @@ public class FaseEntidade {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_fase", unique = true, nullable = false)
+    @Column(name = "id_fase")
     public Integer idFase;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_lobo")
+    @JoinColumn(name = "lobo_id")
     private List<Lobo> lobos;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_personagem")
+    @JoinColumn(name = "personagem_id")
     private Personagem personagem;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_abelhas")
+    @JoinColumn(name = "abelhas_id")
     private List<Animal> abelhas;
 
     // EX:  @Column(name = "nome", unique = true, nullable = false, length = 100)

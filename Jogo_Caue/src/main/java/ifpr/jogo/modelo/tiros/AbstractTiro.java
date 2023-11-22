@@ -1,10 +1,30 @@
 package ifpr.jogo.modelo.tiros;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
+
 import ifpr.jogo.modelo.AbstractVida;
 import ifpr.jogo.modelo.servivos.Personagem;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractTiro extends AbstractVida{
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_tiro")
+    public Integer idTiro;
+
+    @Transient
     public static final int ABSTRACT_VELOCIDADE_TIROS = 5;
+
+    @Column(name="direcao")
     private int direcao;
 
     @Override

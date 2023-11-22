@@ -1,15 +1,15 @@
 package ifpr.jogo.modelo.tiros;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
 @Entity
 @Table(name = "tb_super_tiro")
 public class SuperTiro extends AbstractTiro {
 
-    @Transient
+    @Column(name="explodindo")
     private boolean explodido;
 
     public SuperTiro(int posicaoPersonagemX, int posicaoPersonagemY, int direcao) {
