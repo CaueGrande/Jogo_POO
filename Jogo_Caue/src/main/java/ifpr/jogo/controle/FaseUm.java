@@ -138,12 +138,15 @@ public class FaseUm extends AbstractFase{
             String idDigitado = JOptionPane.showInputDialog("Digite o ID da fa:");
 
             if (idDigitado != null && ! idDigitado.isEmpty()) {
-                //faseEntidade.removerLobos(faseEntidade.getLobos());
+                
                 int id = Integer.parseInt(idDigitado);
                 faseEntidade = FaseServico.buscarPorId(id);
+
                 personagem = faseEntidade.getPersonagem();
                 lobos = faseEntidade.getLobos();
                 abelhas = faseEntidade.getAbelhas();
+
+                faseEntidade.carregarLobos(lobos, personagem);
             }
         }
 
